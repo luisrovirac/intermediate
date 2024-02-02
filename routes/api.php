@@ -25,3 +25,8 @@ Route::get('getTest', [OpenaixController::class, 'getTest']);
 // get openai first
 Route::get('getopenai', [OpenaixController::class, 'getopenai']);
 
+// post openai first
+Route::post('postopenai', [OpenaixController::class, 'postopenai']);
+
+
+

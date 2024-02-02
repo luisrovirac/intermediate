@@ -62,7 +62,7 @@ class OpenaixController extends Controller
 
 		$data = Http::withHeaders([
 			'Content-Type' => 'application/json',
-			'Authorization' => 'bearer ',env('OPEN_API_KEY')
+			'Authorization' => 'bearer ', env('OPEN_API_KEY') 
 		])->post(
 			'https://api.openai.com/v1/chat/completions',[
 				'model' => 'gpt-3.5-turbo',
@@ -78,4 +78,29 @@ class OpenaixController extends Controller
 			])->json();
 			return response()->json($data,200,[]);
 	}
+
+	public function postopenai() {
+		$search = "who is google";
+
+		$data = Http::withHeaders([
+			'Content-Type' => 'application/json',
+			'Authorization' => 'bearer ', env('OPEN_API_KEY') 
+		])->post(
+			'https://api.openai.com/v1/chat/completions',[
+				'model' => 'gpt-3.5-turbo',
+				'messages' => [
+					[
+						'role' => 'user', 'content' => $search
+					]
+				],
+				'temperature' => 0.5,
+				'max_tokens' => 200,
+				'top_p' => 1.0,
+
+			])->json();
+			return response()->json($data,200,[]);
+	}
+
+
+
 }
