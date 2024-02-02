@@ -47,6 +47,15 @@ class OpenaixController extends Controller
         //
     }
 
+    public function getTest() {
+        $dummy = "Data Info Fake";
+        return response()->json([
+                'status' => 'success',
+                'message' => 'Test Api',
+                'data' => $dummy
+        ], 200);
+    }
+
 	public function getopenai() {
 		return response()->json('Works', 200, []);
 	}

@@ -19,5 +19,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Get only test
+Route::get('getTest', [OpenaixController::class, 'getTest']);
+
+// get openai first
 Route::get('getopenai', [OpenaixController::class, 'getopenai']);
 
