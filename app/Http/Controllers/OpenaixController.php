@@ -76,6 +76,6 @@ class OpenaixController extends Controller
 				'top_p' => 1.0,
 
 			])->json();
-			return response()->json($data['choices'][0]['message'],200,[]);
+			return response()->json($data,200,[]);
 	}
 }
