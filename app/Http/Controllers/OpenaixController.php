@@ -178,16 +178,20 @@ echo "Linea 112......";
 
 	public function openai02(){
 
-		$result = OpenAI::completions()->create([
-			'model' => 'gpt-3.5-turbo',
-			'messages' => [
-				[
-					'role' => 'user', 
-					'content' => 'Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'
+		try {
+			$result = OpenAI::completions()->create([
+				'model' => 'gpt-3.5-turbo',
+				'messages' => [
+					[
+						'role' => 'user', 
+						'content' => 'Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'
+					],
 				],
-			],
-		]);
-		echo $result;		
+			]);
+			echo $result;		
+		} catch (\Throwable $th) {
+			echo $th;
+		}
 		//echo $result->choices[0]->message->content; // Hello! How can I assist you today?		
 	}	
 }
