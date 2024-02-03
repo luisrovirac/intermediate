@@ -28,5 +28,11 @@ Route::get('getopenai', [OpenaixController::class, 'getopenai']);
 // post openai first
 Route::post('postopenai', [OpenaixController::class, 'postopenai']);
 
+// get coinmarketcap first test
+Route::get('coinmarket01', [OpenaixController::class, 'coinmarket01']);
+
+// get openai01 test using openai-php/laravel client
+Route::get('openai01', [OpenaixController::class, 'openai01']);
+
 
 

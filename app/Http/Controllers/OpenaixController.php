@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Openaix;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use PhpParser\Node\Stmt\TryCatch;
+use OpenAI\Laravel\Facades\OpenAI;
 
 class OpenaixController extends Controller
 {
@@ -62,7 +64,7 @@ class OpenaixController extends Controller
 
 		$data = Http::withHeaders([
 			'Content-Type' => 'application/json',
-			'Authorization' => 'bearer ', env('OPEN_API_KEY') 
+			'Authorization' => 'Bearer ', env('OPEN_API_KEY') 
 		])->post(
 			'https://api.openai.com/v1/chat/completions',[
 				'model' => 'gpt-3.5-turbo',
@@ -103,6 +105,70 @@ class OpenaixController extends Controller
 		}
 	}
 
+	public function coinmarket01() {
+/**
+ * Requires curl enabled in php.ini
+ **/
 
+echo "Linea 112......";
 
+ $url = 'https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
+ $parameters = [
+   'start' => '1',
+   'limit' => '5000',
+   'convert' => 'USD'
+ ];
+
+ echo "Linea 121......";
+
+ $headers = [
+   'Accepts: application/json',
+   'X-CMC_PRO_API_KEY: 00c8eae1-bfff-45e6-ac60-58c6df43217c'
+ ];
+
+ echo "Linea 128......";
+
+ $qs = http_build_query($parameters); // query string encode the parameters
+ $request = "{$url}?{$qs}"; // create the request URL
+ 
+ echo "Linea 133......";
+
+ try {
+	$curl = curl_init(); // Get cURL resource
+	// Set cURL options
+
+	echo "Linea 139......";
+
+	curl_setopt_array($curl, array(
+	  CURLOPT_URL => $request,            // set the request URL
+	  CURLOPT_HTTPHEADER => $headers,     // set the headers 
+	  CURLOPT_RETURNTRANSFER => 1         // ask for raw response instead of bool
+	));
+	
+	echo "Linea 147......";
+
+	$response = curl_exec($curl); // Send the request, save the response
+
+	echo "Linea 151......";
+
+	print_r(json_decode($response)); // print json decoded response
+	curl_close($curl); // Close request
+	} catch (\Throwable $th) {
+		print_r(json_decode($th)); // print json decoded response $th
+	}
+
+ 
+}
+
+	public function openai01(){
+
+		$result = OpenAI::chat()->create([
+			'model' => 'gpt-3.5-turbo',
+			'messages' => [
+				['role' => 'user', 'content' => 'Hello!'],
+			],
+		]);
+		
+		echo $result->choices[0]->message->content; // Hello! How can I assist you today?		
+	}
 }
