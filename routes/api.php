@@ -32,7 +32,7 @@ Route::post('postopenai', [OpenaixController::class, 'postopenai']);
 Route::get('coinmarket01', [OpenaixController::class, 'coinmarket01']);
 
 // get openai01 test using openai-php/laravel client
-Route::get('openai01', [OpenaixController::class, 'openai01']);
+Route::post('openai01', [OpenaixController::class, 'openai01']);
 
 // get openai02 test using openai-php/laravel client
 Route::get('openai02', [OpenaixController::class, 'openai02']);

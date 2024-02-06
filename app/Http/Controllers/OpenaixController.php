@@ -160,7 +160,7 @@ echo "Linea 112......";
  
 }
 
-	public function openai01(){
+	public function openai01(Request $request){
 
 		$result = OpenAI::chat()->create([
 			'model' => 'gpt-3.5-turbo',
@@ -171,7 +171,7 @@ echo "Linea 112......";
 				],
 				[
 					"role" => "user",
-					"content" => "Que vamos hacer esta tarde?"
+					"content" => $request->actual_message
 				],
 			],
 		]);
