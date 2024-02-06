@@ -187,7 +187,7 @@ echo "Linea 112......";
 				'model' => 'gpt-3.5-turbo',
 				'prompt' => 'Que vamos hacer esta tarde?'
 			]);
-			echo $result->choices[0]->text; 
+			echo $result; 
 		} catch (\Throwable $th) {
 			echo $th;
 		}
