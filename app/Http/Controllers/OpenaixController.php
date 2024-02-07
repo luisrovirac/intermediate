@@ -208,7 +208,6 @@ echo "Linea 112......";
 		foreach ($response->data as $data) {
 			$data->url; // 'https://oaidalleapiprodscus.blob.core.windows.net/private/...'
 			$data->b64_json; // null
-			$this->line($data->url);
 		}
 
 		return $response->toArray(); // ['created' => 1589478378, data => ['url' => 'https://oaidalleapiprodscus...', ...]]
