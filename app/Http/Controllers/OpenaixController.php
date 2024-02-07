@@ -195,7 +195,6 @@ echo "Linea 112......";
 	}	
 
 	public function openaidalle3(Request $request){
-		return $request->prompt_img;
 		
 		$response = OpenAI::images()->create([
 			'prompt' => $request->prompt_img,
