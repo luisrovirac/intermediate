@@ -31,14 +31,16 @@ Route::post('postopenai', [OpenaixController::class, 'postopenai']);
 // get coinmarketcap first test
 Route::get('coinmarket01', [OpenaixController::class, 'coinmarket01']);
 
-// get openai01 test using openai-php/laravel client
+// post openai01 test using openai-php/laravel client
+// You need pass the parameter: actual_message
 Route::post('openai01', [OpenaixController::class, 'openai01']);
 
 // get openai02 test using openai-php/laravel client
 Route::get('openai02', [OpenaixController::class, 'openai02']);
 
-// get openaidalle3 test using openai-php/laravel client
-Route::get('openaidalle3', [OpenaixController::class, 'openaidalle3']);
+// post openaidalle3 test using openai-php/laravel client
+// You need pass the parameter: prompt_img
+Route::post('openaidalle3', [OpenaixController::class, 'openaidalle3']);
 
 
 
