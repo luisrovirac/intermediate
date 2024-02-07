@@ -194,10 +194,11 @@ echo "Linea 112......";
 		//echo $result->choices[0]->message->content; // Hello! How can I assist you today?		
 	}	
 
-	public function openaidalle3(){
-
+	public function openaidalle3(Request $request){
+		return $request->prompt_img;
+		
 		$response = OpenAI::images()->create([
-			'prompt' => 'Hyperrealistic pencil drawing of grizzled spaniard old man with a large, bushy beard and bulbous nose.',
+			'prompt' => $request->prompt_img,
 			'n' => 1,
 			'size' => '1024x1024',
 			'response_format' => 'url',
