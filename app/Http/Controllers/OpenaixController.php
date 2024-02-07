@@ -176,7 +176,7 @@ echo "Linea 112......";
 			],
 		]);
 		
-		echo $result->choices[0]->message->content; // Hello! How can I assist you today?		
+		echo $result->choices[0]->message->content; 		
 	}
 
 
@@ -193,4 +193,25 @@ echo "Linea 112......";
 		}
 		//echo $result->choices[0]->message->content; // Hello! How can I assist you today?		
 	}	
+
+	public function openaidalle3(){
+
+		$response = OpenAI::images()->create([
+			'prompt' => 'Hyperrealistic pencil drawing of grizzled spaniard old man with a large, bushy beard and bulbous nose.',
+			'n' => 1,
+			'size' => '1024x1024',
+			'response_format' => 'url',
+		]);
+
+		//$response->created; // 1589478378
+
+		foreach ($response->data as $data) {
+			$data->url; // 'https://oaidalleapiprodscus.blob.core.windows.net/private/...'
+			$data->b64_json; // null
+			$this->line($data->url);
+		}
+
+		return $response->toArray(); // ['created' => 1589478378, data => ['url' => 'https://oaidalleapiprodscus...', ...]]
+	}	
+
 }

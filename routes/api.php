@@ -37,4 +37,8 @@ Route::post('openai01', [OpenaixController::class, 'openai01']);
 // get openai02 test using openai-php/laravel client
 Route::get('openai02', [OpenaixController::class, 'openai02']);
 
+// get openaidalle3 test using openai-php/laravel client
+Route::get('openaidalle3', [OpenaixController::class, 'openaidalle3']);
+
+
 
