@@ -1,0 +1,159 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API for projects",
+        "version": "0.1"
+    },
+    "paths": {
+        "api.sax.cat/api/openai01": {
+            "post": {
+                "tags": [
+                    "openai01"
+                ],
+                "summary": "Consultar la respuesta a una comunicación en el chat",
+                "operationId": "06b113b5f89f0091d2c65da68b5f3838",
+                "parameters": [
+                    {
+                        "name": "actual_message",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "actual_message": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "actual_message": "Que vamos a hacer esta noche?"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Completed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "actual_message": {
+                                            "type": "string",
+                                            "example": "Que vamos a hacer esta noche?"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "UNPROCESSABLE CONTENT",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The actual_message field is required."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "api.sax.cat/api/openaidalle3": {
+            "post": {
+                "tags": [
+                    "openaidalle3"
+                ],
+                "summary": "Solicitar una imagen al API usando dall-e-3",
+                "operationId": "6d64c90216448c5ca795890a3e5258b6",
+                "parameters": [
+                    {
+                        "name": "prompt_img",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "prompt_img": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "prompt_img": "Foto super realista de joven simpática y coqueta, sonriendo"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Completed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "prompt_img": {
+                                            "type": "string",
+                                            "example": "Foto super realista de joven simpática y coqueta, sonriendo"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "UNPROCESSABLE CONTENT",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The prompt_img field is required."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
