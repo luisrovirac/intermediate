@@ -35,6 +35,10 @@ Route::get('coinmarket01', [OpenaixController::class, 'coinmarket01']);
 // You need pass the parameter: actual_message
 Route::post('openai01', [OpenaixController::class, 'openai01']);
 
+// post openaisavemsgs test using openai-php/laravel client and save messages
+// You need pass the parameter: actual_message
+Route::post('openaisavemsgs', [OpenaixController::class, 'openaisavemsgs']);
+
 // get openai02 test using openai-php/laravel client
 Route::get('openai02', [OpenaixController::class, 'openai02']);
 
