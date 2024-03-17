@@ -245,7 +245,7 @@ echo "Linea 112......";
 		// ini test
 		try {
 			$json = '{"a":1,"b":2,"c":3,"d":4,"e":5}';
-			return response()->json($json,200,[]);
+			return response()->json(json_decode($json),200,[]);
 		} catch (\Throwable $th) {
 			return response()->json($th,500,[]);
 		}
