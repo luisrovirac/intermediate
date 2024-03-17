@@ -241,7 +241,7 @@ echo "Linea 112......";
 		//echo 'idUser->'.$idUser.' - idAssistant->'.$idAssistant.' - actual_message->'.$actual_message;
 		// consultar endpoint dynamodb
 		//$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
-		$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/{".$idAssistant."}";
+		$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$idAssistant;
 		try {
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
