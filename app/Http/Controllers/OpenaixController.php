@@ -248,9 +248,9 @@ echo "Linea 112......";
 			])->get($endpointchats)->json();
 				//$newdata = json_encode($data);
 				$newdata = json_decode($data);
-				//return response()->json($newdata,200,[]);
+				return response()->json($newdata,200,[]);
 				//return response()->json($data->{"messages"},200,[]);
-				return response()->json($newdata->{"messages"},200,[]);
+				//return response()->json($newdata->{"messages"},200,[]);
 				//return response()->json($data,200,[]);
 			} catch (\Throwable $th) {
 				return response()->json($th,200,[]);
