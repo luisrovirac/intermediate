@@ -238,7 +238,18 @@ echo "Linea 112......";
 		$idAssistant = $request->idAssistant;
 		$actual_message = $request->actual_message;
 		//echo 'En openaisavemsgs amigo Sax...';
-		echo 'idUser->'.$idUser.' - idAssistant->'.$idAssistant.' - actual_message->'.$actual_message;
+		//echo 'idUser->'.$idUser.' - idAssistant->'.$idAssistant.' - actual_message->'.$actual_message;
+		// consultar endpoint dynamodb
+		$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
+		try {
+			$data = Http::withHeaders([
+				'Content-Type' => 'application/json',
+			])->get($endpointchats)->json();
+				return response()->json($data,200,[]);
+			} catch (\Throwable $th) {
+				return response()->json($th,200,[]);
+		}
+		
 
 		/*
 		$result = OpenAI::chat()->create([
