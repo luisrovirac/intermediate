@@ -235,10 +235,10 @@ echo "Linea 112......";
 
 	public function openaisavemsgs(Request $request){
 		$idUser = $request->idUser;
-		$idAssitant = $request->idAssitant;
+		$idAssistant = $request->idAssistant;
 		$actual_message = $request->actual_message;
 		//echo 'En openaisavemsgs amigo Sax...';
-		echo 'idUser->'.$idUser.' - idAssitant->'.$idAssitant.' - actual_message->'.$actual_message;
+		echo 'idUser->'.$idUser.' - idAssistant->'.$idAssistant.' - actual_message->'.$actual_message;
 
 		/*
 		$result = OpenAI::chat()->create([
