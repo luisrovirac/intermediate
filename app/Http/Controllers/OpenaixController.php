@@ -249,7 +249,7 @@ echo "Linea 112......";
 				//$newdata = json_encode($data);
 				//$newdata = json_decode($data);
 				//return response()->json($newdata);
-				return response()->json([$data[0],$data[1],$data[2]],200,[]);
+				return response()->json($data[0],200,[]);
 				//return response()->json($newdata,200,[]);
 				//return response()->json($data->{"messages"},200,[]);
 				//return response()->json($newdata->{"messages"},200,[]);
