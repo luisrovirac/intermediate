@@ -237,7 +237,9 @@ echo "Linea 112......";
 		$idUser = $request->idUser;
 		$idAssitant = $request->idAssitant;
 		$actual_message = $request->actual_message;
-		echo 'idUser->'+$idUser+' - idAssitant->'+$idAssitant+' - actual_message->'+$actual_message;
+		echo 'En openaisavemsgs amigo Sax...';
+		//echo 'idUser->'+$idUser+' - idAssitant->'+$idAssitant+' - actual_message->'+$actual_message;
+		
 		/*
 		$result = OpenAI::chat()->create([
 			'model' => 'gpt-3.5-turbo',
