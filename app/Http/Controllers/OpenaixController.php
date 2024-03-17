@@ -242,23 +242,32 @@ echo "Linea 112......";
 		// consultar endpoint dynamodb
 		//$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
 		$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$idAssistant;
+		// ini test
+		try {
+			$json = '{"a":1,"b":2,"c":3,"d":4,"e":5}';
+			return response()->json_decode($json);
+		} catch (\Throwable $th) {
+			return response()->json($th,500,[]);
+		}
+		// fin test
+		/*
 		try {
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
 			])->get($endpointchats)->json();
 				//$newdata = json_encode($data);
-				$newdata = json_decode($data,true);
+				//$newdata = json_decode($data,true);
 				//return response()->json($newdata);
 				//return response()->json($data[1],200,[]);
 				//return response()->json($newdata->{'messages'},200,[]);
 				//return response()->json($data->{"messages"},200,[]);
 				//return response()->json($newdata->{"messages"},200,[]);
-				//return response()->json($data,200,[]);
-				return response()->json($newdata[0],200,[]);
+				return response()->json($data,200,[]);
+				//return response()->json($newdata[0],200,[]);
 			} catch (\Throwable $th) {
 				return response()->json($th,200,[]);
 		}
-		
+		*/
 
 		/*
 		$result = OpenAI::chat()->create([
