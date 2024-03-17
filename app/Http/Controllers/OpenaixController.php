@@ -242,15 +242,6 @@ echo "Linea 112......";
 		// consultar endpoint dynamodb
 		//$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
 		$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$idAssistant;
-		// ini test
-		try {
-			$json = '{"a":1,"b":2,"c":3,"d":4,"e":5}';
-			return response()->json(json_encode(json_decode($json)),200,[]);
-		} catch (\Throwable $th) {
-			return response()->json($th,500,[]);
-		}
-		// fin test
-		/*
 		try {
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
@@ -267,7 +258,6 @@ echo "Linea 112......";
 			} catch (\Throwable $th) {
 				return response()->json($th,200,[]);
 		}
-		*/
 
 		/*
 		$result = OpenAI::chat()->create([
