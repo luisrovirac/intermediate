@@ -246,7 +246,9 @@ echo "Linea 112......";
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
 			])->get($endpointchats)->json();
-				return response()->json(json_decode($data)->{'messages'},200,[]);
+				$newdata = json_decode($data);
+				return response()->json($newdata,200,[]);
+				//return response()->json($newdata->{'messages'},200,[]);
 				//return response()->json($data,200,[]);
 			} catch (\Throwable $th) {
 				return response()->json($th,200,[]);
