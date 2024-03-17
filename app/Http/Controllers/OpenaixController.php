@@ -250,7 +250,7 @@ echo "Linea 112......";
 				$newdata = json_decode($data);
 				//return response()->json($newdata);
 				//return response()->json($data[1],200,[]);
-				return response()->json($newdata->{"messages"},200,[]);
+				return response()->json($newdata->{'messages'},200,[]);
 				//return response()->json($data->{"messages"},200,[]);
 				//return response()->json($newdata->{"messages"},200,[]);
 				//return response()->json($data[0],200,[]);
