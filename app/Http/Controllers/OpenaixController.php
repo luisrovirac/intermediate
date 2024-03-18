@@ -266,14 +266,14 @@ echo "Linea 112......";
 			// if first add the first message
 			if(!$messages){
 				$firstmessage = [
-					'role' => 'system', 
+					'role' => 'assistant', 
 					'content' => 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'
 				];
 				array_push($messages, $firstmessage);			
-				echo "en el if 265";
+				echo "en el if first 273";
 			}
 			else{
-				echo "en el else 268";
+				echo "en el else 276";
 			}
 			// add message of user
 			$toAdduser = [
@@ -293,7 +293,7 @@ echo "Linea 112......";
 
 			// add message of system(assistant)
 			$toAddassistant = [
-				"role" => "system",
+				"role" => "assistant",
 				"content" => $result->choices[0]->message->content
 			];
 			array_push($messages, $toAddassistant);			
@@ -316,8 +316,12 @@ echo "Linea 112......";
 				echo "resultupdate OK";
 				echo "";
 			}
-
-			echo "Good - antes del return 320";
+			else{
+				echo "";
+				echo "resultupdate BAD";
+				echo "";
+			}
+			echo "Good - antes del return 324";
 			return response()->json($result->choices[0]->message->content,200,[]);
 //			echo "despues del return 315";
 
