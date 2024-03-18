@@ -260,7 +260,7 @@ echo "Linea 112......";
 
 			// save the messages
 			echo 'Ojo es 262 En openaisavemsgs amigo Sax...';
-			return true;
+			//return true;
 			return response()->json($data,200,[]);
 			if($data){
 				$messages = $data['messages']; 	
