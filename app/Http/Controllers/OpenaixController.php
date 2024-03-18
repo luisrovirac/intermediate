@@ -247,6 +247,7 @@ echo "Linea 112......";
 		//echo '247 En openaisavemsgs amigo Sax...';
 		$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
 		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$elid;
+		$postx = false;		
 		//echo '250 En openaisavemsgs amigo Sax...';
 		try {
 			// get the old messages
@@ -275,7 +276,8 @@ echo "Linea 112......";
 					'role' => 'system', 
 					'content' => 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'
 				];
-				array_push($messages, $firstmessage);			
+				array_push($messages, $firstmessage);	
+				$postx = true;		
 				echo "en el if first 279";
 				echo "";
 				//return $messages;
@@ -319,10 +321,18 @@ echo "Linea 112......";
 			echo "";
 			//return response()->json($body,200,[]);
 			// update BD with new messages
-			$resultupdate = Http::withUrlParameters([
-				"id" => $elid,
-				"messages" => $messages
-			])->put($endpointputchats)->json();
+			if($postx){
+				$resultupdate = Http::withUrlParameters([
+					"id" => $elid,
+					"messages" => $messages
+				])->post($endpointputchats)->json();
+			}
+			else{
+				$resultupdate = Http::withUrlParameters([
+					"id" => $elid,
+					"messages" => $messages
+				])->put($endpointputchats)->json();
+			}
 
 			if($resultupdate){
 				echo "";
