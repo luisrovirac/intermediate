@@ -261,18 +261,19 @@ echo "Linea 112......";
 			echo '261 En openaisavemsgs amigo Sax...';
 			if($data){
 				$messages = $data['messages']; 	
-				echo "en el if data ";
+				echo "264 en el if data ";
 			}
 			else{
 				// if first add the first message
-				echo "en el else data ";
+				echo "268 en el else data ";
 				$firstmessage = [
 					'role' => 'system', 
 					'content' => 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'
 				];
+				echo "273 en el else data ";
 				array_push($messages, $firstmessage);	
 				$postx = true;		
-				echo "en el if first 279";
+				echo "en el if first 276";
 				echo "";
 			}
 			//return $messages;
@@ -285,7 +286,7 @@ echo "Linea 112......";
 				"content" => $request->actual_message
 			];
 			array_push($messages, $toAdduser);			
-			echo "en el if first 292";
+			echo "en el if first 289";
 			echo "";
 			//return $messages;
 
@@ -303,7 +304,7 @@ echo "Linea 112......";
 				"content" => $result->choices[0]->message->content
 			];
 			array_push($messages, $toAddsystem);			
-			echo "en el if first 310";
+			echo "en el if first 307";
 			echo "";
 			//return $messages;
 			// define body for update with put to BD
