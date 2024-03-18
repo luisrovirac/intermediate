@@ -290,7 +290,7 @@ echo "Linea 112......";
 				"id" => $elid,
 				"messages" => $messages
 			];
-
+/*
 			// update BD with new messages
 			$resultupdate = Http::withHeaders([
 				'Content-Type' => 'application/json',
@@ -302,7 +302,7 @@ echo "Linea 112......";
 				echo "resultupdate OK";
 				echo "";
 			}
-
+*/
 			return response()->json($result->choices[0]->message->content,200,[]);
 
 			//return response()->json($result->choices[0]->message->content,200,[]);
