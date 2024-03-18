@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Http;
 use PhpParser\Node\Stmt\TryCatch;
 use OpenAI\Laravel\Facades\OpenAI;
 
+use Exception;
+
 /**
  * @OA\Info(title="API for projects", version="0.1")
  */
@@ -246,6 +248,7 @@ echo "Linea 112......";
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
 			])->get($endpointchats)->json();
+				return $data;
 				//$newdata = $data->json();
 				//return ((response()->json($data)));
 				//return 'response()->json($data)->'.response()->json($data);
@@ -256,7 +259,7 @@ echo "Linea 112......";
 				//return json_encode(array($data));
 				//$newdata = json_decode($data,true);
 				//return response()->json($newdata);
-				return response()->json($data,200,[]);
+				//return response()->json($data,200,[]);
 				//return response()->json($newdata->{'messages'},200,[]);
 				//return response()->json($data->{"messages"},200,[]);
 				//return response()->json($newdata->{"messages"},200,[]);
@@ -264,6 +267,65 @@ echo "Linea 112......";
 				//return response()->json($newdata[0],200,[]);
 			} catch (\Throwable $th) {
 				return response()->json($th,200,[]);
+		}
+
+		/*
+		$result = OpenAI::chat()->create([
+			'model' => 'gpt-3.5-turbo',
+			'messages' => [
+				[
+					'role' => 'system', 
+					'content' => 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'
+				],
+				[
+					"role" => "user",
+					"content" => $request->actual_message
+				],
+			],
+		]);
+		
+		echo $result->choices[0]->message->content; 		
+		*/
+	}
+
+	public function getopenaisavemsgs(Request $request){
+		$idUser = $request->idUser;
+		$idAssistant = $request->idAssistant;
+		$actual_message = $request->actual_message;
+		//echo 'En getopenaisavemsgs amigo Sax...';
+		//echo 'idUser->'.$idUser.' - idAssistant->'.$idAssistant.' - actual_message->'.$actual_message;
+		// consultar endpoint dynamodb
+		//$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
+		$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$idAssistant;
+		try {
+			$data = Http::withHeaders([
+				'Content-Type' => 'application/json',
+			])->get($endpointchats)->json();
+				//return $data;
+				//$newdata = $data->json();
+				//return ((response()->json($data)));
+				//return 'response()->json($data)->'.response()->json($data);
+				//return 'json_decode($data)->'.json_decode($data);
+				//return 'json_encode(array($data))->'.json_encode(array($data));
+				//return 'json_encode(array($data))[1]->'.json_encode(array($data))[1];
+				//return response()->json($data)[1];
+				//return json_encode(array($data));
+				$newdata = json_decode($data,true);
+				return response()->json($newdata);
+				//return response()->json($data,200,[]);
+				//return response()->json($newdata->{'messages'},200,[]);
+				//return response()->json($data->{"messages"},200,[]);
+				//return response()->json($newdata->{"messages"},200,[]);
+				//return response()->json($data,200,[]);
+				//return response()->json($newdata[0],200,[]);
+			} catch (Exception $e) {
+				return response()->json($e->getMessage(),500,[]);
+
+				try {
+					//code...
+				} catch (\Throwable $th) {
+					//throw $th;
+				}
 		}
 
 		/*
