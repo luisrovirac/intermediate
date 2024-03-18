@@ -309,7 +309,7 @@ echo "Linea 112......";
 			array_push($messages, $toAddsystem);			
 			echo "en el if first 310";
 			echo "";
-			return $messages;
+			//return $messages;
 		
 
 			// define body for update with put to BD
