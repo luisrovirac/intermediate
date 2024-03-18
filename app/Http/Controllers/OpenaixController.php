@@ -293,6 +293,17 @@ echo "Linea 112......";
 		$idAssistant = $request->idAssistant;
 		$actual_message = $request->actual_message;
 		//echo 'En getopenaisavemsgs amigo Sax...';
+
+		$infoBD = [
+			'name' => 'LaAbigail',
+			'state' => 'CA',
+		];
+		//return response()->json($infoBD['name']);
+
+		//$xjson = [{"el1": 1}];
+		  
+		//$resultados = [{"name"=>"Madrid","y"=>"58"}];
+		//$resultados = [{"name":"Madrid","y":"58"},{"name":"Granada","y":"21"},{"name":"Segovia","y":"12"},{"name":"La Rioja","y":"3"},{"name":"Toledo","y":"3"}];		
 		//echo 'idUser->'.$idUser.' - idAssistant->'.$idAssistant.' - actual_message->'.$actual_message;
 		// consultar endpoint dynamodb
 		//$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
@@ -310,9 +321,9 @@ echo "Linea 112......";
 				//return 'json_encode(array($data))[1]->'.json_encode(array($data))[1];
 				//return response()->json($data)[1];
 				//return json_encode(array($data));
-				$newdata = $data;
-				return $newdata[0];
-				//return response()->json($data,200,[]);
+				//$newdata = $data;
+				//return $newdata[0];
+				return response()->json($data['messages'],200,[]);
 				//return response()->json($newdata->{'messages'},200,[]);
 				//return response()->json($data->{"messages"},200,[]);
 				//return response()->json($newdata->{"messages"},200,[]);
