@@ -254,7 +254,7 @@ echo "Linea 112......";
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
 			])->get($endpointgetchats)->json();
-			echo $data;
+			return $data;
 			// save the messages
 			echo '259 En openaisavemsgs amigo Sax...';
 
