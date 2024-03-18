@@ -315,12 +315,13 @@ echo "Linea 112......";
 				"id" => $elid,
 				"messages" => $messages
 			];
-			echo "antes de retornar mostrando el body";
+			echo "antes del put 318";
 			echo "";
-			return response()->json($body,200,[]);
+			//return response()->json($body,200,[]);
 			// update BD with new messages
 			$resultupdate = Http::withUrlParameters([
-				'body' => $body
+				"id" => $elid,
+				"messages" => $messages
 			])->put($endpointputchats)->json();
 
 			if($resultupdate){
