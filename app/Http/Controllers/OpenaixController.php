@@ -237,13 +237,13 @@ echo "Linea 112......";
 
 	public function openaisavemsgs(Request $request){
 		$idUser = $request->idUser;
-		$idsystem = $request->idsystem;
+		$idSystem = $request->idSystem;
 		$actual_message = $request->actual_message;
 		//echo '242 En openaisavemsgs amigo Sax...';
-		//echo 'idUser->'.$idUser.' - idsystem->'.$idsystem.' - actual_message->'.$actual_message;
+		//echo 'idUser->'.$idUser.' - idSystem->'.$idSystem.' - actual_message->'.$actual_message;
 		// consultar endpoint dynamodb
 		//echo '245 En openaisavemsgs amigo Sax...';
-		$elid = $idUser."y".$idsystem;
+		$elid = $idUser."y".$idSystem;
 		//echo '247 En openaisavemsgs amigo Sax...';
 		$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
 		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$elid;
@@ -363,7 +363,7 @@ echo "Linea 112......";
 
 	public function getopenaisavemsgs(Request $request){
 		$idUser = $request->idUser;
-		$idsystem = $request->idsystem;
+		$idSystem = $request->idSystem;
 		$actual_message = $request->actual_message;
 		//echo 'En getopenaisavemsgs amigo Sax...';
 
@@ -377,10 +377,10 @@ echo "Linea 112......";
 		  
 		//$resultados = [{"name"=>"Madrid","y"=>"58"}];
 		//$resultados = [{"name":"Madrid","y":"58"},{"name":"Granada","y":"21"},{"name":"Segovia","y":"12"},{"name":"La Rioja","y":"3"},{"name":"Toledo","y":"3"}];		
-		//echo 'idUser->'.$idUser.' - idsystem->'.$idsystem.' - actual_message->'.$actual_message;
+		//echo 'idUser->'.$idUser.' - idSystem->'.$idSystem.' - actual_message->'.$actual_message;
 		// consultar endpoint dynamodb
 		//$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
-		$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$idsystem;
+		$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$idSystem;
 		try {
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
