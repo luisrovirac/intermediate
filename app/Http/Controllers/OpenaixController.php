@@ -319,18 +319,10 @@ echo "Linea 112......";
 			echo "";
 			//return response()->json($body,200,[]);
 			// update BD with new messages
-			if($postx){
-				$resultupdate = Http::withUrlParameters([
-					"id" => $elid,
-					"messages" => $messages
-				])->post($endpointputchats)->json();
-			}
-			else{
-				$resultupdate = Http::withUrlParameters([
-					"id" => $elid,
-					"messages" => $messages
-				])->put($endpointputchats)->json();
-			}
+			$resultupdate = Http::withUrlParameters([
+				"id" => $elid,
+				"messages" => $messages
+			])->put($endpointputchats)->json();
 
 			if($resultupdate){
 				echo "";
