@@ -259,22 +259,22 @@ echo "Linea 112......";
 
 			// save the messages
 			echo '261 En openaisavemsgs amigo Sax...';
-			return $data;
+			return response()->json($data,200,[]);
 			if($data){
 				$messages = $data['messages']; 	
-				echo "264 en el if data ";
+				echo "265 en el if data ";
 			}
 			else{
 				// if first add the first message
-				echo "268 en el else data ";
+				echo "269 en el else data ";
 				$firstmessage = [
 					'role' => 'system', 
 					'content' => 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'
 				];
-				echo "273 en el else data ";
+				echo "274 en el else data ";
 				array_push($messages, $firstmessage);	
 				$postx = true;		
-				echo "en el if first 276";
+				echo "en el if first 277";
 				echo "";
 			}
 			//return $messages;
@@ -287,7 +287,7 @@ echo "Linea 112......";
 				"content" => $request->actual_message
 			];
 			array_push($messages, $toAdduser);			
-			echo "en el if first 289";
+			echo "en el if first 290";
 			echo "";
 			//return $messages;
 
@@ -305,7 +305,7 @@ echo "Linea 112......";
 				"content" => $result->choices[0]->message->content
 			];
 			array_push($messages, $toAddsystem);			
-			echo "en el if first 307";
+			echo "en el if first 308";
 			echo "";
 			//return $messages;
 			// define body for update with put to BD
@@ -313,7 +313,7 @@ echo "Linea 112......";
 				"id" => $elid,
 				"messages" => $messages
 			];
-			echo "antes del put 318";
+			echo "antes del put 316";
 			echo "";
 			//return response()->json($body,200,[]);
 			// update BD with new messages
@@ -340,7 +340,7 @@ echo "Linea 112......";
 				echo "resultupdate BAD";
 				echo "";
 			}
-			echo "antes del return 326";
+			echo "antes del return 343";
 			return response()->json($result->choices[0]->message->content,200,[]);
 //			echo "despues del return 315";
 
