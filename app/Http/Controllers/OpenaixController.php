@@ -255,6 +255,7 @@ echo "Linea 112......";
 			$messages = $data['messages']; 	
 			echo $messages;
 
+/*			
 			// if first add the first message
 			if(!$messages){
 				$firstmessage = [
@@ -310,9 +311,9 @@ echo "Linea 112......";
 				echo "";
 			}
 */
-			echo "antes del return 313";
-			return response()->json($result->choices[0]->message->content,200,[]);
-			echo "despues del return 315";
+//			echo "antes del return 313";
+//			return response()->json($result->choices[0]->message->content,200,[]);
+//			echo "despues del return 315";
 
 			//return response()->json($result->choices[0]->message->content,200,[]);
 		} catch (Exception $e) {
