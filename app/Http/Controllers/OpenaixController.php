@@ -239,30 +239,30 @@ echo "Linea 112......";
 		$idUser = $request->idUser;
 		$idAssistant = $request->idAssistant;
 		$actual_message = $request->actual_message;
-		echo '242 En openaisavemsgs amigo Sax...';
+		//echo '242 En openaisavemsgs amigo Sax...';
 		//echo 'idUser->'.$idUser.' - idAssistant->'.$idAssistant.' - actual_message->'.$actual_message;
 		// consultar endpoint dynamodb
-		echo '245 En openaisavemsgs amigo Sax...';
+		//echo '245 En openaisavemsgs amigo Sax...';
 		$elid = $idUser."y".$idAssistant;
-		echo '247 En openaisavemsgs amigo Sax...';
+		//echo '247 En openaisavemsgs amigo Sax...';
 		$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
 		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$elid;
-		echo '250 En openaisavemsgs amigo Sax...';
+		//echo '250 En openaisavemsgs amigo Sax...';
 		try {
 			// get the old messages
-			echo '253 En openaisavemsgs amigo Sax...';
+			echo '253 antes de consultar openai amigo Sax...';
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
 			])->get($endpointgetchats)->json();
 
 			// save the messages
-			echo '259 En openaisavemsgs amigo Sax...';
+			//echo '259 En openaisavemsgs amigo Sax...';
 
 			$messages = $data['messages']; 	
 			//return $messages;
-			echo '263 En openaisavemsgs amigo Sax...';
+			//echo '263 En openaisavemsgs amigo Sax...';
 
-/*			
+			
 			// if first add the first message
 			if(!$messages){
 				$firstmessage = [
@@ -281,7 +281,7 @@ echo "Linea 112......";
 				"content" => $request->actual_message
 			];
 			array_push($messages, $toAdduser);			
-			echo "en array_push 276";
+			//echo "en array_push 276";
 
 
 			// consulting openai response
@@ -289,7 +289,7 @@ echo "Linea 112......";
 				'model' => 'gpt-3.5-turbo',
 				'messages' => $messages
 			]);
-			echo $result->choices[0]->message->content; 		
+			//echo $result->choices[0]->message->content; 		
 
 			// add message of system(assistant)
 			$toAddassistant = [
@@ -297,9 +297,9 @@ echo "Linea 112......";
 				"content" => $result->choices[0]->message->content
 			];
 			array_push($messages, $toAddassistant);			
-			echo "en array_push 292";
+			//echo "en array_push 292";
 			
-*/
+
 			// define body for update with put to BD
 			$body = [
 				"id" => $elid,
@@ -317,8 +317,8 @@ echo "Linea 112......";
 				echo "";
 			}
 
-//			echo "antes del return 313";
-//			return response()->json($result->choices[0]->message->content,200,[]);
+			echo "Good - antes del return 320";
+			return response()->json($result->choices[0]->message->content,200,[]);
 //			echo "despues del return 315";
 
 			//return response()->json($result->choices[0]->message->content,200,[]);
