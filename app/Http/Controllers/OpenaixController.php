@@ -310,14 +310,14 @@ echo "Linea 112......";
 			echo "en el if first 310";
 			echo "";
 			//return $messages;
-		
-
 			// define body for update with put to BD
 			$body = [
 				"id" => $elid,
 				"messages" => $messages
 			];
-
+			echo "antes de retornar mostrando el body";
+			echo "";
+			return response()->json($body,200,[]);
 			// update BD with new messages
 			$resultupdate = Http::withUrlParameters([
 				'body' => $body
