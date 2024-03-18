@@ -307,8 +307,7 @@ echo "Linea 112......";
 			];
 
 			// update BD with new messages
-			$resultupdate = Http::withHeaders([
-				'Content-Type' => 'application/json',
+			$resultupdate = Http::withUrlParameters([
 				'body' => $body
 			])->put($endpointputchats)->json();
 
