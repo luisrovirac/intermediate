@@ -265,8 +265,22 @@ echo "Linea 112......";
 			
 			echo $result->choices[0]->message->content; 		
 	
+			$messages = $data['messages']; 	
 
-				return response()->json($data['messages'],200,[]);
+			$toAdd = [[
+				"role" => "user",
+				"content" => $request->actual_message
+			],
+			[
+				"role" => "assistant",
+				"content" => $result->choices[0]->message->content
+			]];
+
+			array_push($messages, $toAdd);			
+
+			return response()->json($messages,200,[]);
+
+			return response()->json($result->choices[0]->message->content,200,[]);
 			} catch (\Throwable $th) {
 				return response()->json($th,200,[]);
 		}
