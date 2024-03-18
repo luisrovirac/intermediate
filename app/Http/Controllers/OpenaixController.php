@@ -257,8 +257,14 @@ echo "Linea 112......";
 
 			// save the messages
 			//echo '259 En openaisavemsgs amigo Sax...';
-
-			$messages = $data['messages']; 	
+			if($data){
+				$messages = $data['messages']; 	
+				echo "en el if data ";
+			}
+			else{
+				echo "en el else data ";
+				$messages = [];
+			}
 			//return $messages;
 			//echo '263 En openaisavemsgs amigo Sax...';
 
