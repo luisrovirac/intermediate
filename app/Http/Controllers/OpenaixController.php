@@ -278,7 +278,7 @@ echo "Linea 112......";
 				array_push($messages, $firstmessage);			
 				echo "en el if first 279";
 				echo "";
-				echo $messages;
+				return $messages;
 			}
 			else{
 				echo "en el else 284";
