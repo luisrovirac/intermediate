@@ -239,7 +239,7 @@ echo "Linea 112......";
 		$idUser = $request->idUser;
 		$idAssistant = $request->idAssistant;
 		$actual_message = $request->actual_message;
-		//echo 'En openaisavemsgs amigo Sax...';
+		echo 'En openaisavemsgs amigo Sax...';
 		//echo 'idUser->'.$idUser.' - idAssistant->'.$idAssistant.' - actual_message->'.$actual_message;
 		// consultar endpoint dynamodb
 		$elid = $idUser."y".$idAssistant;
@@ -253,6 +253,7 @@ echo "Linea 112......";
 
 			// save the messages
 			$messages = $data['messages']; 	
+			echo $messages;
 
 			// if first add the first message
 			if(!$messages){
@@ -261,20 +262,26 @@ echo "Linea 112......";
 					'content' => 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'
 				];
 				array_push($messages, $firstmessage);			
+				echo "en el if 265";
 			}
-
+			else{
+				echo "en el else 268";
+			}
 			// add message of user
 			$toAdduser = [
 				"role" => "user",
 				"content" => $request->actual_message
 			];
 			array_push($messages, $toAdduser);			
+			echo "en array_push 276";
+
 
 			// consulting openai response
 			$result = OpenAI::chat()->create([
 				'model' => 'gpt-3.5-turbo',
 				'messages' => $messages
 			]);
+			echo $result->choices[0]->message->content; 		
 
 			// add message of system(assistant)
 			$toAddassistant = [
@@ -282,8 +289,8 @@ echo "Linea 112......";
 				"content" => $result->choices[0]->message->content
 			];
 			array_push($messages, $toAddassistant);			
+			echo "en array_push 292";
 			
-			//echo $result->choices[0]->message->content; 		
 
 			// define body for update with put to BD
 			$body = [
@@ -303,7 +310,9 @@ echo "Linea 112......";
 				echo "";
 			}
 */
+			echo "antes del return 313";
 			return response()->json($result->choices[0]->message->content,200,[]);
+			echo "despues del return 315";
 
 			//return response()->json($result->choices[0]->message->content,200,[]);
 		} catch (Exception $e) {
