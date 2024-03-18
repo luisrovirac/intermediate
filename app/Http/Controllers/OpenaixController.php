@@ -306,9 +306,9 @@ echo "Linea 112......";
 			return response()->json($result->choices[0]->message->content,200,[]);
 
 			//return response()->json($result->choices[0]->message->content,200,[]);
-			} catch (\Throwable $th) {
-				return response()->json($th,200,[]);
-		}
+		} catch (Exception $e) {
+			return response()->json($e->getMessage(),500,[]);
+	}
 
 		/*
 		$result = OpenAI::chat()->create([
