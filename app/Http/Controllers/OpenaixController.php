@@ -248,17 +248,17 @@ echo "Linea 112......";
 		$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
 		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$elid;
 		$postx = false;		
-		$messages = [];
+		public $messages = [];
 		//echo '250 En openaisavemsgs amigo Sax...';
 		try {
 			// get the old messages
-			echo '253 antes de consultar openai amigo Sax...';
+			echo '255 antes de consultar openai amigo Sax...';
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
 			])->get($endpointgetchats)->json();
 
 			// save the messages
-			//echo '259 En openaisavemsgs amigo Sax...';
+			echo '261 En openaisavemsgs amigo Sax...';
 			if($data){
 				$messages = $data['messages']; 	
 				echo "en el if data ";
