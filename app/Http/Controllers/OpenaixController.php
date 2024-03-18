@@ -250,14 +250,17 @@ echo "Linea 112......";
 		echo '250 En openaisavemsgs amigo Sax...';
 		try {
 			// get the old messages
+			echo '253 En openaisavemsgs amigo Sax...';
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
 			])->get($endpointgetchats)->json();
-
+			echo $data;
 			// save the messages
+			echo '259 En openaisavemsgs amigo Sax...';
+
 			$messages = $data['messages']; 	
 			echo $messages;
-			echo '260 En openaisavemsgs amigo Sax...';
+			echo '263 En openaisavemsgs amigo Sax...';
 
 /*			
 			// if first add the first message
