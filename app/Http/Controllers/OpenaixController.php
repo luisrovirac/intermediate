@@ -248,7 +248,7 @@ echo "Linea 112......";
 		$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
 		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$elid;
 		$postx = false;		
-		public $messages = [];
+		$messages = [];
 		//echo '250 En openaisavemsgs amigo Sax...';
 		try {
 			// get the old messages
