@@ -237,13 +237,13 @@ echo "Linea 112......";
 
 	public function openaisavemsgs(Request $request){
 		$idUser = $request->idUser;
-		$idAssistant = $request->idAssistant;
+		$idsystem = $request->idsystem;
 		$actual_message = $request->actual_message;
 		//echo '242 En openaisavemsgs amigo Sax...';
-		//echo 'idUser->'.$idUser.' - idAssistant->'.$idAssistant.' - actual_message->'.$actual_message;
+		//echo 'idUser->'.$idUser.' - idsystem->'.$idsystem.' - actual_message->'.$actual_message;
 		// consultar endpoint dynamodb
 		//echo '245 En openaisavemsgs amigo Sax...';
-		$elid = $idUser."y".$idAssistant;
+		$elid = $idUser."y".$idsystem;
 		//echo '247 En openaisavemsgs amigo Sax...';
 		$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
 		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$elid;
@@ -272,14 +272,16 @@ echo "Linea 112......";
 			// if first add the first message
 			if(!$messages){
 				$firstmessage = [
-					'role' => 'assistant', 
+					'role' => 'system', 
 					'content' => 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'
 				];
 				array_push($messages, $firstmessage);			
-				echo "en el if first 273";
+				echo "en el if first 279";
+				echo "";
+				echo $messages;
 			}
 			else{
-				echo "en el else 276";
+				echo "en el else 284";
 			}
 			// add message of user
 			$toAdduser = [
@@ -287,7 +289,9 @@ echo "Linea 112......";
 				"content" => $request->actual_message
 			];
 			array_push($messages, $toAdduser);			
-			//echo "en array_push 276";
+			echo "en el if first 292";
+			echo "";
+			echo $messages;
 
 
 			// consulting openai response
@@ -297,14 +301,16 @@ echo "Linea 112......";
 			]);
 			//echo $result->choices[0]->message->content; 		
 
-			// add message of system(assistant)
-			$toAddassistant = [
-				"role" => "assistant",
+			// add message of system(system)
+			$toAddsystem = [
+				"role" => "system",
 				"content" => $result->choices[0]->message->content
 			];
-			array_push($messages, $toAddassistant);			
-			//echo "en array_push 292";
-			
+			array_push($messages, $toAddsystem);			
+			echo "en el if first 310";
+			echo "";
+			echo $messages;
+		
 
 			// define body for update with put to BD
 			$body = [
@@ -327,7 +333,7 @@ echo "Linea 112......";
 				echo "resultupdate BAD";
 				echo "";
 			}
-			echo "Good - antes del return 324";
+			echo "antes del return 326";
 			return response()->json($result->choices[0]->message->content,200,[]);
 //			echo "despues del return 315";
 
@@ -357,7 +363,7 @@ echo "Linea 112......";
 
 	public function getopenaisavemsgs(Request $request){
 		$idUser = $request->idUser;
-		$idAssistant = $request->idAssistant;
+		$idsystem = $request->idsystem;
 		$actual_message = $request->actual_message;
 		//echo 'En getopenaisavemsgs amigo Sax...';
 
@@ -371,10 +377,10 @@ echo "Linea 112......";
 		  
 		//$resultados = [{"name"=>"Madrid","y"=>"58"}];
 		//$resultados = [{"name":"Madrid","y":"58"},{"name":"Granada","y":"21"},{"name":"Segovia","y":"12"},{"name":"La Rioja","y":"3"},{"name":"Toledo","y":"3"}];		
-		//echo 'idUser->'.$idUser.' - idAssistant->'.$idAssistant.' - actual_message->'.$actual_message;
+		//echo 'idUser->'.$idUser.' - idsystem->'.$idsystem.' - actual_message->'.$actual_message;
 		// consultar endpoint dynamodb
 		//$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
-		$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$idAssistant;
+		$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$idsystem;
 		try {
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
