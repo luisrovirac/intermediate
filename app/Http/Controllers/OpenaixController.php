@@ -217,7 +217,7 @@ echo "Linea 112......";
 
 	public function openai01(Request $request){
 
-		$result = OpenAI::chat()->create([
+		$result = OpenAI::completions()->create([
 			'model' => 'gpt-3.5-turbo',
 			'messages' => [
 				[
@@ -231,7 +231,7 @@ echo "Linea 112......";
 			],
 		]);
 		
-		echo $result->choices[0]->message->content; 		
+		echo $result->choices[0]['text']; 		
 	}
 
 
@@ -317,14 +317,6 @@ echo "Linea 112......";
 			];
 			echo "antes del put 316";
 			echo "";
-			//return response()->json($body,200,[]);
-			// update BD with new messages
-/*			
-			$resultupdate = Http::withUrlParameters([
-				"id" => $elid,
-				"messages" => $messages
-			])->put($endpointputchats)->json();
-*/
 			// update BD with new messages
 			$resultupdate = Http::put($endpointputchats, [
 				"id" => $elid,
