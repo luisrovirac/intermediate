@@ -259,8 +259,7 @@ echo "Linea 112......";
 			echo '259 En openaisavemsgs amigo Sax...';
 
 			$messages = $data['messages']; 	
-			return $messages;
-			//echo $messages;
+			//return $messages;
 			echo '263 En openaisavemsgs amigo Sax...';
 
 /*			
@@ -300,13 +299,13 @@ echo "Linea 112......";
 			array_push($messages, $toAddassistant);			
 			echo "en array_push 292";
 			
-
+*/
 			// define body for update with put to BD
 			$body = [
 				"id" => $elid,
 				"messages" => $messages
 			];
-/*
+
 			// update BD with new messages
 			$resultupdate = Http::withHeaders([
 				'Content-Type' => 'application/json',
@@ -318,7 +317,7 @@ echo "Linea 112......";
 				echo "resultupdate OK";
 				echo "";
 			}
-*/
+
 //			echo "antes del return 313";
 //			return response()->json($result->choices[0]->message->content,200,[]);
 //			echo "despues del return 315";
