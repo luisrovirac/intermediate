@@ -259,7 +259,8 @@ echo "Linea 112......";
 			])->get($endpointgetchats)->json();
 
 			// save the messages
-			echo '261 En openaisavemsgs amigo Sax...';
+			echo 'Ojo es 262 En openaisavemsgs amigo Sax...';
+			return true;
 			return response()->json($data,200,[]);
 			if($data){
 				$messages = $data['messages']; 	
