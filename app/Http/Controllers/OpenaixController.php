@@ -243,28 +243,12 @@ echo "Linea 112......";
 		//echo 'idUser->'.$idUser.' - idAssistant->'.$idAssistant.' - actual_message->'.$actual_message;
 		// consultar endpoint dynamodb
 		//$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
-		$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$idAssistant;
+		$endpointchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$idUser."y".$idAssistant;
 		try {
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
 			])->get($endpointchats)->json();
-				return $data;
-				//$newdata = $data->json();
-				//return ((response()->json($data)));
-				//return 'response()->json($data)->'.response()->json($data);
-				//return 'json_decode($data)->'.json_decode($data);
-				//return 'json_encode(array($data))->'.json_encode(array($data));
-				//return 'json_encode(array($data))[1]->'.json_encode(array($data))[1];
-				//return response()->json($data)[1];
-				//return json_encode(array($data));
-				//$newdata = json_decode($data,true);
-				//return response()->json($newdata);
-				//return response()->json($data,200,[]);
-				//return response()->json($newdata->{'messages'},200,[]);
-				//return response()->json($data->{"messages"},200,[]);
-				//return response()->json($newdata->{"messages"},200,[]);
-				//return response()->json($data,200,[]);
-				//return response()->json($newdata[0],200,[]);
+				return response()->json($data['messages'],200,[]);
 			} catch (\Throwable $th) {
 				return response()->json($th,200,[]);
 		}
@@ -331,12 +315,6 @@ echo "Linea 112......";
 				//return response()->json($newdata[0],200,[]);
 			} catch (Exception $e) {
 				return response()->json($e->getMessage(),500,[]);
-
-				try {
-					//code...
-				} catch (\Throwable $th) {
-					//throw $th;
-				}
 		}
 
 		/*
