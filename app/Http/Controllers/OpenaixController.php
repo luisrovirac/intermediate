@@ -248,6 +248,7 @@ echo "Linea 112......";
 		$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
 		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$elid;
 		$postx = false;		
+		$messages = [];
 		//echo '250 En openaisavemsgs amigo Sax...';
 		try {
 			// get the old messages
@@ -263,15 +264,8 @@ echo "Linea 112......";
 				echo "en el if data ";
 			}
 			else{
+				// if first add the first message
 				echo "en el else data ";
-				$messages = [];
-			}
-			//return $messages;
-			//echo '263 En openaisavemsgs amigo Sax...';
-
-			
-			// if first add the first message
-			if(!$messages){
 				$firstmessage = [
 					'role' => 'system', 
 					'content' => 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'
@@ -280,11 +274,11 @@ echo "Linea 112......";
 				$postx = true;		
 				echo "en el if first 279";
 				echo "";
-				//return $messages;
 			}
-			else{
-				echo "en el else 284";
-			}
+			//return $messages;
+			//echo '263 En openaisavemsgs amigo Sax...';
+
+			
 			// add message of user
 			$toAdduser = [
 				"role" => "user",
