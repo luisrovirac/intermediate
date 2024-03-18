@@ -310,7 +310,7 @@ echo "Linea 112......";
 				//return 'json_encode(array($data))[1]->'.json_encode(array($data))[1];
 				//return response()->json($data)[1];
 				//return json_encode(array($data));
-				$newdata = (json_encode($data,true));
+				$newdata = $data;
 				return $newdata[0];
 				//return response()->json($data,200,[]);
 				//return response()->json($newdata->{'messages'},200,[]);
