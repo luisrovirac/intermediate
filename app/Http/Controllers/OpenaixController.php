@@ -239,12 +239,15 @@ echo "Linea 112......";
 		$idUser = $request->idUser;
 		$idAssistant = $request->idAssistant;
 		$actual_message = $request->actual_message;
-		echo 'En openaisavemsgs amigo Sax...';
+		echo '242 En openaisavemsgs amigo Sax...';
 		//echo 'idUser->'.$idUser.' - idAssistant->'.$idAssistant.' - actual_message->'.$actual_message;
 		// consultar endpoint dynamodb
+		echo '245 En openaisavemsgs amigo Sax...';
 		$elid = $idUser."y".$idAssistant;
+		echo '247 En openaisavemsgs amigo Sax...';
 		$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
 		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$elid;
+		echo '250 En openaisavemsgs amigo Sax...';
 		try {
 			// get the old messages
 			$data = Http::withHeaders([
@@ -254,6 +257,7 @@ echo "Linea 112......";
 			// save the messages
 			$messages = $data['messages']; 	
 			echo $messages;
+			echo '260 En openaisavemsgs amigo Sax...';
 
 /*			
 			// if first add the first message
