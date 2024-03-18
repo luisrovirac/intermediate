@@ -251,6 +251,7 @@ echo "Linea 112......";
 				//return 'response()->json($data)->'.response()->json($data);
 				//return 'json_decode($data)->'.json_decode($data);
 				return 'json_encode(array($data))->'.json_encode(array($data));
+				return 'json_encode(array($data))[1]->'.json_encode(array($data))[1];
 				//$newdata = json_decode($data,true);
 				//return response()->json($newdata);
 				//return response()->json($data[1],200,[]);
