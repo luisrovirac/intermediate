@@ -247,7 +247,7 @@ echo "Linea 112......";
 				'Content-Type' => 'application/json',
 			])->get($endpointchats)->json();
 				//$newdata = $data->json();
-				return json_decode(response()->json($data));
+				return json_encode(response()->json($data));
 				//$newdata = json_decode($data,true);
 				//return response()->json($newdata);
 				//return response()->json($data[1],200,[]);
