@@ -281,7 +281,7 @@ $response = $client->post('chat/completions', [
 
 echo "Sax todo ok despues";
 echo "";
-echo $response;
+echo $response->getBody();
 
 
 
