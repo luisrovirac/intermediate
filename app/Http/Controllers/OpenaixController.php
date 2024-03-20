@@ -275,7 +275,7 @@ $data = $response->getBody();
 echo "";
 echo "";
 echo "";
-echo $data[0]['choices'];
+echo $data['choices'];
 //echo response()->json($data[0]['choices'][0]['message']['content']);
 
 /*
