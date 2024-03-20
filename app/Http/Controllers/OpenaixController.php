@@ -231,13 +231,32 @@ echo "Linea 112......";
 			],
 		]);
 */		
+$client = OpenAI::client(env('OPEN_API_KEY'));
+
+$result = $client->completions()->create([
+	"model" => "gpt-3.5-turbo",
+	"temperature" => 0.7,
+	"top_p" => 1,
+	"frequency_penalty" => 0,
+	"presence_penalty" => 0,
+	'max_tokens' => 200,
+	'prompt' => sprintf('Write article about: %s live'),
+]);
+
+$content = trim($result['choices'][0]['text']);
+return $content;
+
+		/*
         $result = OpenAI::completions()->create([
 			'model' => 'gpt-3.5-turbo',
             'prompt' => $request->actual_message . " the response should be only 20 chars",
         ]);
 
         return response()->json(["content" => $result['choices'][0]['text']]);		
+		*/
 	}
+
+
 
 
 	public function openaisavemsgs(Request $request){
