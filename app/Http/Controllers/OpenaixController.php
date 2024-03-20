@@ -262,21 +262,49 @@ $body = json_encode([
 	'stream' => false
 ]);
 
+
 $response = $client->post('chat/completions', [
 	'headers' => $headers,
 	'body' => $body,
 	'stream' => false
 ]);
 
+
 //echo $response->getBody()->choices[0]['content'];
 $data = $response->getBody();
-echo $data;
+//echo $data;
 echo "";
 echo "";
 echo "";
-//echo $data->choices;
+echo response()->json($data[0]['choices'][0]['message']['content']);
 
+/*
+$data = [[
+	"id"=> "chatcmpl-94okdaks0wS7saekr9tqCpON1Q3eF",
+	"object"=> "chat.completion",
+	"created"=> 1710935427,
+	"model"=> "gpt-3.5-turbo-0125",
+	"choices"=> [
+	[
+	"index"=> 0,
+	"message"=> [
+	"role"=> "assistant",
+	"content"=> "Hola, me llamo Carla. Sí, me encanta mi nombre."
+	],
+	"logprobs"=> null,
+	"finish_reason"=> "stop"
+	]
+	],
+	"usage"=> [
+	"prompt_tokens"=> 170,
+	"completion_tokens"=> 16,
+	"total_tokens"=> 186
+	],
+	"system_fingerprint"=> "fp_4f0b692a78"
+]];
 
+echo response()->json($data[0]['choices'][0]['message']['content']);
+*/
 		/*
         $result = OpenAI::completions()->create([
 			'model' => 'gpt-3.5-turbo',
