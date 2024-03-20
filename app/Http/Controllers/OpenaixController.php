@@ -216,7 +216,7 @@ echo "Linea 112......";
 
 
 	public function openai01(Request $request){
-
+/*
 		$result = OpenAI::completions()->create([
 			'model' => 'gpt-3.5-turbo',
 			'messages' => [
@@ -230,10 +230,13 @@ echo "Linea 112......";
 				],
 			],
 		]);
-		
-		echo "Antes del return";
-		echo "";
-		return $result->choices[0]['text']; 		
+*/		
+        $result = OpenAI::completions()->create([
+			'model' => 'gpt-3.5-turbo',
+            'prompt' => $request->actual_message . " the response should be only 20 chars",
+        ]);
+
+        return response()->json(["content" => $result['choices'][0]['text']]);		
 	}
 
 
