@@ -271,9 +271,10 @@ $response = $client->post('chat/completions', [
 //echo $response->getBody()->choices[0]['content'];
 $data = $response->getBody();
 echo $data;
-echo "/n";
-echo $data->choices[0];
-
+echo "";
+echo "";
+echo "";
+echo $data['choices'];
 
 
 		/*
