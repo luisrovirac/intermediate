@@ -231,7 +231,9 @@ echo "Linea 112......";
 			],
 		]);
 		
-		echo $result->choices[0]['text']; 		
+		echo "Antes del return";
+		echo "";
+		return $result->choices[0]['text']; 		
 	}
 
 
