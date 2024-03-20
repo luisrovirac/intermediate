@@ -221,104 +221,41 @@ echo "Linea 112......";
 
 
 
-	public function openai01(Request $request){
-/*
-		$result = OpenAI::completions()->create([
-			'model' => 'gpt-3.5-turbo',
-			'messages' => [
-				[
-					'role' => 'system', 
-					'content' => 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'
-				],
-				[
-					"role" => "user",
-					"content" => $request->actual_message
-				],
-			],
-		]);
-*/		
-//$client = OpenAI::client(env('OPEN_API_KEY'));
+public function openai01(Request $request){
 
-$client = new Client([
-	'base_uri' => 'https://api.openai.com/v1/',
-]);
+	$client = new Client([
+		'base_uri' => 'https://api.openai.com/v1/',
+	]);
 
-$openaikey = "Bearer ". env('OPEN_API_KEY');
+	$openaikey = "Bearer ". env('OPEN_API_KEY');
 
-$headers = [
-	'Content-Type' => 'application/json',
-	'Authorization' => $openaikey
-];
+	$headers = [
+		'Content-Type' => 'application/json',
+		'Authorization' => $openaikey
+	];
 
-$messages = [
-	['role' => 'assistant', 'content' => 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'],
-	['role' => 'user', 'content' => $request->actual_message],
-];
+	$messages = [
+		['role' => 'assistant', 'content' => 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'],
+		['role' => 'user', 'content' => $request->actual_message],
+	];
 
-$body = json_encode([
-	'model' => 'gpt-3.5-turbo',
-	'messages' => $messages,
-	'stream' => false
-]);
+	$body = json_encode([
+		'model' => 'gpt-3.5-turbo',
+		'messages' => $messages,
+		'stream' => false
+	]);
 
 
-$response = $client->post('chat/completions', [
-	'headers' => $headers,
-	'body' => $body,
-	'stream' => false
-]);
+	$response = $client->post('chat/completions', [
+		'headers' => $headers,
+		'body' => $body,
+		'stream' => false
+	]);
 
+	$result = json_decode($response->getBody()->getContents(), true);
+	return response()->json($result['choices'][0]['message']['content']);
 
-//echo $response->getBody()->choices[0]['content'];
-//$data = $response->getBody();
-//echo $data;
-//echo "";
-//echo $data["choices"];
-//echo $data->choices;
-//echo $data[0];
-//echo $data[0]["choices"];
-//echo $data[0]["choices"][0];
-//echo $data;
-$result = json_decode($response->getBody()->getContents(), true);
-return response()->json($result['choices'][0]['message']['content']);
-//echo response()->json($data[0]['choices'][0]['message']['content']);
-
-/*
-$data = [[
-	"id"=> "chatcmpl-94okdaks0wS7saekr9tqCpON1Q3eF",
-	"object"=> "chat.completion",
-	"created"=> 1710935427,
-	"model"=> "gpt-3.5-turbo-0125",
-	"choices"=> [
-	[
-	"index"=> 0,
-	"message"=> [
-	"role"=> "assistant",
-	"content"=> "Hola, me llamo Carla. Sí, me encanta mi nombre."
-	],
-	"logprobs"=> null,
-	"finish_reason"=> "stop"
-	]
-	],
-	"usage"=> [
-	"prompt_tokens"=> 170,
-	"completion_tokens"=> 16,
-	"total_tokens"=> 186
-	],
-	"system_fingerprint"=> "fp_4f0b692a78"
-]];
-
-echo response()->json($data[0]['choices'][0]['message']['content']);
-*/
-		/*
-        $result = OpenAI::completions()->create([
-			'model' => 'gpt-3.5-turbo',
-            'prompt' => $request->actual_message . " the response should be only 20 chars",
-        ]);
-
-        return response()->json(["content" => $result['choices'][0]['text']]);		
-		*/
-	}
+}
 
 
 	public function openai03(Request $request){
@@ -470,6 +407,148 @@ echo response()->json($data[0]['choices'][0]['message']['content']);
 		*/
 	}
 
+	public function openaisavemsgs2(Request $request){
+		$idUser = $request->idUser;
+		$idSystem = $request->idSystem;
+		$actual_message = $request->actual_message;
+		//echo '242 En openaisavemsgs amigo Sax...';
+		//echo 'idUser->'.$idUser.' - idSystem->'.$idSystem.' - actual_message->'.$actual_message;
+		// consultar endpoint dynamodb
+		//echo '245 En openaisavemsgs amigo Sax...';
+		$elid = $idUser."y".$idSystem;
+		//echo '247 En openaisavemsgs amigo Sax...';
+		$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
+		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$elid;
+		$postx = false;		
+		$messages = [];
+		$data = [];
+		//echo '250 En openaisavemsgs amigo Sax...';
+		try {
+			// get the old messages
+			echo '255 antes de consultar openai amigo Sax...';
+			$data = Http::withHeaders([
+				'Content-Type' => 'application/json',
+			])->get($endpointgetchats)->json();
+
+			// save the messages
+			echo 'Ojo es 262 En openaisavemsgs amigo Sax...';
+
+			//return response()->json($data,200,[]);
+			if($data){
+				$messages = $data['messages']; 	
+				echo "265 en el if data ";
+			}
+			else{
+				// if first add the first message
+				echo "269 en el else data ";
+				$firstmessage = [
+					'role' => 'system', 
+					'content' => 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'
+				];
+				echo "274 en el else data ";
+				array_push($messages, $firstmessage);	
+				$postx = true;		
+				echo "en el if first 277";
+				echo "";
+			}
+			//return $messages;
+			//echo '263 En openaisavemsgs amigo Sax...';
+
+			
+			// add message of user
+			$toAdduser = [
+				"role" => "user",
+				"content" => $request->actual_message
+			];
+			array_push($messages, $toAdduser);			
+			echo "en el if first 290";
+			echo "";
+			//return $messages;
+
+
+			// consulting openai response
+			$result = OpenAI::chat()->create([
+				'model' => 'gpt-3.5-turbo',
+				'messages' => $messages
+			]);
+
+
+
+
+			$client = new Client([
+				'base_uri' => 'https://api.openai.com/v1/',
+			]);
+		
+			$openaikey = "Bearer ". env('OPEN_API_KEY');
+		
+			$headers = [
+				'Content-Type' => 'application/json',
+				'Authorization' => $openaikey
+			];
+		
+			$body = json_encode([
+				'model' => 'gpt-3.5-turbo',
+				'messages' => $messages,
+				'stream' => false
+			]);
+		
+			$response = $client->post('chat/completions', [
+				'headers' => $headers,
+				'body' => $body,
+				'stream' => false
+			]);
+		
+			$result = json_decode($response->getBody()->getContents(), true);
+			//return response()->json($result['choices'][0]['message']['content']);
+			$content = response()->json($result['choices'][0]['message']['content']);
+		
+			//echo $result->choices[0]->message->content; 		
+
+			// add message of system(system)
+			$toAddsystem = [
+				"role" => "system",
+				"content" => $content  //$result->choices[0]->message->content
+			];
+			array_push($messages, $toAddsystem);			
+			echo "en el if first 308";
+			echo "";
+			//return $messages;
+			// define body for update with put to BD
+			$body = [
+				"id" => $elid,
+				"messages" => $messages
+			];
+			echo "antes del put 316";
+			echo "";
+			// update BD with new messages
+			$resultupdate = Http::put($endpointputchats, [
+				"id" => $elid,
+				"messages" => $messages
+			]);
+
+
+			if($resultupdate){
+				echo "";
+				echo "resultupdate OK";
+				echo "";
+			}
+			else{
+				echo "";
+				echo "resultupdate BAD";
+				echo "";
+			}
+			echo "antes del return 343";
+			//return response()->json($result->choices[0]->message->content,200,[]);
+			return response()->json($result['choices'][0]['message']['content'],200,[]);
+//			echo "despues del return 315";
+
+			//return response()->json($result->choices[0]->message->content,200,[]);
+		} catch (Exception $e) {
+			return response()->json($e->getMessage(),500,[]);
+	}
+
+	}
+
 	public function getopenaisavemsgs(Request $request){
 		$idUser = $request->idUser;
 		$idSystem = $request->idSystem;
@@ -616,3 +695,32 @@ echo response()->json($data[0]['choices'][0]['message']['content']);
 	}	
 
 }
+
+
+/*
+$data = [[
+	"id"=> "chatcmpl-94okdaks0wS7saekr9tqCpON1Q3eF",
+	"object"=> "chat.completion",
+	"created"=> 1710935427,
+	"model"=> "gpt-3.5-turbo-0125",
+	"choices"=> [
+	[
+	"index"=> 0,
+	"message"=> [
+	"role"=> "assistant",
+	"content"=> "Hola, me llamo Carla. Sí, me encanta mi nombre."
+	],
+	"logprobs"=> null,
+	"finish_reason"=> "stop"
+	]
+	],
+	"usage"=> [
+	"prompt_tokens"=> 170,
+	"completion_tokens"=> 16,
+	"total_tokens"=> 186
+	],
+	"system_fingerprint"=> "fp_4f0b692a78"
+]];
+
+echo response()->json($data[0]['choices'][0]['message']['content']);
+*/
