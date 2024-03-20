@@ -411,18 +411,12 @@ public function openai01(Request $request){
 		$idUser = $request->idUser;
 		$idSystem = $request->idSystem;
 		$actual_message = $request->actual_message;
-		echo '414 En openaisavemsgs2 amigo Sax...';
-		//echo 'idUser->'.$idUser.' - idSystem->'.$idSystem.' - actual_message->'.$actual_message;
-		// consultar endpoint dynamodb
-		//echo '245 En openaisavemsgs amigo Sax...';
 		$elid = $idUser."y".$idSystem;
-		//echo '247 En openaisavemsgs amigo Sax...';
 		$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
 		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$elid;
 		$postx = false;		
 		$messages = [];
 		$data = [];
-		//echo '250 En openaisavemsgs amigo Sax...';
 		try {
 			// get the old messages
 			echo '428 antes de consultar los mensajes de dynamobd amigo Sax...';
@@ -431,25 +425,17 @@ public function openai01(Request $request){
 			])->get($endpointgetchats)->json();
 
 			// save the messages
-			echo 'Ojo es 434 En openaisavemsgs2 amigo Sax...';
-
-			//return response()->json($data,200,[]);
 			if($data){
 				$messages = $data['messages']; 	
-				echo "439 en el if data ";
 			}
 			else{
 				// if first add the first message
-				echo "443 en el else data ";
 				$firstmessage = [
 					'role' => 'system', 
 					'content' => 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'
 				];
 				array_push($messages, $firstmessage);	
 			}
-			//return $messages;
-			//echo '263 En openaisavemsgs amigo Sax...';
-
 			
 			// add message of user
 			$toAdduser = [
@@ -457,16 +443,6 @@ public function openai01(Request $request){
 				"content" => $request->actual_message
 			];
 			array_push($messages, $toAdduser);			
-			//return $messages;
-
-/*
-			// consulting openai response
-			$result = OpenAI::chat()->create([
-				'model' => 'gpt-3.5-turbo',
-				'messages' => $messages
-			]);
-*/
-
 
 			// start consulting openai response
 			$client = new Client([
@@ -493,49 +469,28 @@ public function openai01(Request $request){
 			]);
 		
 			$result = json_decode($response->getBody()->getContents(), true);
-			//return response()->json($result['choices'][0]['message']['content']);
 			$content = response()->json($result['choices'][0]['message']['content']);
 		
-			echo "499 antes de mostrar el content de openai ...";
-			echo $content; 		
-
 			// add message of system(system)
 			$toAddsystem = [
 				"role" => "system",
 				"content" => $result['choices'][0]['message']['content']
 			];
 			array_push($messages, $toAddsystem);			
-			//return $messages;
+
 			// define body for update with put to BD
 			$body = [
 				"id" => $elid,
 				"messages" => $messages
 			];
-			echo "antes del put 514";
-			echo "";
+
 			// update BD with new messages
 			$resultupdate = Http::put($endpointputchats, [
 				"id" => $elid,
 				"messages" => $messages
 			]);
 
-			if($resultupdate){
-				echo "";
-				echo "resultupdate OK";
-				echo "";
-			}
-			else{
-				echo "";
-				echo "resultupdate BAD";
-				echo "";
-			}
-			echo "antes del return 532...";
-			echo "";
-			//return response()->json($result->choices[0]->message->content,200,[]);
 			return response()->json($result['choices'][0]['message']['content'],200,[]);
-//			echo "despues del return 315";
-
-			//return response()->json($result->choices[0]->message->content,200,[]);
 		} catch (Exception $e) {
 			return response()->json($e->getMessage(),500,[]);
 	}
