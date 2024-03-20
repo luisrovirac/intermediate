@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Http;
 use PhpParser\Node\Stmt\TryCatch;
 use OpenAI\Laravel\Facades\OpenAI;
 
+/** */
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Psr7\Utils;
+
+
 use Exception;
 
 /**
@@ -231,20 +237,47 @@ echo "Linea 112......";
 			],
 		]);
 */		
-$client = OpenAI::client(env('OPEN_API_KEY'));
+//$client = OpenAI::client(env('OPEN_API_KEY'));
 
-$result = $client->completions()->create([
-	"model" => "gpt-3.5-turbo",
-	"temperature" => 0.7,
-	"top_p" => 1,
-	"frequency_penalty" => 0,
-	"presence_penalty" => 0,
-	'max_tokens' => 200,
-	'prompt' => sprintf('Write article about: %s live'),
+$client = new Client([
+	'base_uri' => 'https://api.openai.com/v1/',
 ]);
 
-$content = trim($result['choices'][0]['text']);
-return $content;
+$openaikey = "Bearer ". env('OPEN_API_KEY');
+
+$headers = [
+	'Content-Type' => 'application/json',
+	'Authorization' => $openaikey
+];
+
+$messages = [
+	['role' => 'user', 'content' => 'Hi'],
+	['role' => 'assistant', 'content' => "Hi i will give you some description about lorem. if i question you then you have to answer from that description and if you do not find answer then reply only Not Found
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+
+rules to follow,
+only find answer from above information.
+
+
+"],
+['role' => 'user', 'content' => $request->actual_message],
+];
+
+$body = json_encode([
+	'model' => 'gpt-3.5-turbo',
+	'messages' => $messages,
+	'stream' => true
+]);
+
+$response = $client->post('chat/completions', [
+	'headers' => $headers,
+	'body' => $body,
+	'stream' => true
+]);
+
+return $response;
 
 		/*
         $result = OpenAI::completions()->create([
