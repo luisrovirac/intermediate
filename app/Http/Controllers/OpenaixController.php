@@ -280,8 +280,8 @@ $response = $client->post('chat/completions', [
 ]);
 
 echo "Sax todo ok despues";
-
-return $response;
+echo "";
+echo $response;
 
 
 
