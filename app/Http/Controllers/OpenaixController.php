@@ -268,7 +268,7 @@ only find answer from above information.
 $body = json_encode([
 	'model' => 'gpt-3.5-turbo',
 	'messages' => $messages,
-	'stream' => true
+	'stream' => false
 ]);
 
 echo "Sax todo ok antes";
@@ -276,7 +276,7 @@ echo "Sax todo ok antes";
 $response = $client->post('chat/completions', [
 	'headers' => $headers,
 	'body' => $body,
-	'stream' => true
+	'stream' => false
 ]);
 
 echo "Sax todo ok despues";
