@@ -262,17 +262,14 @@ $body = json_encode([
 	'stream' => false
 ]);
 
-echo "Sax todo ok antes";
-
 $response = $client->post('chat/completions', [
 	'headers' => $headers,
 	'body' => $body,
 	'stream' => false
 ]);
 
-echo "Sax todo ok despues";
-echo "";
-echo $response->getBody();
+//echo $response->getBody()->choices[0]['content'];
+echo $response->getBody()->choices[0];
 
 
 
