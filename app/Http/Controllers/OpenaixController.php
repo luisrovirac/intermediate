@@ -270,17 +270,17 @@ $response = $client->post('chat/completions', [
 
 
 //echo $response->getBody()->choices[0]['content'];
-$data = $response->getBody();
+//$data = $response->getBody();
 //echo $data;
-echo "";
-echo "";
-echo "";
+//echo "";
 //echo $data["choices"];
 //echo $data->choices;
 //echo $data[0];
 //echo $data[0]["choices"];
 //echo $data[0]["choices"][0];
-echo $data;
+//echo $data;
+$result = json_decode($response->getBody()->getContents(), true);
+return response()->json($result['choices'][0]['message']['content']);
 //echo response()->json($data[0]['choices'][0]['message']['content']);
 
 /*
