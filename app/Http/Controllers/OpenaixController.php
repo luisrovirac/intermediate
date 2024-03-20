@@ -280,7 +280,7 @@ echo "";
 //echo $data[0];
 //echo $data[0]["choices"];
 //echo $data[0]["choices"][0];
-echo $data;
+echo $data[0]->choices;
 //echo response()->json($data[0]['choices'][0]['message']['content']);
 
 /*
