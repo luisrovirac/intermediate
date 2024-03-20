@@ -502,7 +502,7 @@ public function openai01(Request $request){
 			// add message of system(system)
 			$toAddsystem = [
 				"role" => "system",
-				"content" => $content  //$result->choices[0]->message->content
+				"content" => $result->choices[0]->message->content
 			];
 			array_push($messages, $toAddsystem);			
 			//return $messages;
