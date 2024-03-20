@@ -419,7 +419,6 @@ public function openai01(Request $request){
 		$data = [];
 		try {
 			// get the old messages
-			echo '428 antes de consultar los mensajes de dynamobd amigo Sax...';
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
 			])->get($endpointgetchats)->json();
