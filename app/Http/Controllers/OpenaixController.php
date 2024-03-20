@@ -274,7 +274,7 @@ echo $data;
 echo "";
 echo "";
 echo "";
-echo $data['choices'];
+echo $data->choices;
 
 
 		/*
