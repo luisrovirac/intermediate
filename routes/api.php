@@ -3,21 +3,38 @@
 use App\Http\Controllers\OpenaixController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\RegisterController;
+use App\Http\Controllers\API\AssistantController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+/* Auth */
+Route::post('register', [RegisterController::class, 'register']);
+Route::post('login', [RegisterController::class, 'login']);
+Route::post('logout', [RegisterController::class, 'logout']);
+
+//Route::middleware('auth:api')->group( function() {
+	//Route::resource('assistant', AssistantController::class);
+	//Route::apiResource('/assistant', AssistantController::class)->only(['index','show','store','update','destroy']);
+//});
+
+/* Assistant crud */
+
+// post   - create    - store - create new register
+Route::post('store', [AssistantController::class, 'store']);
+
+// get    - read      - index - show all data
+Route::get('index', [AssistantController::class, 'index']);
+
+// patch  - update    - update only register by id passed at parameter (for example 2)
+Route::post('update', [AssistantController::class, 'update']);
+
+// delete - destroy   - delete only register by id passed at parameter (for example 4)
+Route::post('destroy', [AssistantController::class, 'destroy']);
+
+// get    - show/{id} - show only register by id passed at parameter (for example 2)
+Route::post('show', [AssistantController::class, 'show']);
+
+
 
 // Get only test
 Route::get('getTest', [OpenaixController::class, 'getTest']);
