@@ -14,24 +14,29 @@ class RegisterController extends Controller
 {
 	public function register(Request $request): JsonResponse
 	{
-		$validator = Validator::make($request->all(), 
-		[
-			'name' => 'required',
-			'email' => 'required',
-			'password' => 'required',
-			'c_password' => 'required|same:password' // alt 124 |
-		]);
-	
-		if($validator->fails()) {
-			return $this->sendError('Validation Error.', $validator->errors());
-		}
-	
-		$input = $request->all();
-		$input['password'] = bcrypt($input['password']);
-		$user = User::create($input);
-		$success['token'] = $user->createToken('MyApp')->accessToken;
-	
-		return $this->sendResponse($success, 'User register succesfully');
+        $message = 'Hubo un problema en el proceso del Registro';
+		try {
+			$validator = Validator::make($request->all(), 
+			[
+				'name' => 'required',
+				'email' => 'required',
+				'password' => 'required',
+				'c_password' => 'required|same:password' // alt 124 |
+			]);
+		
+			if($validator->fails()) {
+				return $this->sendError('Validation Error.', $validator->errors());
+			}
+		
+			$input = $request->all();
+			$input['password'] = bcrypt($input['password']);
+			$user = User::create($input);
+			$success['token'] = $user->createToken('MyApp')->accessToken;
+		
+			return $this->sendResponse($success, 'User register succesfully');
+			} catch (\Throwable $th) {
+				return $this->sendError($message, [], 500);
+			}
 	}
 
 	public function login(Request $request): JsonResponse
@@ -76,7 +81,7 @@ class RegisterController extends Controller
             return $this->sendResponse($message, $data, 200);
         }
         catch (\Exception $e) {
-            return $this->sendError($e, [], 500);
+            return $this->sendError($message, [], 500);
         }
     }    
 
