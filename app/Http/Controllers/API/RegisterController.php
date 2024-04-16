@@ -19,13 +19,13 @@ class RegisterController extends Controller
 			$validator = Validator::make($request->all(), 
 			[
 				'name' => 'required',
-				'email' => 'required',
-				'password' => 'required',
+				'email' => 'required|email|unique:users',
+				'password' => 'required|min:6',
 				'c_password' => 'required|same:password' // alt 124 |
 			]);
 		
 			if($validator->fails()) {
-				return $this->sendError('Validation Error.', $validator->errors());
+				return $this->sendError('Validation Error.', $validator->errors(),400);
 			}
 		
 			$input = $request->all();
@@ -41,26 +41,35 @@ class RegisterController extends Controller
 
 	public function login(Request $request): JsonResponse
 	{
+		return $this->sendError(' Usuario no auntenticado.',[], 403);
+	}
+
+	public function thelogin(Request $request): JsonResponse
+	{
 		try {
-		//if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+			$validator = Validator::make($request->all(), 
+			[
+				'email' => 'required',
+				'password' => 'required',
+			]);
+		
+			if($validator->fails()) {
+				return $this->sendError('Validation Error.', $validator->errors(),400);
+			}
+			
 			$user = User::where('email', $request->email)->first();
+			if (!$user) {
+				return $this->sendError('Datos no válidos.',[], 400);
+			}
+
 			if (Hash::check($request->password, $user->password)) {
-			//if (Hash::check(['email' => $request->email, 'password' => $request->password])){
-				$id = Auth::id();
-				/** @var \App\Models\MyUserModel $user **/
-				//$user = Auth::user();
 				$success['token'] = $user->createToken('MyApp')->accessToken;
 				$success['name'] = $user->name;
-				$success['name'] = $user->id;
-	
+				$success['id'] = $user->id;
 				return $this->sendResponse($success, 'User login successfully');
-				// implementar esto...
-				//return response()->json(['user' => $user, 'token' => $success['token']]);
 			}
 			else{
-				//echo 'en el else de error...';
-				return false;
-				return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
+				return $this->sendError('Datos no válidos.',[], 400);
 			}
 		} catch (\Throwable $th) {
 			$data = [];
@@ -75,13 +84,19 @@ class RegisterController extends Controller
         $message     = 'Hubo un problema en el proceso del Logout';
 
         try {
-            $token   = $request->user()->token();
-            $token->revoke();
-            $message = 'Logout satisfactorio';
-            return $this->sendResponse($message, $data, 200);
+			if(Auth::check()){
+				$token   = $request->user()->token();
+				$token->revoke();
+				$message = 'Logout satisfactorio';
+				return $this->sendResponse($message, $data, 200);
+			}
+			else{
+				$motive = ', Usuario no auntenticado';
+				return $this->sendError($message.$motive, [], 403);
+			}
         }
         catch (\Exception $e) {
-            return $this->sendError($message, [], 500);
+            return $this->sendError($message.$e, [], 500);
         }
     }    
 

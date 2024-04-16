@@ -6,16 +6,34 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\AssistantController;
 
+use Illuminate\Support\Facades\Auth;
+
 
 /* Auth */
 Route::post('register', [RegisterController::class, 'register']);
-Route::post('login', [RegisterController::class, 'login']);
-Route::post('logout', [RegisterController::class, 'logout']);
+Route::get('login', [RegisterController::class, 'login'])->name('login');
+Route::post('thelogin', [RegisterController::class, 'thelogin'])->name('thelogin');
+//Route::post('logout', [RegisterController::class, 'logout']);
+/*
+Route::middleware('auth:api')->group( function() {
+	Route::post('logout', [RegisterController::class, 'logout']);
+});
+*/
+/*
+Route::controller(RegisterController::class)->group(function(){
 
-//Route::middleware('auth:api')->group( function() {
-	//Route::resource('assistant', AssistantController::class);
-	//Route::apiResource('/assistant', AssistantController::class)->only(['index','show','store','update','destroy']);
-//});
+	Route::post('logout', [RegisterController::class, 'logout']);
+  
+})->middleware('auth:api');
+*/
+
+Route::middleware('auth:api')->group(function () {
+	//Route::post('me', [AuthorizationController::class, 'me'])->name('me');
+	Route::post('logout', [RegisterController::class, 'logout']);
+	// get    - read      - index - show all data
+	Route::get('index', [AssistantController::class, 'index'])->name('index');
+});
+
 
 /* Assistant crud */
 
@@ -23,7 +41,7 @@ Route::post('logout', [RegisterController::class, 'logout']);
 Route::post('store', [AssistantController::class, 'store']);
 
 // get    - read      - index - show all data
-Route::get('index', [AssistantController::class, 'index']);
+//Route::get('index', [AssistantController::class, 'index']);
 
 // patch  - update    - update only register by id passed at parameter (for example 2)
 Route::post('update', [AssistantController::class, 'update']);
