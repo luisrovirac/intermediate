@@ -423,18 +423,21 @@ public function openai01(Request $request){
 		$data = [];
 		try {
 			// get the old messages
+			/*
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
 			])->get($endpointgetchats)->json();
-
+			*/
+			$data = false;
 			// save the messages
 			if($data){
 				$messages = $data['messages']; 	
 			}
 			else{
+				//return response()->json($idAssistant,200);
 				$result = Assistant::find($idAssistant);
-				return response()->json($result,200);
-				//return response()->json($result->details,200);
+				//return response()->json($result,200);
+				return response()->json($result->details,200);
 				//$result = $this->assistant->find($request->id);  
 				if($result){
 					//return response()->json($result->details,200);
