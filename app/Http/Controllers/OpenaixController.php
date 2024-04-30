@@ -13,8 +13,10 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Utils;
 
-
 use Exception;
+
+use App\Models\Assistant;
+
 
 /**
  * @OA\Info(title="API for projects", version="0.1")
@@ -411,7 +413,9 @@ public function openai01(Request $request){
 		$idUser = $request->idUser;
 		$idSystem = $request->idSystem;
 		$actual_message = $request->actual_message;
+		$idAssistant = $request->idAssistant;
 		$elid = $idUser."y".$idSystem;
+
 		$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
 		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$elid;
 		$postx = false;		
@@ -428,11 +432,23 @@ public function openai01(Request $request){
 				$messages = $data['messages']; 	
 			}
 			else{
+				$result = Assistant::find($idAssistant);
+				//$result = $this->assistant->find($request->id);  
+				if($result){
+					//return response()->json($result->details,200);
+					$content = $result->details;
+				}
+				else{
+					//return response()->json("Registro no encontrado -439",500);
+					$content = 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 14 palabras.';
+				}
+			
 				// if first add the first message
 				$firstmessage = [
 					'role' => 'system', 
-					'content' => 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'
+					'content' => $content
 				];
+
 				array_push($messages, $firstmessage);	
 			}
 			
@@ -500,6 +516,7 @@ public function openai01(Request $request){
 		$idUser = $request->idUser;
 		$idSystem = $request->idSystem;
 		$actual_message = $request->actual_message;
+		$idAssistant = $request->idAssistant;
 		//echo 'En getopenaisavemsgs amigo Sax...';
 
 		$infoBD = [

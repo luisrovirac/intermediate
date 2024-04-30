@@ -53,6 +53,8 @@ Route::post('destroy', [AssistantController::class, 'destroy']);
 Route::post('show', [AssistantController::class, 'show']);
 
 
+// get all users
+Route::get('listuser', [RegisterController::class, 'listuser']);
 
 // Get only test
 Route::get('getTest', [OpenaixController::class, 'getTest']);
@@ -78,10 +80,6 @@ Route::post('openai03', [OpenaixController::class, 'openai03']);
 // You need pass the parameter: actual_message
 Route::post('openaisavemsgs', [OpenaixController::class, 'openaisavemsgs']);
 
-// post openaisavemsgs2 test using http and guzzle and save messages
-// You need pass the parameter: actual_message, idUser and idSystem
-Route::post('openaisavemsgs2', [OpenaixController::class, 'openaisavemsgs2']);
-
 // get getopenaisavemsgs test using openai-php/laravel client and save messages
 // You need pass the parameter: actual_message
 Route::get('getopenaisavemsgs', [OpenaixController::class, 'getopenaisavemsgs']);
@@ -93,5 +91,10 @@ Route::get('openai02', [OpenaixController::class, 'openai02']);
 // You need pass the parameter: prompt_img
 Route::post('openaidalle3', [OpenaixController::class, 'openaidalle3']);
 
+
+// El quefrado
+// post openaisavemsgs2 test using http and guzzle and save messages
+// You need pass the parameter: actual_message, idUser and idSystem
+Route::post('openaisavemsgs2', [OpenaixController::class, 'openaisavemsgs2']);
 
 

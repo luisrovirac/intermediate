@@ -100,4 +100,18 @@ class RegisterController extends Controller
         }
     }    
 
+	public function listuser(){
+		try {
+			$result = User::all();
+			if($result){
+				return response()->json($result,200);
+			}
+			else{
+				return response()->json("No user list",200);
+			}
+		} catch (\Throwable $th) {
+			return response()->json($th,500);
+		}
+	}
+
 }
