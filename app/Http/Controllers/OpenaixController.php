@@ -433,6 +433,7 @@ public function openai01(Request $request){
 			}
 			else{
 				$result = Assistant::find($idAssistant);
+				return response()->json($result->details,200);
 				//$result = $this->assistant->find($request->id);  
 				if($result){
 					//return response()->json($result->details,200);
