@@ -417,7 +417,8 @@ public function openai01(Request $request){
 		$idUser = $request->idUser;
 		$idSystem = $request->idSystem;
 		$actual_message = $request->actual_message;
-		$idAssistant = $request->idAssistant;
+		$idAssistant = $request->idSystem;
+		//$idAssistant = $request->idAssistant;
 		$elid = $idUser."y".$idSystem;
 
 		$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
@@ -441,8 +442,8 @@ public function openai01(Request $request){
 				//$result = Assistant::all();
 				//$result = DB::table('assistants')->where('id', $idAssistant)->first();				
 				//return response()->json($idAssistant,200);
-				//$result = Assistant::find($idAssistant);
-				$result = Assistant::find(1);
+				$result = Assistant::find($idAssistant);
+				//$result = Assistant::find(1);
 				return response()->json($result,200);
 				return response()->json($result->details,200);
 				//$result = $this->assistant->find($request->id);  
