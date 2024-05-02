@@ -438,10 +438,8 @@ public function openai01(Request $request){
 				$messages = $data['messages']; 	
 			}
 			else{
-				$result = DB::table('assistants')
-					->where('id', $idAssistant)
-					->first()
-				;				
+				$result = Assistant::all();
+				//$result = DB::table('assistants')->where('id', $idAssistant)->first();				
 				//return response()->json($idAssistant,200);
 				//$result = Assistant::find($idAssistant);
 				return response()->json($result,200);
