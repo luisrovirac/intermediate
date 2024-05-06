@@ -5,13 +5,199 @@
         "version": "0.1"
     },
     "paths": {
-        "api.sax.cat/api/openai01": {
+        "/api/register": {
             "post": {
                 "tags": [
-                    "openai01"
+                    "User"
+                ],
+                "summary": "Register - Create a new user",
+                "description": "This endpoint creates a new user when register",
+                "operationId": "25dc775588d2e73b509bcb375d425b27",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "name",
+                                    "c_password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Jose Gabriel"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "josegabriel@example.org"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "#sdasd$ssdaAA@"
+                                    },
+                                    "c_password": {
+                                        "type": "string",
+                                        "example": "#sdasd$ssdaAA@"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User created when User register",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User register succesfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The name has already been taken. (and 2 more errors)"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "..."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/thelogin": {
+            "post": {
+                "tags": [
+                    "Login Authentication"
+                ],
+                "summary": "Get a autentication user token",
+                "description": "Iniciar session con un usuario ya existente en la base de datos",
+                "operationId": "fd59ac81d93053df059b4176af488610",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "gabriel_nunes@example.org"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "#sdasd$ssdaAA@"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User login successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "json": {
+                                            "type": "json",
+                                            "example": {
+                                                "success": true,
+                                                "data": {
+                                                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNzhkNzQwOTA4YjNmNzA3NmFiNjY0YTUwZmYwOTdlNDQ4OThiMzUwMmYyMTJmMTg1Y2JiOWRkMWNhNGIxNDRmYTAwMTk4MjBmNTcxOTYxMTgiLCJpYXQiOjE3MTQ4OTczMzguOTQ0MDQ4LCJuYmYiOjE3MTQ4OTczMzguOTQ0MDUsImV4cCI6MTc0NjQzMzMzOC45MjgzMzgsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.o7k0xue0rBFY6YHcEQ4ffU1K7c105g2vmWlPa4xBm7Jmlk1yQ7U69QMVXGD8w1VdUKdNYDoLqXIrFgIAFChg0WyN4tYQNn1rUlBsud8EafrrMGhVF4gAF8Cw0yq-nSkW9mo3KvryaJei6NbhAb8vnurRUvRVp425ysYUiBTgwIey7yoXPSGzVvl5tFu9xCiJ40o2S5m8saCrSYsfP6qWOcRr1aCiMq2WV9D1wlwHaYjrAf1fbg-W829W1Zp2K_1DJq7MJvxPuAbDhdmZ1odfARAsFpZaSP4xnanyZhbISAYgmDqyRY2ofpIe24m9WOlVfKLTOc3EogBfP2hroXHRAuUOOJNI165SV0vB5chryid1VIyCjgeXNOwWZK2DkRXQ64ZWQaj3g4fArO96nNYKmXTubGgPZfDso7mLMhe3j_KglyBxxPoqiUu2SW_ewnDmxJkLTIgl1M2vF-w0wb0c7a_cTZSj84nwYFw1pB9gkdqL8vJTrUshIxPCWuPPWG5srRt4JdxvJTon-raYjkiAK7IkfIFlN6hYgE86-3waTSKMV5xh0peUM18zDPEuKkYzO6KKe4WYQ9LSX919HIImQuu3NvykyTckBHfvtngSDgMzPhw0oVuIE1aThfMOtuP7_yfV1nS4gykk9owtyBZtWHck2Xy3YiobpHCSUYoTFD0",
+                                                    "name": "Schell",
+                                                    "id": 1
+                                                },
+                                                "message": "User login successfully"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Incorrect credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Datos no válidos."
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "..."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Cerrar session un usuario",
+                "description": "Cerrar session con un usuario ya existente en la base de datos",
+                "operationId": "logout",
+                "responses": {
+                    "200": {
+                        "description": "Logout satisfactorio"
+                    },
+                    "401": {
+                        "description": "Usuario no auntenticado"
+                    },
+                    "500": {
+                        "description": "Hubo un problema en el proceso del Logout"
+                    }
+                },
+                "security": [
+                    {
+                        "SANCTUM": []
+                    }
+                ]
+            }
+        },
+        "api.sax.cat/api/openaisavemsgs2": {
+            "post": {
+                "tags": [
+                    "openaisavemsgs2"
                 ],
                 "summary": "Consultar la respuesta a una comunicación en el chat",
-                "operationId": "06b113b5f89f0091d2c65da68b5f3838",
+                "operationId": "e144fac2a6d492670dd0ebc56ec0f586",
                 "parameters": [
                     {
                         "name": "actual_message",
@@ -20,26 +206,49 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "idUser",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "idSystem",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
                     }
                 ],
                 "requestBody": {
+                    "description": "Where enter the information of actual_message and idUser",
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
+                                "required": [
+                                    "actual_message",
+                                    "idUser"
+                                ],
                                 "properties": {
-                                    "": {
-                                        "properties": {
-                                            "actual_message": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "type": "object"
+                                    "actual_message": {
+                                        "type": "string",
+                                        "example": "Que vamos a hacer esta noche?"
+                                    },
+                                    "idUser": {
+                                        "type": "integer",
+                                        "example": 7
+                                    },
+                                    "idSystem": {
+                                        "type": "integer",
+                                        "example": 2
                                     }
                                 },
-                                "type": "object",
-                                "example": {
-                                    "actual_message": "Que vamos a hacer esta noche?"
-                                }
+                                "type": "object"
                             }
                         }
                     }
@@ -51,9 +260,9 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "actual_message": {
+                                        "message": {
                                             "type": "string",
-                                            "example": "Que vamos a hacer esta noche?"
+                                            "example": "Podemos tomar un café"
                                         }
                                     },
                                     "type": "object"
@@ -77,82 +286,12 @@
                             }
                         }
                     }
-                }
-            }
-        },
-        "api.sax.cat/api/openaidalle3": {
-            "post": {
-                "tags": [
-                    "openaidalle3"
-                ],
-                "summary": "Solicitar una imagen al API usando dall-e-3",
-                "operationId": "6d64c90216448c5ca795890a3e5258b6",
-                "parameters": [
-                    {
-                        "name": "prompt_img",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "": {
-                                        "properties": {
-                                            "prompt_img": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "type": "object"
-                                    }
-                                },
-                                "type": "object",
-                                "example": {
-                                    "prompt_img": "Foto super realista de joven simpática y coqueta, sonriendo"
-                                }
-                            }
-                        }
-                    }
                 },
-                "responses": {
-                    "200": {
-                        "description": "Completed",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "prompt_img": {
-                                            "type": "string",
-                                            "example": "Foto super realista de joven simpática y coqueta, sonriendo"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "UNPROCESSABLE CONTENT",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "The prompt_img field is required."
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                "security": [
+                    {
+                        "bearer": []
                     }
-                }
+                ]
             }
         }
     }

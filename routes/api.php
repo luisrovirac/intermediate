@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 /* Auth */
 Route::post('register', [RegisterController::class, 'register']);
+// For return error
 Route::get('login', [RegisterController::class, 'login'])->name('login');
+// For autenticate
 Route::post('thelogin', [RegisterController::class, 'thelogin'])->name('thelogin');
 //Route::post('logout', [RegisterController::class, 'logout']);
 /*

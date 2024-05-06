@@ -179,53 +179,6 @@ echo "Linea 112......";
  
 }
 
-     /**
-     * Consultar la respuesta a una comunicación en el chat
-     * @OA\Post (
-     *     path="api.sax.cat/api/openai01",
-     *     tags={"openai01"},
-     *     @OA\Parameter(
-     *         in="path",
-     *         name="actual_message",
-     *         required=true,
-     *         @OA\Schema(type="string")
-     *     ),
-	 *     @OA\RequestBody(
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 @OA\Property(
-     *                      type="object",
-     *                      @OA\Property(
-     *                          property="actual_message",
-     *                          type="string"
-     *                      ),
-     *                 ),
-     *                 example={
-     *                     "actual_message":"Que vamos a hacer esta noche?",
-     *                }
-     *             )
-     *         )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Completed",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="actual_message", type="string", example="Que vamos a hacer esta noche?"),
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="UNPROCESSABLE CONTENT",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="The actual_message field is required."),
-     *          )
-     *      )
-     * )
-     */
-
-
-
 
 public function openai01(Request $request){
 
@@ -412,6 +365,60 @@ public function openai01(Request $request){
 		echo $result->choices[0]->message->content; 		
 		*/
 	}
+
+
+     /**
+     * Consultar la respuesta a una comunicación en el chat
+     * @OA\Post (
+     *     path="api.sax.cat/api/openaisavemsgs2",
+     *     tags={"openaisavemsgs2"},
+     *     security={ {"bearer": {} }},
+     *     @OA\Parameter(
+     *         in="path",
+     *         name="actual_message",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         in="path",
+     *         name="idUser",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         in="path",
+     *         name="idSystem",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     * @OA\RequestBody(
+     *    required=true,
+     *    description="Where enter the information of actual_message and idUser",
+     *    @OA\JsonContent(
+     *       required={"actual_message","idUser"},
+     *       @OA\Property(property="actual_message", type="string", example="Que vamos a hacer esta noche?"),
+     *       @OA\Property(property="idUser", type="integer", example=7),
+     *       @OA\Property(property="idSystem", type="integer", example=2),
+     *    ),
+     * ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Completed",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="Podemos tomar un café"),
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="UNPROCESSABLE CONTENT",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="The actual_message field is required."),
+     *          )
+     *      )
+     * )
+     */
+
+
 
 	public function openaisavemsgs2(Request $request){
 		$idUser = $request->idUser;
@@ -602,52 +609,6 @@ public function openai01(Request $request){
 		}
 		//echo $result->choices[0]->message->content; // Hello! How can I assist you today?		
 	}	
-
-
-     /**
-     * Solicitar una imagen al API usando dall-e-3
-     * @OA\Post (
-     *     path="api.sax.cat/api/openaidalle3",
-     *     tags={"openaidalle3"},
-     *     @OA\Parameter(
-     *         in="path",
-     *         name="prompt_img",
-     *         required=true,
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\RequestBody(
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 @OA\Property(
-     *                      type="object",
-     *                      @OA\Property(
-     *                          property="prompt_img",
-     *                          type="string"
-     *                      ),
-     *                 ),
-     *                 example={
-     *                     "prompt_img":"Foto super realista de joven simpática y coqueta, sonriendo",
-     *                }
-     *             )
-     *         )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Completed",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="prompt_img", type="string", example="Foto super realista de joven simpática y coqueta, sonriendo"),
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="UNPROCESSABLE CONTENT",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="The prompt_img field is required."),
-     *          )
-     *      )
-     * )
-     */
 
 
 	public function openaidalle3(Request $request){
