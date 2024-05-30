@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use PhpParser\Node\Stmt\TryCatch;
 
 class RegisterController extends Controller
 {
@@ -61,10 +62,14 @@ class RegisterController extends Controller
 				'c_password' => 'required|same:password' // alt 124 |
 			]);
 		
+			/*
 			if($validator->fails()) {
 				return $this->sendError('Validation Error.', $validator->errors(),400);
 			}
-		
+			*/
+
+			//return $this->sendResponse($validator, 'line 71 ... pasan o no la validacion de los campos...no lo se ...',200);
+
 			$input = $request->all();
 			$input['password'] = bcrypt($input['password']);
 			$user = User::create($input);
@@ -75,6 +80,67 @@ class RegisterController extends Controller
 				return $this->sendError($message, [], 500);
 			}
 	}
+
+	public function FLECHAregister(Request $request): JsonResponse
+	{
+        $message = 'Hubo un problema en el proceso del Registro';
+		try {
+			$validator = Validator::make($request->all(), 
+			[
+				'name' => 'required|name|unique:users',
+				'email' => 'required|email|unique:users',
+				'password' => 'required|min:6',
+				'c_password' => 'required|same:password' // alt 124 |
+			]);
+
+			//return $this->sendResponse("if break Sax line 64 before validator fails", 'No User register ... por ahora');
+
+			//return $this->sendResponse($validator, 'line 66 break Sax ...No User register ... por ahora');
+/*			
+			if($validator->fails()) {
+				return $this->sendResponse("if break Sax line 67 validator fails", 'No User register ... por ahora');
+				//return $this->sendError('Validation Error.', $validator->errors(),400);
+			}
+			else{
+				return $this->sendResponse("if break Sax line 71 validator fails", 'No User register ... por ahora');
+			}
+*/
+/*
+try {
+				if($validator->fails()){
+					return $this->sendResponse($validator->errors(), 'if todo ok break Sax line 78 No User register ... por ahora',400);
+				}
+			} catch (\Throwable $th) {
+				return $this->sendResponse($validator, 'en catch da error...break Sax line 81 No User register ... por ahora');
+			}
+			*/
+			//if($validator->errors()){
+
+			//}
+			try {
+				if($validator->fails()){
+					return $this->sendResponse($validator->errors(), 'No pasan la validacion de los campos, reintentar',400);
+				}
+			} catch (\Throwable $th) {
+				if($validator->errors()){
+					return $this->sendResponse($validator->errors(), 'line 122 if ... pasan la validacion de los campos, reintentar',400);
+				}
+				else{
+					return $this->sendResponse($validator->errors(), 'else line 125... pasan la validacion de los campos, reintentar',400);
+				}
+				return $this->sendResponse($validator->errors(), 'en catch pasa la validation de los campos...break Sax line 124 No User register ... por ahora');
+				$input = $request->all();
+				$input['password'] = bcrypt($input['password']);
+				$user = User::create($input);
+				$success['token'] = $user->createToken('MyApp')->accessToken;
+			
+				return $this->sendResponse($success, 'User register succesfully');
+			}
+			} catch (\Throwable $th) {
+				return $this->sendError($th, [], 500);
+			}
+	}
+
 
 	public function login(Request $request): JsonResponse
 	{
