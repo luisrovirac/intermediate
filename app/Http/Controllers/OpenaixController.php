@@ -463,7 +463,7 @@ public function openai01(Request $request){
 			
 				// if first add the first message
 				$firstmessage = [
-					'role' => 'assistant', 
+					'role' => 'system', 
 					'content' => $content
 				];
 
@@ -506,7 +506,7 @@ public function openai01(Request $request){
 		
 			// add message of system(system)
 			$toAddsystem = [
-				"role" => "assistant",
+				"role" => "system",
 				"content" => $result['choices'][0]['message']['content']
 			];
 			array_push($messages, $toAddsystem);			
