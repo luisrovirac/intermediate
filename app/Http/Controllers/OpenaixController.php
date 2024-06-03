@@ -349,7 +349,8 @@ public function openai01(Request $request){
 	}
 	}
 */
-	public function getMsgsChat($endpointgetchats){
+	public function getMsgsChat($elid){
+		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$elid;
 		$dataChat = Http::withHeaders([
 			'Content-Type' => 'application/json',
 		])->get($endpointgetchats)->json();
@@ -425,7 +426,7 @@ public function openai01(Request $request){
 		$data = [];
 		try {
 			// get the old messages
-			$data = $this->getMsgsChat($endpointgetchats);
+			$data = $this->getMsgsChat($elid);
 			//return response()->json($data,200);
 
 			/*
