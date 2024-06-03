@@ -489,7 +489,8 @@ public function openai01(Request $request){
 			];
 		
 			$body = json_encode([
-				'model' => 'gpt-3.5-turbo',
+				//'model' => 'gpt-3.5-turbo',
+				'model' => 'gpt-4o',
 				'messages' => $messages,
 				'stream' => false
 			]);
