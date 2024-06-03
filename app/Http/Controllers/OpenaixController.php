@@ -351,8 +351,9 @@ public function openai01(Request $request){
 */
 	public function getMsgsChat(Request $request){
 	//public function getMsgsChat($idUser,$idSystem){
-		return response()->json($request);
-		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$idUser."y".$idSystem;
+		//return response()->json($request);
+		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$request->idUser."y".$request->idSystem;
+		return response()->json($endpointgetchats);
 		$dataChat = Http::withHeaders([
 			'Content-Type' => 'application/json',
 		])->get($endpointgetchats)->json();
