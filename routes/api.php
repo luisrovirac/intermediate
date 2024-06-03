@@ -99,4 +99,6 @@ Route::post('openaidalle3', [OpenaixController::class, 'openaidalle3']);
 // You need pass the parameter: actual_message, idUser and idSystem
 Route::post('openaisavemsgs2', [OpenaixController::class, 'openaisavemsgs2']);
 
-
+// get msgs of chats
+// You need pass the parameter: idUser and idSystem
+Route::post('getMsgsChat', [OpenaixController::class, 'getMsgsChat']);
