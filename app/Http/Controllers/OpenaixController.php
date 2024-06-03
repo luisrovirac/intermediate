@@ -426,11 +426,13 @@ public function openai01(Request $request){
 		try {
 			// get the old messages
 			$data = $this->getMsgsChat($endpointgetchats);
-			return response()->json($data,200);
+			//return response()->json($data,200);
 
+			/*
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
 			])->get($endpointgetchats)->json();
+			*/
 			//$data = false;
 			// save the messages
 			if($data){
