@@ -429,14 +429,14 @@ public function openai01(Request $request){
 		$data = [];
 		try {
 			// get the old messages
-			$data = $this->getMsgsChat($idUser,$idSystem);
+			//$data = $this->getMsgsChat($idUser,$idSystem);
 			//return response()->json($data,200);
 
-			/*
+			
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
 			])->get($endpointgetchats)->json();
-			*/
+			
 			//$data = false;
 			// save the messages
 			if($data){
