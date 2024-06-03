@@ -80,7 +80,7 @@ Route::post('openai03', [OpenaixController::class, 'openai03']);
 
 // post openaisavemsgs test using openai-php/laravel client and save messages
 // You need pass the parameter: actual_message
-Route::post('openaisavemsgs', [OpenaixController::class, 'openaisavemsgs']);
+// Route::post('openaisavemsgs', [OpenaixController::class, 'openaisavemsgs']);
 
 // get getopenaisavemsgs test using openai-php/laravel client and save messages
 // You need pass the parameter: actual_message

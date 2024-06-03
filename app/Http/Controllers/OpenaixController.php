@@ -239,6 +239,7 @@ public function openai01(Request $request){
 		return $response;
 	}
 
+/*
 	public function openaisavemsgs(Request $request){
 		$idUser = $request->idUser;
 		$idSystem = $request->idSystem;
@@ -346,27 +347,14 @@ public function openai01(Request $request){
 		} catch (Exception $e) {
 			return response()->json($e->getMessage(),500,[]);
 	}
-
-		/*
-		$result = OpenAI::chat()->create([
-			'model' => 'gpt-3.5-turbo',
-			'messages' => [
-				[
-					'role' => 'system', 
-					'content' => 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 10 palabras.'
-				],
-				[
-					"role" => "user",
-					"content" => $request->actual_message
-				],
-			],
-		]);
-		
-		echo $result->choices[0]->message->content; 		
-		*/
 	}
-
-
+*/
+	public function getMsgsChat($endpointgetchats){
+		$dataChat = Http::withHeaders([
+			'Content-Type' => 'application/json',
+		])->get($endpointgetchats)->json();
+		return $dataChat;
+	}
      /**
      * Consultar la respuesta a una comunicación en el chat
      * @OA\Post (
@@ -421,6 +409,8 @@ public function openai01(Request $request){
 
 
 	public function openaisavemsgs2(Request $request){
+		// El quefrado		
+		//return response()->json('data 428',200);
 		$idUser = $request->idUser;
 		$idSystem = $request->idSystem;
 		$actual_message = $request->actual_message;
@@ -435,6 +425,9 @@ public function openai01(Request $request){
 		$data = [];
 		try {
 			// get the old messages
+			$data = $this->getMsgsChat($endpointgetchats);
+			return response()->json($data,200);
+
 			$data = Http::withHeaders([
 				'Content-Type' => 'application/json',
 			])->get($endpointgetchats)->json();
