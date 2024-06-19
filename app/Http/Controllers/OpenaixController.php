@@ -478,7 +478,7 @@ public function openai01(Request $request){
 
 			// start consulting openai response
 			$client = new Client([
-				'base_uri' => 'https://api.openai.com/v1/',
+				'base_uri' => 'https://api.openai.com/v2/',
 			]);
 		
 			$openaikey = "Bearer ". env('OPEN_API_KEY');
