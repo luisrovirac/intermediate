@@ -99,6 +99,13 @@ Route::post('openaidalle3', [OpenaixController::class, 'openaidalle3']);
 // You need pass the parameter: actual_message, idUser and idSystem
 Route::post('openaisavemsgs2', [OpenaixController::class, 'openaisavemsgs2']);
 
+
+// Intento de El quefrado version 2
+// post openaisavemsgsv2 test using http and guzzle and save messages
+// You need pass the parameter: actual_message, idUser and idSystem
+Route::post('openaisavemsgsv2', [OpenaixController::class, 'openaisavemsgsv2']);
+
+
 // get msgs of chats
 // You need pass the parameter: idUser and idSystem
 Route::post('getMsgsChat', [OpenaixController::class, 'getMsgsChat']);

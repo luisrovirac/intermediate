@@ -54,8 +54,11 @@ class AssistantController extends Controller
 		try {
 			$validator = Validator::make($request->all(),
 			[
-				'name'    => 'required',
-				'details' => 'required',
+				'name'        => 'required',
+				'details' 	  => 'required',
+				'infoLoraIni' => 'required',
+				'infoLoraEnd' => 'required',
+				'typesex_id' => 'required',
 			]);
 
 			if($validator->fails()){

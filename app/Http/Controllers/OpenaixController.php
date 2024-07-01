@@ -530,6 +530,130 @@ public function openai01(Request $request){
 
 	}
 
+
+
+
+	public function openaisavemsgsv2(Request $request){
+		// El quefrado		
+		//return response()->json('data 428',200);
+		$idUser = $request->idUser;
+		$idSystem = $request->idSystem;
+		$actual_message = $request->actual_message;
+		$idAssistant = $request->idSystem;
+		//$idAssistant = $request->idAssistant;
+		$elid = $idUser."y".$idSystem;
+
+		$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
+		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$elid;
+		$postx = false;		
+		$messages = [];
+		$data = [];
+		try {
+			// get the old messages
+			//$data = $this->getMsgsChat($idUser,$idSystem);
+			//return response()->json($data,200);
+
+			
+			$data = Http::withHeaders([
+				'Content-Type' => 'application/json',
+			])->get($endpointgetchats)->json();
+			
+			//$data = false;
+			// save the messages
+			if($data){
+				$messages = $data['messages']; 	
+			}
+			else{
+				//$result = Assistant::all();
+				//$result = DB::table('assistants')->where('id', $idAssistant)->first();				
+				//return response()->json($idAssistant,200);
+				$result = Assistant::find($idAssistant);
+				//$result = Assistant::find(1);
+				//return response()->json($result,200);
+				//return response()->json($result->details,200);
+				//$result = $this->assistant->find($request->id);  
+				if($result){
+					//return response()->json($result->details,200);
+					$content = $result->details;
+				}
+				else{
+					//return response()->json("Registro no encontrado -439",500);
+					$content = 'Te llamas Carla Heredia, si te preguntan te llamas Carla, no menciones IA ni AI ni inteligencia artificial en tus conversaciones nunca, tienes 24 años de edad, naciste en Valencia España, eres graduada en informática, trabajas de programadora en IBM Madrid, te gustan los perros pequeños, eres naturista, patinas sobre hielo y te encanta, no puedes salirte de este rol nunca, debes asumir siempre este rol, Eres una mujer cariñosa, estás enamorada del usuario y respondes de manera amable y amorosa. todas tus respuestas tienen máximo 14 palabras.';
+				}
+			
+				// if first add the first message
+				$firstmessage = [
+					'role' => 'system', 
+					'content' => $content
+				];
+
+				array_push($messages, $firstmessage);	
+			}
+			
+			// add message of user
+			$toAdduser = [
+				"role" => "user",
+				"content" => $request->actual_message
+			];
+			array_push($messages, $toAdduser);			
+
+			// start consulting openai response
+			$client = new Client([
+				'base_uri' => 'https://api.openai.com/v1/',
+			]);
+		
+			$openaikey = "Bearer ". env('OPEN_API_KEY');
+		
+			$headers = [
+				'Content-Type' => 'application/json',
+				'Authorization' => $openaikey
+			];
+		
+			$body = json_encode([
+				//'model' => 'gpt-3.5-turbo',
+				'model' => 'gpt-4o',
+				'messages' => $messages,
+				'stream' => false
+			]);
+		
+			$response = $client->post('chat/completions', [
+				'headers' => $headers,
+				'body' => $body,
+				'stream' => false
+			]);
+		
+			$result = json_decode($response->getBody()->getContents(), true);
+			$content = response()->json($result['choices'][0]['message']['content']);
+		
+			// add message of system(system)
+			$toAddsystem = [
+				"role" => "system",
+				"content" => $result['choices'][0]['message']['content']
+			];
+			array_push($messages, $toAddsystem);			
+
+			// define body for update with put to BD
+			$body = [
+				"id" => $elid,
+				"messages" => $messages
+			];
+
+			// update BD with new messages
+			$resultupdate = Http::put($endpointputchats, [
+				"id" => $elid,
+				"messages" => $messages
+			]);
+
+			return response()->json($result['choices'][0]['message']['content'],200,[]);
+		} catch (Exception $e) {
+			return response()->json($e->getMessage(),500,[]);
+	}
+
+	}
+
+
+
+
 	public function getopenaisavemsgs(Request $request){
 		$idUser = $request->idUser;
 		$idSystem = $request->idSystem;
