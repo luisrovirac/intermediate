@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\AssistantController;
-
+use App\Http\Controllers\VisionController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -109,3 +109,6 @@ Route::post('openaisavemsgsv2', [OpenaixController::class, 'openaisavemsgsv2']);
 // get msgs of chats
 // You need pass the parameter: idUser and idSystem
 Route::post('getMsgsChat', [OpenaixController::class, 'getMsgsChat']);
+
+// get do you see in the image
+Route::get('doyousee', [VisionController::class, 'doyousee']);
