@@ -46,8 +46,8 @@ class VisionController extends Controller
 							'type' => 'image_url', // Your offering, in image form.
 							//'image_url' => "data:image/jpeg;base64,$base64Image"
 							//'image_url' => $imagePath
-							'image_url' => $imageContent
-							//'image_url' => $base64Image
+							//'image_url' => $imageContent
+							'image_url' => $base64Image
 						],
 					],
 				]
