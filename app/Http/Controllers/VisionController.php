@@ -55,7 +55,7 @@ class VisionController extends Controller
 			'max_tokens' => 900, // How much you're willing to let the spirit ramble.
 		];
 
-$result  = OpenAI::chat()->create($payload);		
+//$result  = OpenAI::chat()->create($payload);		
 
 // Opening the portal to the API.
 $ch = curl_init("https://api.openai.com/v1/chat/completions");
