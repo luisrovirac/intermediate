@@ -47,7 +47,11 @@ class VisionController extends Controller
 							//'image_url' => "data:image/jpeg;base64,$base64Image"
 							//'image_url' => $imagePath
 							//'image_url' => $imageContent
-							'image_url' => $base64Image
+							'image_url' => [
+								'url'    => $base64Image,
+								'detail' => 'high'
+							]
+							
 						],
 					],
 				]
