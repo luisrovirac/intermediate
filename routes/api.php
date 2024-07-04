@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\AssistantController;
 use App\Http\Controllers\VisionController;
+use App\Http\Controllers\AudioController;
 use Illuminate\Support\Facades\Auth;
-
+use OpenAI\Resources\Audio;
 
 /* Auth */
 Route::post('register', [RegisterController::class, 'register']);
@@ -112,3 +113,7 @@ Route::post('getMsgsChat', [OpenaixController::class, 'getMsgsChat']);
 
 // get do you see in the image
 Route::get('doyousee', [VisionController::class, 'doyousee']);
+
+// get do you see in the image
+Route::get('texttospeech', [AudioController::class, 'texttospeech']);
+

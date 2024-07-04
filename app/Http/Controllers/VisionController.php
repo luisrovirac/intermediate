@@ -23,8 +23,8 @@ class VisionController extends Controller
 	{
         $apiKey = env('OPEN_API_KEY');
 		$imagePath = $request->file;
-		$imageContent = file_get_contents($imagePath);
-		$base64Image = base64_encode($imageContent);
+		//$imageContent = file_get_contents($imagePath);
+		//$base64Image = base64_encode($imageContent);
 
 		$headers = [
 			"Content-Type: application/json",
@@ -57,7 +57,7 @@ class VisionController extends Controller
 					],
 				]
 			],
-			'max_tokens' => 900, // How much you're willing to let the spirit ramble.
+			'max_tokens' => 300, // How much you're willing to let the spirit ramble.
 		];
 
 //$result  = OpenAI::chat()->create($payload);		
