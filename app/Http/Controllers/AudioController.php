@@ -71,7 +71,7 @@ class AudioController extends Controller
 		return response()->json([
 			'status' => 'success',
 			'message' => 'Test Api speechtotext',
-			'response' => $apiKey,
+			'response' => $testaudio,
 		], 200);
 	
 
