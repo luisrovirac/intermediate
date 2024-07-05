@@ -63,5 +63,60 @@ class AudioController extends Controller
 	}
 
 
+    public function speechtotext(Request $request){
+		// path at speech test: C:\Users\luisr\Music\fortest\speechfortest.mp3
+        $testaudio = $request->file('audio');
+        $apiKey = env('OPEN_API_KEY');
+        
+        $request->validate([
+            'audio' => 'required|mimes:flac,m4a,mp3,mp4,mpeg,mpga',
+        ]);
+
+        $filePath = $request->file('audio')->store('temp'); 
+        $fileContent = file_get_contents(storage_path('app/'.$filePath));
+        $client = new Client();
+
+        try {
+            $response = $client->post('https://api.openai.com/v1/audio/transcriptions', [
+                'headers' => [
+                    'Authorization' => 'Bearer '.$apiKey,
+                ],
+                'multipart' => [
+                    [
+                        'name' => 'file',
+                        'contents' => $fileContent,
+                        'filename' => $testaudio->getClientOriginalName(), 
+                    ],
+                    [
+                        'name' => 'response_format',
+                        'contents' => 'text',
+                    ],
+                    [
+                        'name' => 'model',
+                        'contents' => 'whisper-1',
+                    ],
+                ],
+            ]);
+
+            $result = $response->getBody()->getContents();
+			return response()->json([
+				'status' => 'success',
+				'message' => 'Test Api speechtotext',
+				'response' => $response,
+			], 200);
+	
+        } catch (\Exception $e) {
+            $errorMessage = 'An error occurred while processing your request.';
+
+			return response()->json([
+				'status' => 'error',
+				'message' => $errorMessage,
+				'type error' => $e,
+			], 500);
+
+        } 
+    }
+
+
 }
 

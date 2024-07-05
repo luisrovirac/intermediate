@@ -114,6 +114,9 @@ Route::post('getMsgsChat', [OpenaixController::class, 'getMsgsChat']);
 // get do you see in the image
 Route::get('doyousee', [VisionController::class, 'doyousee']);
 
-// get do you see in the image
+// get text to speech
 Route::get('texttospeech', [AudioController::class, 'texttospeech']);
+
+// get speech to text
+Route::get('speechtotext', [AudioController::class, 'speechtotext']);
 
