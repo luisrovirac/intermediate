@@ -67,7 +67,14 @@ class AudioController extends Controller
 		// path at speech test: C:\Users\luisr\Music\fortest\speechfortest.mp3
         $testaudio = $request->file('audio');
         $apiKey = env('OPEN_API_KEY');
-        
+
+		return response()->json([
+			'status' => 'success',
+			'message' => 'Test Api speechtotext',
+			'response' => $apiKey,
+		], 200);
+	
+
         $request->validate([
             'audio' => 'required|mimes:flac,m4a,mp3,mp4,mpeg,mpga',
         ]);
@@ -102,7 +109,7 @@ class AudioController extends Controller
 			return response()->json([
 				'status' => 'success',
 				'message' => 'Test Api speechtotext',
-				'response' => $response,
+				'response' => $result,
 			], 200);
 	
         } catch (\Exception $e) {
