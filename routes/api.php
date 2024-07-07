@@ -118,5 +118,5 @@ Route::get('doyousee', [VisionController::class, 'doyousee']);
 Route::get('texttospeech', [AudioController::class, 'texttospeech']);
 
 // get speech to text
-Route::get('speechtotext', [AudioController::class, 'speechtotext']);
+Route::post('speechtotext', [AudioController::class, 'speechtotext']);
 
