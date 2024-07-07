@@ -68,11 +68,18 @@ class AudioController extends Controller
         $testaudio = $request->file('audio');
         $apiKey = env('OPEN_API_KEY');
 
-		return response()->json([
-			'status' => 'success',
-			'message' => 'Test Api speechtotext',
-			'response' => $testaudio->getClientOriginalName()
-		], 200);
+		if($request->hasFile('audio')){
+			return response()->json([
+				'status' => 'success',
+				'message' => 'IF Test Api speechtotext',
+			], 200);
+		}		
+		else{
+			return response()->json([
+				'status' => 'success',
+				'message' => 'ELSE Test Api speechtotext',
+			], 200);
+		}		
 	
 
         $request->validate([
