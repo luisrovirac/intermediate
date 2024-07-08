@@ -64,8 +64,14 @@ class AudioController extends Controller
 // end
 */
 
-		//$pathx =  asset('public/');
-		$pathx =  'https://api.sax.cat/public/';
+		$pathx =  asset('public/');
+		//$pathx =  'https://api.sax.cat/public/';
+
+		return response()->json([
+			'status' => 'success',
+			'message' => 'Test Api texttospeech',
+			'response' => $pathx
+			], 200);
 
         //$filePath = "/../../../public/newspeech.mp3";
 		//$filePath = public_path('newspeech.mp3');
