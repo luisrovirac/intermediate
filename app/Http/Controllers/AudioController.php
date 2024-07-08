@@ -23,7 +23,8 @@ class AudioController extends Controller
 
     public function texttospeech(Request $request)
 	{
-
+// ini
+/*
         $apiKey = env('OPEN_API_KEY');
 
         $request->validate([
@@ -60,12 +61,16 @@ class AudioController extends Controller
 		} catch (\Exception $e) {
     		echo "Error: " . $e->getMessage() . "\n";
 		}
+// end
+*/
 
+		$pathx =  asset('public/');
 
         //$filePath = "/../../../public/newspeech.mp3";
 		//$filePath = public_path('newspeech.mp3');
-		$filePath = asset('public/newspeech.mp3');
+		//$filePath = asset('public/newspeech.mp3');
 
+		return response()->download($pathx, 'newspeech.mp3', ['Content-Type' => 'audio/mp3']);
 		
 		return response()->json([
 			'status' => 'success',
