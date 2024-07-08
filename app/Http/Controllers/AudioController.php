@@ -24,8 +24,6 @@ class AudioController extends Controller
     public function texttospeech(Request $request)
 	{
 
-/*
-// ini		
         $apiKey = env('OPEN_API_KEY');
 
         $request->validate([
@@ -41,8 +39,8 @@ class AudioController extends Controller
     		// Request parameters
     		$params = [
         		'model' => 'tts-1',
-        		'input' => "This is there are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words",
-        		//'input' => $request->input,
+        		//'input' => "This is there are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words",
+        		'input' => $request->input,
         		'voice' => 'alloy',
     		];
 
@@ -63,8 +61,7 @@ class AudioController extends Controller
     		echo "Error: " . $e->getMessage() . "\n";
 		}
 
-// end
-*/
+
         //$filePath = "/../../../public/newspeech.mp3";
 		//$filePath = public_path('newspeech.mp3');
 		$filePath = asset('public/newspeech.mp3');
@@ -76,7 +73,7 @@ class AudioController extends Controller
 			'response' => $filePath
 			], 200);
 
-
+/*
         if (file_exists($filePath)) {
             return response()->download($filePath);
         } else {
@@ -86,12 +83,14 @@ class AudioController extends Controller
 				//'response' => $response->getBody()
 				], 404);
         }
-
+*/
+/*
 		return response()->json([
 			'status' => 'success',
 			'message' => 'Test Api texttospeech',
 			//'response' => $response->getBody()
 			], 200);
+*/			
 	}
 
 
