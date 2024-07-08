@@ -26,7 +26,7 @@ class AudioController extends Controller
         $apiKey = env('OPEN_API_KEY');
 
         $request->validate([
-            'input' => 'required|text',
+            'input' => 'required',
         ]);
 
 		// Initialize Guzzle HTTP client
