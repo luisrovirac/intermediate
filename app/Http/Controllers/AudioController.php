@@ -66,15 +66,16 @@ class AudioController extends Controller
 // end
 */
         //$filePath = "/../../../public/newspeech.mp3";
-		$filePath = public_path('newspeech.mp3');
+		//$filePath = public_path('newspeech.mp3');
+		$filePath = asset('public/newspeech.mp3');
 
-/*		
+		
 		return response()->json([
 			'status' => 'success',
 			'message' => 'Test Api texttospeech',
 			'response' => $filePath
 			], 200);
-*/
+
 
         if (file_exists($filePath)) {
             return response()->download($filePath);
