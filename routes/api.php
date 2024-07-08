@@ -59,36 +59,6 @@ Route::post('show', [AssistantController::class, 'show']);
 // get all users
 Route::get('listuser', [RegisterController::class, 'listuser']);
 
-// Get only test
-Route::get('getTest', [OpenaixController::class, 'getTest']);
-
-// get openai first
-Route::get('getopenai', [OpenaixController::class, 'getopenai']);
-
-// post openai first
-Route::post('postopenai', [OpenaixController::class, 'postopenai']);
-
-// get coinmarketcap first test
-Route::get('coinmarket01', [OpenaixController::class, 'coinmarket01']);
-
-// post openai01 test using openai-php/laravel client
-// You need pass the parameter: actual_message
-Route::post('openai01', [OpenaixController::class, 'openai01']);
-
-// post openai03 test using http
-// You need pass the parameter: actual_message
-Route::post('openai03', [OpenaixController::class, 'openai03']);
-
-// post openaisavemsgs test using openai-php/laravel client and save messages
-// You need pass the parameter: actual_message
-// Route::post('openaisavemsgs', [OpenaixController::class, 'openaisavemsgs']);
-
-// get getopenaisavemsgs test using openai-php/laravel client and save messages
-// You need pass the parameter: actual_message
-Route::get('getopenaisavemsgs', [OpenaixController::class, 'getopenaisavemsgs']);
-
-// get openai02 test using openai-php/laravel client
-Route::get('openai02', [OpenaixController::class, 'openai02']);
 
 // post openaidalle3 test using openai-php/laravel client
 // You need pass the parameter: prompt_img
