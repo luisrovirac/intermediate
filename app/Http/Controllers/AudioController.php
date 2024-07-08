@@ -60,10 +60,18 @@ class AudioController extends Controller
     		echo "Error: " . $e->getMessage() . "\n";
 		}
 
+        $filePath = "/public/newspeech.mp3";
+
+        if (file_exists($filePath)) {
+            return response()->download($filePath);
+        } else {
+            abort(404, 'File not found');
+        }
+
 		return response()->json([
 			'status' => 'success',
 			'message' => 'Test Api texttospeech',
-			'response' => $response->getBody()
+			//'response' => $response->getBody()
 			], 200);
 	}
 
