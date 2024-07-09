@@ -23,8 +23,6 @@ class AudioController extends Controller
 
     public function texttospeech(Request $request)
 	{
-// ini
-/*
         $apiKey = env('OPEN_API_KEY');
 
         $request->validate([
@@ -68,9 +66,8 @@ class AudioController extends Controller
 		} catch (\Exception $e) {
     		echo "Error: " . $e->getMessage() . "\n";
 		}
-// end
-*/
-		$namemp3 = $request->idUser."y".$request->idSystem.".mp3";
+
+		//$namemp3 = $request->idUser."y".$request->idSystem.".mp3";
 
 		$pathx =  asset('/'.$namemp3);
 		//$pathx =  'https://api.sax.cat/public/';
