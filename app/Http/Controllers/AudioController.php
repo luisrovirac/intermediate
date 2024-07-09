@@ -29,7 +29,12 @@ class AudioController extends Controller
 
         $request->validate([
             'input' => 'required',
+            'idUser' => 'required',
+            'idSystem' => 'required',
         ]);
+
+		$idUser = $request->idUser;
+		$idSystem = $request->idSystem;
 
 		// Initialize Guzzle HTTP client
 		$client = new Client([
@@ -55,7 +60,9 @@ class AudioController extends Controller
     		]);
 
     		// Save the audio to a file
-    		file_put_contents('newspeech.mp3', $response->getBody());
+			$namemp3 = $request->idUser."y".$request->idSystem;
+    		file_put_contents($namemp3, $response->getBody());
+    		//file_put_contents('newspeech.mp3', $response->getBody());
 
     		echo "Audio generated successfully!\n";
 		} catch (\Exception $e) {
@@ -64,7 +71,7 @@ class AudioController extends Controller
 // end
 */
 
-		$pathx =  asset('public/');
+		$pathx =  asset('/newspeech.mp3');
 		//$pathx =  'https://api.sax.cat/public/';
 
 		return response()->json([
@@ -82,7 +89,7 @@ class AudioController extends Controller
 		return response()->json([
 			'status' => 'success',
 			'message' => 'Test Api texttospeech',
-			'response' => $filePath
+			'response' => $pathx
 			], 200);
 
 /*
