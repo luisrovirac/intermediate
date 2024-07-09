@@ -62,37 +62,31 @@ class AudioController extends Controller
     		file_put_contents($namemp3, $response->getBody());
     		//file_put_contents('newspeech.mp3', $response->getBody());
 
-    		echo "Audio generated successfully!\n";
+    		//echo "Audio generated successfully!\n";
 		} catch (\Exception $e) {
     		echo "Error: " . $e->getMessage() . "\n";
+			return response()->json([
+				'status' => 'failed',
+				'message' => 'Error generating Audio with texttospeech',
+				'response' => $e->getMessage()
+				], 500);
+	
 		}
 
-		//$namemp3 = $request->idUser."y".$request->idSystem.".mp3";
-
-		$pathx =  asset('/'.$namemp3);
-		//$pathx =  'https://api.sax.cat/public/';
+		$pathfilex =  asset('/'.$namemp3);
 
 		return response()->json([
 			'status' => 'success',
-			'message' => 'Test Api texttospeech',
-			'response' => $pathx
+			'message' => 'Audio generated successfully! with texttospeech',
+			'response' => $pathfilex
 			], 200);
 
-        //$filePath = "/../../../public/newspeech.mp3";
-		//$filePath = public_path('newspeech.mp3');
-		//$filePath = asset('public/newspeech.mp3');
-
-		return response()->download($pathx, 'newspeech.mp3', ['Content-Type' => 'audio/mp3']);
+		//return response()->download($pathx, 'newspeech.mp3', ['Content-Type' => 'audio/mp3']);
 		
-		return response()->json([
-			'status' => 'success',
-			'message' => 'Test Api texttospeech',
-			'response' => $pathx
-			], 200);
 
 /*
-        if (file_exists($filePath)) {
-            return response()->download($filePath);
+        if (file_exists($pathfilex)) {
+            return response()->download($pathfilex);
         } else {
 			return response()->json([
 				'status' => 'error',
