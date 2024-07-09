@@ -60,7 +60,7 @@ class AudioController extends Controller
     		]);
 
     		// Save the audio to a file
-			$namemp3 = $request->idUser."y".$request->idSystem;
+			$namemp3 = $request->idUser."y".$request->idSystem.".mp3";
     		file_put_contents($namemp3, $response->getBody());
     		//file_put_contents('newspeech.mp3', $response->getBody());
 
@@ -70,7 +70,7 @@ class AudioController extends Controller
 		}
 // end
 */
-		$namemp3 = $request->idUser."y".$request->idSystem;
+		$namemp3 = $request->idUser."y".$request->idSystem.".mp3";
 
 		$pathx =  asset('/'.$namemp3);
 		//$pathx =  'https://api.sax.cat/public/';
