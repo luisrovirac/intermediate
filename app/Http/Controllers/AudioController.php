@@ -70,8 +70,9 @@ class AudioController extends Controller
 		}
 // end
 */
+		$namemp3 = $request->idUser."y".$request->idSystem;
 
-		$pathx =  asset('/newspeech.mp3');
+		$pathx =  asset('/'.$namemp3);
 		//$pathx =  'https://api.sax.cat/public/';
 
 		return response()->json([
