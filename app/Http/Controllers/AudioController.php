@@ -23,7 +23,8 @@ class AudioController extends Controller
 
     public function texttospeech(Request $request)
 	{
-        $apiKey = env('OPEN_API_KEY');
+	try {
+		$apiKey = env('OPEN_API_KEY');
 
         $request->validate([
             'input' => 'required',
@@ -39,7 +40,6 @@ class AudioController extends Controller
     		'base_uri' => 'https://api.openai.com/v1/',
 		]);
 
-		try {
     		// Request parameters
     		$params = [
         		'model' => 'tts-1',
