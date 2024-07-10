@@ -308,19 +308,28 @@ class OpenaixController extends Controller
 	 public function openaisavemsgsemoji(Request $request){
 		// Version del quefrado para que retorne solo emojis		
 		//return response()->json('data 428',200);
-		$idUser = $request->idUser;
-		$idSystem = $request->idSystem;
-		$actual_message = $request->actual_message;
-		$idAssistant = $request->idSystem;
-		//$idAssistant = $request->idAssistant;
-		$elid = $idUser."y".$idSystem;
-
-		$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
-		$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$elid;
-		$postx = false;		
-		$messages = [];
-		$data = [];
 		try {
+
+			$request->validate([
+				'actual_message' => 'required', 
+				'idUser'         => 'required',
+				'idSystem'       => 'required',
+				'cuantosemoji'   => 'required', 
+			]);
+
+			$idUser = $request->idUser;
+			$idSystem = $request->idSystem;
+			$actual_message = $request->actual_message;
+			$idAssistant = $request->idSystem;
+			//$idAssistant = $request->idAssistant;
+			$elid = $idUser."y".$idSystem;
+	
+			$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
+			$endpointgetchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items/".$elid;
+			$postx = false;		
+			$messages = [];
+			$data = [];
+				
 			// get the old messages
 			//$data = $this->getMsgsChat($idUser,$idSystem);
 			//return response()->json($data,200);
@@ -381,17 +390,19 @@ class OpenaixController extends Controller
 				'Authorization' => $openaikey
 			];
 			$cuantosemoji = $request->cuantosemoji;
-			$contentemoji = 'todas tus respuestas en este momento deben consistir solo en '.$cuantosemoji.' emojis que se corresponda como respuesta a lo que te han planteado';
+			$contentemoji = 'todas tus respuestas en este momento deben consistir solo en '.$cuantosemoji.' emojis que se corresponda como respuesta a lo que te han planteado, es lo único que debes considerar';
 			// if first add the first message
 			$messagesemoji = [
 				'role' => 'system', 
-				'content' => $contentemoji
+				'content' => $contentemoji,
+				"role" => "user",
+				"content" => $request->actual_message
 			];
 		
 			$body = json_encode([
 				//'model' => 'gpt-3.5-turbo',
 				'model' => 'gpt-4o',
-				'messages' => $messages,
+				'messages' => $messagesemoji,
 				'stream' => false
 			]);
 		
