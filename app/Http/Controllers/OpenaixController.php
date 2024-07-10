@@ -392,12 +392,13 @@ class OpenaixController extends Controller
 			$cuantosemojis = $request->cuantosemojis;
 			$contentemoji = 'todas tus respuestas en este momento deben consistir solo en '.$cuantosemojis.' emojis que se corresponda como respuesta a lo que te han planteado, es lo único que debes considerar';
 			// if first add the first message
-			$messagesemoji = [
-				'role' => 'system', 
-				'content' => $contentemoji,
-				"role" => "user",
-				"content" => $request->actual_message
-			];
+			$messagesemoji = [];
+			$msgsystem = [ 'role' => 'system', 
+				'content' => $contentemoji ];
+			$msguser = [ "role" => "user",
+				"content" => $request->actual_message ];
+			array_push($messagesemoji, $msgsystem);	
+			array_push($messagesemoji, $msguser);	
 		
 			$body = json_encode([
 				//'model' => 'gpt-3.5-turbo',
