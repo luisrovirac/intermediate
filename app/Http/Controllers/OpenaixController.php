@@ -314,7 +314,7 @@ class OpenaixController extends Controller
 				'actual_message' => 'required', 
 				'idUser'         => 'required',
 				'idSystem'       => 'required',
-				'cuantosemoji'   => 'required', 
+				'cuantosemojis'   => 'required', 
 			]);
 
 			$idUser = $request->idUser;
@@ -389,8 +389,8 @@ class OpenaixController extends Controller
 				'Content-Type' => 'application/json',
 				'Authorization' => $openaikey
 			];
-			$cuantosemoji = $request->cuantosemoji;
-			$contentemoji = 'todas tus respuestas en este momento deben consistir solo en '.$cuantosemoji.' emojis que se corresponda como respuesta a lo que te han planteado, es lo único que debes considerar';
+			$cuantosemojis = $request->cuantosemojis;
+			$contentemoji = 'todas tus respuestas en este momento deben consistir solo en '.$cuantosemojis.' emojis que se corresponda como respuesta a lo que te han planteado, es lo único que debes considerar';
 			// if first add the first message
 			$messagesemoji = [
 				'role' => 'system', 
