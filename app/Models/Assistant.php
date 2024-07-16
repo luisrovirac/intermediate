@@ -9,5 +9,5 @@ class Assistant extends Model
 {
     use HasFactory;
 
-	protected $fillable = ['name', 'details','infoLoraIni','infoLoraEnd','typesex_id'];
+	protected $fillable = ['name', 'details','infoLoraIni','infoLoraEnd','typesex_id','voice'];
 }
