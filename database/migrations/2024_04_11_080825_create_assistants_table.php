@@ -18,6 +18,7 @@ return new class extends Migration
 			$table->string('name');
 			$table->string('infoLoraIni');
 			$table->string('infoLoraEnd');
+			$table->string('voice');
 			$table->longtext('details');
 			$table->timestamps();
             
