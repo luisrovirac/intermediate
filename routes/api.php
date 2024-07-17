@@ -12,6 +12,11 @@ use OpenAI\Resources\Audio;
 
 /* Auth */
 Route::post('register', [RegisterController::class, 'register']);
+
+Route::post('x', [RegisterController::class, 'x']);
+
+Route::post('FLECHAregister', [RegisterController::class, 'FLECHAregister']);
+
 // For return error
 Route::get('login', [RegisterController::class, 'login'])->name('login');
 // For autenticate
