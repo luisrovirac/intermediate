@@ -207,7 +207,97 @@ class DatabaseSeeder extends Seeder
 			]
 		);
 
+		//  Messages
 
+		//  Create Message 01
+		\App\Models\Message::factory()->create(
+			[
+				'message' => 'Que tal, como va tu dia?'
+			]
+		);
+
+		//  Create Message 02
+		\App\Models\Message::factory()->create(
+			[
+				'message' => '¡Ay, si supieras lo que me pasó!'
+			]
+		);
+
+		//  Create Message 03
+		\App\Models\Message::factory()->create(
+			[
+				'message' => 'Qué tal las actividades hoy?'
+			]
+		);
+
+		//  Create Message 04
+		\App\Models\Message::factory()->create(
+			[
+				'message' => 'Cómo va el día hoy?'
+			]
+		);
+
+		//  Create Message 05
+		\App\Models\Message::factory()->create(
+			[
+				'message' => 'Cómo te trata la temperatura hoy?'
+			]
+		);
+
+		//  Create Message 06
+		\App\Models\Message::factory()->create(
+			[
+				'message' => 'Está fluyendo este día para ti?'
+			]
+		);
+
+		//  Create Message 07
+		\App\Models\Message::factory()->create(
+			[
+				'message' => 'Parece que hoy es un buen día para hacer deporte'
+			]
+		);
+
+		//  Create Message 08
+		\App\Models\Message::factory()->create(
+			[
+				'message' => 'Parece que todo va sobre ruedas...'
+			]
+		);
+
+		//  Create Message 09
+		\App\Models\Message::factory()->create(
+			[
+				'message' => 'Cómo te sientes hoy?'
+			]
+		);
+
+		//  Create Message 10
+		\App\Models\Message::factory()->create(
+			[
+				'message' => 'Qué podemos hacer hoy?'
+			]
+		);
+
+		//  Create Message 11
+		\App\Models\Message::factory()->create(
+			[
+				'message' => 'Hola'
+			]
+		);
+
+
+		// config parameters
+
+		\App\Models\Configmsg::factory()->create(
+			[
+				'arraymessage' => '1,2,3,4,5,6,7,8,9,10,11',
+				'forporcentaje' => 2,
+				'waittimeinseconds' => 600,
+				'minNumberRandom' => 1,
+				'maxNumberRandom' => 10
+			]
+		);
 
     }
 }
