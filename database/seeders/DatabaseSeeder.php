@@ -212,77 +212,88 @@ class DatabaseSeeder extends Seeder
 		//  Create Message 01
 		\App\Models\Message::factory()->create(
 			[
-				'message' => 'Que tal, como va tu dia?'
+				'message' => 'Que tal, como va tu dia?',
+				'messageenglish' => "How's your day going?"
 			]
 		);
 
 		//  Create Message 02
 		\App\Models\Message::factory()->create(
 			[
-				'message' => '¡Ay, si supieras lo que me pasó!'
+				'message' => '¡Ay, si supieras lo que me pasó!',
+				'messageenglish' => "Oh, if you only knew what happened to me!"
 			]
 		);
 
 		//  Create Message 03
 		\App\Models\Message::factory()->create(
 			[
-				'message' => 'Qué tal las actividades hoy?'
+				'message' => 'Qué tal las actividades hoy?',
+				'messageenglish' => "How were the activities today?"
 			]
 		);
 
 		//  Create Message 04
 		\App\Models\Message::factory()->create(
 			[
-				'message' => 'Cómo va el día hoy?'
+				'message' => 'Cómo va el día hoy?',
+				'messageenglish' => "How is your day going today?"
 			]
 		);
 
 		//  Create Message 05
 		\App\Models\Message::factory()->create(
 			[
-				'message' => 'Cómo te trata la temperatura hoy?'
+				'message' => 'Cómo te trata la temperatura hoy?',
+				'messageenglish' => "How is the temperature treating you today?"
 			]
 		);
 
 		//  Create Message 06
 		\App\Models\Message::factory()->create(
 			[
-				'message' => 'Está fluyendo este día para ti?'
+				'message' => 'Está fluyendo este día para ti?',
+				'messageenglish' => "Is this day flowing for you?"
 			]
 		);
 
 		//  Create Message 07
 		\App\Models\Message::factory()->create(
 			[
-				'message' => 'Parece que hoy es un buen día para hacer deporte'
+				'message' => 'Parece que hoy es un buen día para hacer deporte',
+				'messageenglish' => "It seems that today is a good day to play sports"
 			]
 		);
 
 		//  Create Message 08
 		\App\Models\Message::factory()->create(
 			[
-				'message' => 'Parece que todo va sobre ruedas...'
+				'message' => 'Parece que todo va sobre ruedas...',
+				'messageenglish' => "It seems that everything is going smoothly..."
 			]
 		);
 
 		//  Create Message 09
 		\App\Models\Message::factory()->create(
 			[
-				'message' => 'Cómo te sientes hoy?'
+				'message' => 'Cómo te sientes hoy?',
+				'messageenglish' => "How do you feel today?"
 			]
 		);
 
 		//  Create Message 10
 		\App\Models\Message::factory()->create(
 			[
-				'message' => 'Qué podemos hacer hoy?'
+				'message' => 'Qué podemos hacer hoy?',
+				'messageenglish' => "What can we do today?"
 			]
 		);
 
 		//  Create Message 11
 		\App\Models\Message::factory()->create(
 			[
-				'message' => 'Hola'
+				'message' => 'Hola',
+				'messageenglish' => "Hello"
 			]
 		);
 
