@@ -325,7 +325,10 @@ class OpenaixController extends Controller
 				'idSystem'       => 'required',
 			]);
 
+			// inicializa  $elid, messages y$endpointputchats
 			$elid = $request->idUser."y".$request->idSystem;
+			$messages = [];
+			$endpointputchats = "https://4ebyoidlwh.execute-api.us-east-1.amazonaws.com/items";
 
 			// toma la info de config
 			$configmsg = configmsg::find(1);
@@ -390,6 +393,25 @@ class OpenaixController extends Controller
 				$rowtoupdate->noUsedMessages = $string_save;
 				$rowtoupdate->save();
 				//return response()->json(["aplica" => true, "message" =>"=='' - MIENTRAS line 394 - x message...", "listnoUsedMessages" => $listnoUsedMessages, "if(resultmsgnotuseds)" => true, "count(arrlistnoUsedMessages) == 0" => count($arrlistnoUsedMessages), "arrlistnoUsedMessages[0]='" => $arrlistnoUsedMessages[0] =="","numazarmsg" => $numazarmsg,"elementquitar" => $elementquitar,"string_save" => $string_save, "arrlistnoUsedMessages" => $arrlistnoUsedMessages , "msgToSendOk" => $msgToSendOk, "migadepan" => $migadepan, "rowtoupdate" => $rowtoupdate],200);
+				// Save message
+				$foraddmessage = [
+					'role' => 'system', 
+					'content' => $msgToSendOk
+				];
+				array_push($messages, $foraddmessage);	
+
+				// define body for update with put to BD
+				$body = [
+					"id" => $elid,
+					"messages" => $messages
+				];
+
+				// update BD with new messages
+				$resultupdate = Http::put($endpointputchats, [
+					"id" => $elid,
+					"messages" => $messages
+				]);
+
 				return response()->json(["aplica" => true, "message" => $msgToSendOk],200);
 			}
 			else{
