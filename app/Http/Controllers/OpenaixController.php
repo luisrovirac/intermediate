@@ -323,6 +323,7 @@ class OpenaixController extends Controller
 			$request->validate([
 				'idUser'         => 'required',
 				'idSystem'       => 'required',
+				'lang'           => 'required'
 			]);
 
 			// inicializa  $elid, messages y$endpointputchats
@@ -343,8 +344,9 @@ class OpenaixController extends Controller
 					// No existe el registro y debe crearlo
 					$migadepan = "if(!resultmsgnotuseds){ - No existe el registro y debe crearlo";
 					$forsee = $this->CreateNewRegMsgs($elid, true);
-					return response()->json(["aplica" => true, "migadepan" => $migadepan, "forsee" => $forsee]);
-					//$resultmsgnotuseds = DB::table('msgnotuseds')->where('stringId', $elid)->first();
+					//return response()->json(["aplica" => true, "migadepan" => $migadepan, "forsee" => $forsee]);
+					// retoma info recien creada
+					$resultmsgnotuseds = DB::table('msgnotuseds')->where('stringId', $elid)->first();
 				}
 				else{
 					// existe el registro
@@ -383,10 +385,22 @@ class OpenaixController extends Controller
 				// Toma el msg $numazarmsg de la tabla message
 				$msgToSend = Message::find($arrlistnoUsedMessages[$numazarmsg]);
 				if($msgToSend){
-					$msgToSendOk = $msgToSend->message;
+					if($request->lang == "en"){
+						$msgToSendOk = $msgToSend->messageenglish;
+					}
+					else{
+						// by default es
+						$msgToSendOk = $msgToSend->message;
+					}
 				}
 				else{
-					$msgToSendOk = "Que día tan interesante..."; // Mensaje cableado
+					if($request->lang == "en"){
+						$msgToSendOk = "What an interesting day..."; // Mensaje cableado english
+					}
+					else{
+						// by default es
+						$msgToSendOk = "Que día tan interesante..."; // Mensaje cableado spanish
+					}
 				}
 				// update data
 				$rowtoupdate = msgnotused::find($idnow);
@@ -399,12 +413,6 @@ class OpenaixController extends Controller
 					'content' => $msgToSendOk
 				];
 				array_push($messages, $foraddmessage);	
-
-				// define body for update with put to BD
-				$body = [
-					"id" => $elid,
-					"messages" => $messages
-				];
 
 				// update BD with new messages
 				$resultupdate = Http::put($endpointputchats, [
