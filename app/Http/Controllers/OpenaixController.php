@@ -327,9 +327,11 @@ class OpenaixController extends Controller
 
 			$elid = $request->idUser."y".$request->idSystem;
 
+			// toma la info de config
+			$configmsg = configmsg::find(1);
 			// get num al azar para probabilidad del 80%
-			$numazarx = $this->givemenumazar(1,10);
-			if($numazarx>2){
+			$numazarx = $this->givemenumazar($configmsg->minNumberRandom,$configmsg->maxNumberRandom);
+			if($numazarx>$configmsg->forporcentaje){
 				// cae en el 80% - Si debe enviar el msg proactivo
 				// busca en la tabla msgnotused el $elid
 				$aplica = true;
@@ -351,7 +353,7 @@ class OpenaixController extends Controller
 				// convertir $listnoUsedMessages en un array
 				$arrlistnoUsedMessages=explode(",",$listnoUsedMessages);
 				// se evalua si hay que resetearlo
-				if(count($arrlistnoUsedMessages) < 2){ // || $arrlistnoUsedMessages[0] ==""){
+				if(count($arrlistnoUsedMessages) < 2){ // Si queda sólo 1 elemento
 					// existe el registro pero debe resetearse (queda 1 elemento)
 					$forsee = $this->CreateNewRegMsgs($elid, true);
 					$migadepan = "361 if(count(arrlistnoUsedMessages) < 2){ - existe el registro pero debe resetearse (queda 1 elemento)";
@@ -385,7 +387,6 @@ class OpenaixController extends Controller
 				}
 				// update data
 				$rowtoupdate = msgnotused::find($idnow);
-				//$rowtoupdate->stringId = $elid;
 				$rowtoupdate->noUsedMessages = $string_save;
 				$rowtoupdate->save();
 				return response()->json(["aplica" => true, "message" =>"=='' - MIENTRAS line 394 - x message...", "listnoUsedMessages" => $listnoUsedMessages, "if(resultmsgnotuseds)" => true, "count(arrlistnoUsedMessages) == 0" => count($arrlistnoUsedMessages), "arrlistnoUsedMessages[0]='" => $arrlistnoUsedMessages[0] =="","numazarmsg" => $numazarmsg,"elementquitar" => $elementquitar,"string_save" => $string_save, "arrlistnoUsedMessages" => $arrlistnoUsedMessages , "msgToSendOk" => $msgToSendOk, "migadepan" => $migadepan, "rowtoupdate" => $rowtoupdate],200);
