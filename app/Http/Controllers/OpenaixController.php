@@ -389,7 +389,8 @@ class OpenaixController extends Controller
 				$rowtoupdate = msgnotused::find($idnow);
 				$rowtoupdate->noUsedMessages = $string_save;
 				$rowtoupdate->save();
-				return response()->json(["aplica" => true, "message" =>"=='' - MIENTRAS line 394 - x message...", "listnoUsedMessages" => $listnoUsedMessages, "if(resultmsgnotuseds)" => true, "count(arrlistnoUsedMessages) == 0" => count($arrlistnoUsedMessages), "arrlistnoUsedMessages[0]='" => $arrlistnoUsedMessages[0] =="","numazarmsg" => $numazarmsg,"elementquitar" => $elementquitar,"string_save" => $string_save, "arrlistnoUsedMessages" => $arrlistnoUsedMessages , "msgToSendOk" => $msgToSendOk, "migadepan" => $migadepan, "rowtoupdate" => $rowtoupdate],200);
+				//return response()->json(["aplica" => true, "message" =>"=='' - MIENTRAS line 394 - x message...", "listnoUsedMessages" => $listnoUsedMessages, "if(resultmsgnotuseds)" => true, "count(arrlistnoUsedMessages) == 0" => count($arrlistnoUsedMessages), "arrlistnoUsedMessages[0]='" => $arrlistnoUsedMessages[0] =="","numazarmsg" => $numazarmsg,"elementquitar" => $elementquitar,"string_save" => $string_save, "arrlistnoUsedMessages" => $arrlistnoUsedMessages , "msgToSendOk" => $msgToSendOk, "migadepan" => $migadepan, "rowtoupdate" => $rowtoupdate],200);
+				return response()->json(["aplica" => true, "message" => $msgToSendOk],200);
 			}
 			else{
 				// cae en el 20% - No debe enviar el msg proactivo
