@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Assistant extends Model
+class Configmsg extends Model
 {
     use HasFactory;
 
-	protected $fillable = ['name', 'details','infoLoraIni','infoLoraEnd','typesex_id','voice'];
+	protected $fillable = ['arraymessage', 'forporcentaje', 'waittimeinseconds', 'minNumberRandom', 'maxNumberRandom'];
 
 	protected $hidden = ['created_at', 'updated_at'];
+
 }

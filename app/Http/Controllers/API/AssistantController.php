@@ -20,7 +20,11 @@ class AssistantController extends Controller
     public function index()
     {
 		//return response()->json("Index -> Mostrando los registros",200);
-        return $this->assistant->all();
+		try {
+			return $this->assistant->all();
+		} catch (\Throwable $th) {
+			return response()->json('Error', $th);				
+		}
     }
 
 	public function show(Request $request){

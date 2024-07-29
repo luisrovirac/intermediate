@@ -9,14 +9,11 @@ use App\Http\Controllers\VisionController;
 use App\Http\Controllers\AudioController;
 use Illuminate\Support\Facades\Auth;
 use OpenAI\Resources\Audio;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ConfigmsgController;
 
 /* Auth */
 Route::post('register', [RegisterController::class, 'register']);
-
-Route::post('x', [RegisterController::class, 'x']);
-
-Route::post('FLECHAregister', [RegisterController::class, 'FLECHAregister']);
-
 // For return error
 Route::get('login', [RegisterController::class, 'login'])->name('login');
 // For autenticate
@@ -57,8 +54,29 @@ Route::post('update', [AssistantController::class, 'update']);
 // delete - destroy   - delete only register by id passed at parameter (for example 4)
 Route::post('destroy', [AssistantController::class, 'destroy']);
 
+
+/* Message crud */
+
+// post   - create    - store - create new message - message id passed at parameter
+Route::post('storemessage', [MessageController::class, 'storemessage']);
+
+// get    - read      - index - show all data
+Route::get('indexmessage', [MessageController::class, 'indexmessage']);
+
+// patch  - update    - update only register by id passed at parameter (for example 2)
+Route::post('updatemessage', [MessageController::class, 'updatemessage']);
+
+// delete - destroy   - delete only register by id passed at parameter (for example 4)
+Route::post('destroymessage', [MessageController::class, 'destroymessage']);
+
 // get    - show/{id} - show only register by id passed at parameter (for example 2)
 Route::post('show', [AssistantController::class, 'show']);
+
+
+
+
+// post   - create    - store - create new message - message id passed at parameter
+Route::post('storeconfigmsg', [ConfigmsgController::class, 'storeconfigmsg']);
 
 
 // get all users
@@ -79,6 +97,13 @@ Route::post('openaisavemsgs2', [OpenaixController::class, 'openaisavemsgs2']);
 // You need pass the parameter: actual_message, idUser and idSystem
 Route::post('openaisavemsgsemoji', [OpenaixController::class, 'openaisavemsgsemoji']);
 
+// post msgproactive genera msg proactivo of assistant
+// You need pass the parameter: idUser and idSystem
+Route::post('msgproactive', [OpenaixController::class, 'msgproactive']);
+
+// post msgproactive genera msg proactivo of assistant
+// You need pass the parameter: idUser and idSystem
+Route::post('msgproactiveok', [OpenaixController::class, 'msgproactiveok']);
 
 // Intento de El quefrado version 2
 // post openaisavemsgsversion2 test using http and guzzle and save messages
