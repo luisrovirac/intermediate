@@ -312,7 +312,7 @@ class OpenaixController extends Controller
      * )
      */
 
-	 public function msgproactiveok(Request $request){
+	 public function msgproactive(Request $request){
 		try {
 
 			// variables dummies
