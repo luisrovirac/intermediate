@@ -98,12 +98,8 @@ Route::post('openaisavemsgs2', [OpenaixController::class, 'openaisavemsgs2']);
 Route::post('openaisavemsgsemoji', [OpenaixController::class, 'openaisavemsgsemoji']);
 
 // post msgproactive genera msg proactivo of assistant
-// You need pass the parameter: idUser and idSystem
-Route::post('msgproactive', [OpenaixController::class, 'msgproactive']);
-
-// post msgproactive genera msg proactivo of assistant
 // You need pass the parameter: idUser, idSystem and lang("es" or "en")
-Route::post('msgproactiveok', [OpenaixController::class, 'msgproactiveok']);
+Route::post('msgproactive', [OpenaixController::class, 'msgproactive']);
 
 // Intento de El quefrado version 2
 // post openaisavemsgsversion2 test using http and guzzle and save messages
