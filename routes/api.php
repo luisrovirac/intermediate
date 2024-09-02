@@ -32,12 +32,13 @@ Route::controller(RegisterController::class)->group(function(){
 })->middleware('auth:api');
 */
 
-Route::middleware('auth:api')->group(function () {
+// disable auth:api
+//Route::middleware('auth:api')->group(function () {
 	//Route::post('me', [AuthorizationController::class, 'me'])->name('me');
 	Route::post('logout', [RegisterController::class, 'logout']);
 	// get    - read      - index - show all data
 	Route::get('index', [AssistantController::class, 'index'])->name('index');
-});
+//});
 
 
 /* Assistant crud */

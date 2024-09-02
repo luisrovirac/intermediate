@@ -315,10 +315,6 @@ class OpenaixController extends Controller
 	 public function msgproactive(Request $request){
 		try {
 
-			// variables dummies
-			$forsee = "dummy";
-			$migadepan = "dummy";
-
 			// valida que pasen los campos idUser y idSystem
 			$request->validate([
 				'idUser'         => 'required',
@@ -347,11 +343,6 @@ class OpenaixController extends Controller
 					//return response()->json(["aplica" => true, "migadepan" => $migadepan, "forsee" => $forsee]);
 					// retoma info recien creada
 					$resultmsgnotuseds = DB::table('msgnotuseds')->where('stringId', $elid)->first();
-				}
-				else{
-					// existe el registro
-					$migadepan = "else if(!resultmsgnotuseds){ - existe el registro";
-					//return response()->json(["aplica" => true, "migadepan" => $migadepan, "forsee" => $forsee]);
 				}
 				// guardar string noUsedMessages en una variable
 				$listnoUsedMessages = $resultmsgnotuseds->noUsedMessages;
@@ -419,43 +410,39 @@ class OpenaixController extends Controller
 					"id" => $elid,
 					"messages" => $messages
 				]);
-
 				return response()->json(["aplica" => true, "message" => $msgToSendOk],200);
 			}
 			else{
 				// cae en el 20% - No debe enviar el msg proactivo
-				$aplica = false;
-				return response()->json(["aplica" => $aplica, "message" =>""],200);
+				return response()->json(["aplica" => false, "message" =>""],200);
 			}
-	} catch (Exception $e) {
+		} catch (Exception $e) {
 			//return response()->json($e->getMessage(),500,["message" =>"Error and go to line 527 ..."]);
 			return response()->json(["e->getMessage()" => $e->getMessage()]);
 		}	
-
-		return response()->json(["Msg" => "OK Final Line 338 y contando..."],200);
 	}
 
 	private function CreateNewRegMsgs($elidx, $clean){
 		try {
 			$pan = "";
-		// toma la info de config
-		$resultmsgconfig = configmsg::find(1);
-		$resultmsgnotusedsx = DB::table('msgnotuseds')->where('stringId', $elidx)->first();				
-		if($resultmsgnotusedsx){
-			// Existe
-			$result = $this->msgnotused->find($resultmsgnotusedsx->id);
-			$result->update(['noUsedMessages' => $resultmsgconfig->arraymessage ]);
-			$pan = $pan." - update el registro para ".$elidx;
-		}
-		else{
-			// no existe
-			// determina la info a guardar
-			$infoaGuardar = ["stringId" => $elidx, "noUsedMessages" => $resultmsgconfig->arraymessage];
-			// el registro debe crearlo
-			$resultcreate = $this->msgnotused->create($infoaGuardar);
-			$pan = $pan." - Crea nuevo registro para ".$elidx;
-		}
-		return $pan;
+			// toma la info de config
+			$resultmsgconfig = configmsg::find(1);
+			$resultmsgnotusedsx = DB::table('msgnotuseds')->where('stringId', $elidx)->first();				
+			if($resultmsgnotusedsx){
+				// Existe
+				$result = $this->msgnotused->find($resultmsgnotusedsx->id);
+				$result->update(['noUsedMessages' => $resultmsgconfig->arraymessage ]);
+				$pan = $pan." - update el registro para ".$elidx;
+			}
+			else{
+				// no existe
+				// determina la info a guardar
+				$infoaGuardar = ["stringId" => $elidx, "noUsedMessages" => $resultmsgconfig->arraymessage];
+				// el registro debe crearlo
+				$resultcreate = $this->msgnotused->create($infoaGuardar);
+				$pan = $pan." - Crea nuevo registro para ".$elidx;
+			}
+			return $pan;
 		} catch (Exception $e) {
 			return response()->json($e->getMessage(),500,[]);
 		}
