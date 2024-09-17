@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\OpenaixController;
+use App\Http\Controllers\BucketImgController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RegisterController;
@@ -121,3 +122,6 @@ Route::post('texttospeech', [AudioController::class, 'texttospeech']);
 // get speech to text
 Route::post('speechtotext', [AudioController::class, 'speechtotext']);
 
+
+// img bucket
+Route::post('uploadImg', [BucketImgController::class, 'uploadImg']);
