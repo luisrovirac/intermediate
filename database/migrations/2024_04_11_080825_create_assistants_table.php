@@ -20,7 +20,11 @@ return new class extends Migration
 			$table->string('infoLoraEnd');
 			$table->string('voice');
 			$table->longtext('details');
-			//$table->blob('codeimg01')->nullable();
+			$table->string('photo01');
+			$table->string('photo02');
+			$table->string('photo03');
+			$table->string('photo04');
+			$table->string('photo05');
 			$table->timestamps();
             
             $table->foreign('typesex_id')->references('id')->on('typesexes')
