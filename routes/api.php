@@ -104,9 +104,9 @@ Route::post('openaisavemsgsemoji', [OpenaixController::class, 'openaisavemsgsemo
 Route::post('msgproactive', [OpenaixController::class, 'msgproactive']);
 
 // Intento de El quefrado version 2
-// post openaisavemsgsversion2 test using http and guzzle and save messages
+// post openaisavemsgsversion2 apunta a lmstudio uncensored test using http and guzzle and save messages
 // You need pass the parameter: actual_message, idUser and idSystem
-Route::post('openaisavemsgsversion2', [OpenaixController::class, 'openaisavemsgsversion2']);
+Route::post('lmstudiouncensored1', [OpenaixController::class, 'lmstudiouncensored1']);
 
 
 // get msgs of chats
