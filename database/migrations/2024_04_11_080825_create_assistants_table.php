@@ -14,17 +14,21 @@ return new class extends Migration
         Schema::create('assistants', function (Blueprint $table) {
             $table->id();
             //$table->unsignedinteger('typesexes_id')->nullable();
-			$table->bigInteger('typesex_id')->unsigned();
+			$table->bigInteger('typesex_id')->unsigned();  // sex type
 			$table->string('name');
-			$table->string('infoLoraIni');
-			$table->string('infoLoraEnd');
-			$table->string('voice');
-			$table->longtext('details');
-			$table->string('photo01');
-			$table->string('photo02');
-			$table->string('photo03');
-			$table->string('photo04');
-			$table->string('photo05');
+			$table->string('infoLoraIni')->nullable();  // Para generar imagen si es tipo lora
+			$table->string('infoLoraEnd')->nullable();  // Para generar imagen si es tipo lora
+			$table->string('voice');     // Que voz usar
+			$table->longtext('details');  // Detalles que definen al asistente
+			$table->string('photo01')->nullable();
+			$table->string('photo02')->nullable();
+			$table->string('photo03')->nullable();
+			$table->string('photo04')->nullable();
+			$table->string('photo05')->nullable();  
+			$table->string('seed')->nullable();   // Para generar sus imágenes + campo prompt
+			$table->string('typeSeed_o_Lora');    // Si usa lora o seed
+			$table->longtext('prompt')->nullable();   // Para generar sus imágenes + campo seed
+			$table->string('userIdCreator')->nullable();  // Que usuario lo creó
 			$table->timestamps();
             
             $table->foreign('typesex_id')->references('id')->on('typesexes')

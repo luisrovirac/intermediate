@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'paths' => ['*', 'sb-json','api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['*', 'api/*', 'sanctum/csrf-cookie'],
 
     'allowed_methods' => ['POST, GET, OPTIONS'],
 

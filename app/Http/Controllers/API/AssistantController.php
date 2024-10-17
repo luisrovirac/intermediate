@@ -9,12 +9,45 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PhpParser\Node\Stmt\TryCatch;
 
+use App\Models\Genero;
+use App\Models\Pais;
+use App\Models\Language;
+use App\Models\Face;
+use App\Models\HairColor;
+use App\Models\BodyStyle;
+use App\Models\Ethnicity;
+use App\Models\EducationLevel;
+use App\Models\Profession;
+use App\Models\Job;
+use App\Models\HealthCondition;
+use App\Models\PhisicalActivity;
+use App\Models\DoesExercise;
+use App\Models\Smoker;
+use App\Models\Drinker;
+use App\Models\TakeMedication;
+use App\Models\DrugUse;
+use App\Models\EmotionalState;
+use App\Models\Humor;
+use App\Models\RelationStatus;
+use App\Models\Children;
+use App\Models\FamilyOrientation;
+use App\Models\Pets;
+use App\Models\Values;
+use App\Models\Interest;
+use App\Models\Voicex;
+
+use \App\Models\SeedUsed;
+use \App\Models\DataGenericx;
+use Exception;
+
 class AssistantController extends Controller
 {
     protected $assistant;
+    protected $SeedUsed;
 
     public function __construct(Assistant $assistant){
         $this->assistant = new Assistant();
+        $this->SeedUsed = new SeedUsed();
     }
 
     public function index()
@@ -60,9 +93,9 @@ class AssistantController extends Controller
 			[
 				'name'        => 'required',
 				'details' 	  => 'required',
-				'infoLoraIni' => 'required',
-				'infoLoraEnd' => 'required',
 				'typesex_id' => 'required',
+				'voice' => 'required',
+				'typeSeed_o_Lora' => 'required',
 			]);
 
 			if($validator->fails()){
@@ -161,4 +194,211 @@ class AssistantController extends Controller
 		}
 	
     }
+
+
+	public function getDataCreateAssistant(Request $request){
+		$Genero = Genero::all();
+		$Pais = Pais::all();
+		$Language = Language::all();
+		$Face = Face::all();
+		$HairColor = HairColor::all();
+		$BodyStyle = BodyStyle::all();
+		$Ethnicity = Ethnicity::all();
+		$EducationLevel = EducationLevel::all();
+		$Profession = Profession::all();
+		$Job = Job::all();
+		$HealthCondition = HealthCondition::all();
+		$PhisicalActivity = PhisicalActivity::all();
+		$DoesExercise = DoesExercise::all();
+		$Smoker = Smoker::all();
+		$Drinker = Drinker::all();
+		$TakeMedication = TakeMedication::all();
+		$DrugUse = DrugUse::all();
+		$EmotionalState = EmotionalState::all();
+		$Humor = Humor::all();
+		$RelationStatus = RelationStatus::all();
+		$Children = Children::all();
+		$FamilyOrientation = FamilyOrientation::all();
+		$Pets = Pets::all();
+		$Values = Values::all();
+		$Interest = Interest::all();
+		$Voicex = Voicex::all();
+		
+		return ["Genero"=>$Genero, "Pais"=>$Pais, "Language"=>$Language, "Face"=>$Face, "HairColor"=>$HairColor,
+			"BodyStyle"=>$BodyStyle, "Ethnicity"=>$Ethnicity, "EducationLevel"=>$EducationLevel, "Profession"=>$Profession, "Job"=>$Job,
+			"HealthCondition"=>$HealthCondition, "PhisicalActivity"=>$PhisicalActivity, "DoesExercise"=>$DoesExercise, "Smoker"=>$Smoker, "Drinker"=>$Drinker,
+			"TakeMedication"=>$TakeMedication, "DrugUse"=>$DrugUse, "EmotionalState"=>$EmotionalState, "Humor"=>$Humor, "RelationStatus"=>$RelationStatus,
+			"Children"=>$Children, "FamilyOrientation"=>$FamilyOrientation, "Pets"=>$Pets, "Values"=>$Values, "Interest"=>$Interest, "Voicex"=>$Voicex
+		];
+}
+
+
+
+	public function createassistant(Request $request){
+		try {
+			$Interest = "";
+			for ($i=0; $i < count($request->Interest) ; $i++) { 
+				if($i == (count($request->Interest)-1)){
+					// if last element
+					$Interest = $Interest.$request->Interest[$i]." ";
+				}
+				else{
+					$Interest = $Interest.$request->Interest[$i].", ";
+				}
+			} 
+			$Values = "";
+			for ($i=0; $i < count($request->Values) ; $i++) { 
+				if($i == (count($request->Values)-1)){
+					// if last element
+					$Values = $Values.$request->Values[$i]." ";
+				}
+				else{
+					$Values = $Values.$request->Values[$i].", ";
+				}
+			} 
+			$EmotionalState = "";
+			for ($i=0; $i < count($request->EmotionalState) ; $i++) { 
+				if($i == (count($request->EmotionalState)-1)){
+					// if last element
+					$EmotionalState = $EmotionalState.$request->EmotionalState[$i]." ";
+				}
+				else{
+					$EmotionalState = $EmotionalState.$request->EmotionalState[$i].", ";
+				}
+			} 
+			$details = 'Your name is '.$request->nombre.
+			', gender '.$request->genero.
+			', do not mention AI or AI or artificial intelligence, or assistant, or virtual assistant, in your conversations ever. You are not there to help or assist anyone. It is like a game where you must always maintain your role as a human. Remember these principles whenever you communicate, '.
+			'you never ask a question at the end of a sentence unless the situation or conversation warrants it, all your answers are 16 words maximum, they can be less. And not all your answers or communications should end in a question'.
+			', you were born in '.$request->listpaisOrigen.
+			', you live in '.$request->listpaisResidencia.
+			', in the city of '.$request->ciudad.
+			', have '.$request->edad.' años de edad'.
+			', your educational level is '.$request->EducationLevel.
+			', your profession is '.$request->Profession.
+			', you work as '.$request->Job.
+			', you exercise '.$request->DoesExercise.
+			', Regarding cigarettes you are an '.$request->Smoker.
+			', regarding the drink you are an '.$request->Drinker.
+			', '.$request->TakeMedication.' you take medications, '.
+			$request->DrugUse.' you use drugs'.
+			', emotionally you are '.$EmotionalState.
+			'you have a sense of humor '.$request->Humor.
+			', the status of your relationship is '.$request->RelationStatus.
+			', '.$request->Children.
+			', '.$request->FamilyOrientation.
+			', regarding pets you have a '.$request->Pets.
+			', your main values ​are '.$Values.
+			'and your main interests are '.$Interest;
+			$prompt = 'Realistic photography. An elegant and sophisticated '.$request->genero.', '.$request->Ethnicity.' with '.$request->bodystyle.', of '.$request->edad.'-year-old wears serious, dress pants; with a long sleeve shirt with the first 2 buttons open. Combine luxury shoes and a fine gold watch. Her look is completed with hair colored '.$request->HairColor.' full body, boldly looking at the viewer, walking near a bridge.'; 
+			// Here save info for create new assistant
+			$null = '';
+			$type = 'seed';
+			$infoToSave = [
+						'typesex_id'=> $request->genero, 
+						'name'=> $request->nombre,
+						'infoLoraIni'=> $null,
+						'infoLoraEnd'=> $null,
+						'voice'=> $request->Voicex,
+						'details'=> $details,
+						'photo01'=> $null,
+						'photo02'=> $null,
+						'photo03'=> $null,
+						'photo04'=> $null,
+						'photo05'=> $null,
+						'seed'=> $request->seed,
+						'typeSeed_o_Lora'=> $type,
+						'prompt'=> $prompt,
+						'userIdCreator'=> $request->iduser
+			];
+
+			$result=$this->saveNewAssistant($infoToSave);
+			return $result;
+			//return response()->json($details);
+		} catch (\Throwable $th) {
+			echo "Error ";
+			echo $th;
+		}
+	}		
+	
+
+	public function givemeprompt(Request $request){
+		try {
+			// return the first register
+			//$infoseeds = SeedUsed::first()->first();
+
+			// Define next seed to will use
+			$infoseeds = SeedUsed::latest()->first();
+			$infoseeds = ($infoseeds->seedused)+1;
+			//return response()->json(['seed' => $infoseeds]);
+			/*
+			$infoseeds = SeedUsed::select('seedused')
+				->where('id',5)
+				->get();
+			return $infoseeds;
+			*/
+			/*
+			$listall = SeedUsed::select('seedused')->get();
+			return [max([$listall])];
+			*/
+
+			// save infoseeds in table
+			$resultx = $this->saveInfoseeds($infoseeds);
+
+			// get negative prompt 
+			$negativeprompt = DataGenericx::all();
+			$prompt = 'Realistic photography. An elegant and sophisticated '.$request->genero.', '.$request->Ethnicity.' with '.$request->bodystyle.', of '.$request->edad.'-year-old wears serious, dress pants; with a long sleeve shirt with the first 2 buttons open. Combine luxury shoes and a fine gold watch. Her look is completed with hair colored '.$request->HairColor.' full body, boldly looking at the viewer, walking near a bridge.'; 
+			return response()->json(['prompt'=> $prompt, 'seed' => $infoseeds, 'negativeprompt' => $negativeprompt[0]->negativeprompt, 'Voicex' => $request->Voicex]);
+			//return response()->json(['prompt'=> $prompt, 'seed' => $infoseeds]);
+		} catch (\Throwable $th) {
+			echo "Error ";
+			echo $th;
+		}
+	}		
+	
+	private function saveInfoseeds($Infoseeds) {
+		try {
+	    	$result = $this->SeedUsed->create(['seedused' => $Infoseeds]);
+			return $result;
+		} catch (\Throwable $th) {
+			return false;
+		}
+	}
+
+	private function saveNewAssistant($Info) {
+		try {
+			$validator = Validator::make($Info,
+			[
+				'name'        => 'required',
+				'details' 	  => 'required',
+				'typesex_id' => 'required',
+				'typeSeed_o_Lora' => 'required',
+				'voice' => 'required',
+			]);
+
+			if($validator->fails()){
+				$data = [
+					'message' => 'Error en la validación de los datos: '.$validator->errors(),
+					'status' => 400
+				];
+				return response()->json($data['message'], $data['status']);				
+			}
+
+	    	$result = $this->assistant->create($Info);
+			if($result){
+				return response()->json("Agregado el registro en Assistant",200);
+			}
+			else{
+				return response()->json("Problema agregando registro en Assistant",500);
+			}
+
+			//$result = $this->assistant->create($Info);
+			//return ['true'];
+		} catch (Exception $e) {
+			//return response()->json($e->getMessage(),500,["message" =>"Error and go to line 527 ..."]);
+			return response()->json(["e->getMessage()" => $e->getMessage()]);
+		}	
+	}
+
+
 }

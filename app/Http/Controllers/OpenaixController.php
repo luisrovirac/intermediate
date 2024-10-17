@@ -24,6 +24,32 @@ use App\Models\msgnotused;
 use App\Models\Configmsg;
 use App\Models\Message;
 
+use App\Models\Genero;
+use App\Models\Pais;
+use App\Models\Language;
+use App\Models\Face;
+use App\Models\HairColor;
+use App\Models\BodyStyle;
+use App\Models\Ethnicity;
+use App\Models\EducationLevel;
+use App\Models\Profession;
+use App\Models\Job;
+use App\Models\HealthCondition;
+use App\Models\PhisicalActivity;
+use App\Models\DoesExercise;
+use App\Models\Smoker;
+use App\Models\Drinker;
+use App\Models\TakeMedication;
+use App\Models\DrugUse;
+use App\Models\EmotionalState;
+use App\Models\Humor;
+use App\Models\RelationStatus;
+use App\Models\Children;
+use App\Models\FamilyOrientation;
+use App\Models\Pets;
+use App\Models\Values;
+use App\Models\Interest;
+
 /**
  * @OA\Info(title="API for projects", version="0.1")
  */
@@ -89,6 +115,7 @@ class OpenaixController extends Controller
 		])->get($endpointgetchats)->json();
 		return $dataChat;
 	}
+
 
 	/**
      * Consultar la respuesta a una comunicación en el chat

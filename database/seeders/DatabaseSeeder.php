@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
 				'photo03' => 'https://imgsassistants.s3.amazonaws.com/uploads/001carla03.png',
 				'photo04' => 'https://imgsassistants.s3.amazonaws.com/uploads/001carla04.png',
 				'photo05' => 'https://imgsassistants.s3.amazonaws.com/uploads/001carla05.png',
+				'typeSeed_o_Lora' => 'lora'
 			]
 		);
 
@@ -83,6 +84,7 @@ class DatabaseSeeder extends Seeder
 				'photo03' => 'https://imgsassistants.s3.amazonaws.com/uploads/002simona03.png',
 				'photo04' => 'https://imgsassistants.s3.amazonaws.com/uploads/002simona04.png',
 				'photo05' => 'https://imgsassistants.s3.amazonaws.com/uploads/002simona05.png',
+				'typeSeed_o_Lora' => 'lora'
 			]
 		);
 
@@ -101,6 +103,7 @@ class DatabaseSeeder extends Seeder
 				'photo03' => 'https://imgsassistants.s3.amazonaws.com/uploads/003haruka03.png',
 				'photo04' => 'https://imgsassistants.s3.amazonaws.com/uploads/003haruka04.png',
 				'photo05' => 'https://imgsassistants.s3.amazonaws.com/uploads/003haruka05.png',
+				'typeSeed_o_Lora' => 'lora'
 			]
 		);
 
@@ -119,6 +122,7 @@ class DatabaseSeeder extends Seeder
 				'photo03' => 'https://imgsassistants.s3.amazonaws.com/uploads/004anne03.png',
 				'photo04' => 'https://imgsassistants.s3.amazonaws.com/uploads/004anne04.png',
 				'photo05' => 'https://imgsassistants.s3.amazonaws.com/uploads/004anne05.png',
+				'typeSeed_o_Lora' => 'lora'
 			]
 		);
 
@@ -137,6 +141,7 @@ class DatabaseSeeder extends Seeder
 				'photo03' => 'https://imgsassistants.s3.amazonaws.com/uploads/005angela03.png',
 				'photo04' => 'https://imgsassistants.s3.amazonaws.com/uploads/005angela04.png',
 				'photo05' => 'https://imgsassistants.s3.amazonaws.com/uploads/005angela05.png',
+				'typeSeed_o_Lora' => 'lora'
 			]
 		);
 
@@ -155,6 +160,7 @@ class DatabaseSeeder extends Seeder
 				'photo03' => 'https://imgsassistants.s3.amazonaws.com/uploads/006zeel03.png',
 				'photo04' => 'https://imgsassistants.s3.amazonaws.com/uploads/006zeel04.png',
 				'photo05' => 'https://imgsassistants.s3.amazonaws.com/uploads/006zeel05.png',
+				'typeSeed_o_Lora' => 'lora'
 			]
 		);
 
@@ -174,6 +180,7 @@ class DatabaseSeeder extends Seeder
 				'photo03' => 'https://imgsassistants.s3.amazonaws.com/uploads/007stuart03.png',
 				'photo04' => 'https://imgsassistants.s3.amazonaws.com/uploads/007stuart04.png',
 				'photo05' => 'https://imgsassistants.s3.amazonaws.com/uploads/007stuart05.png',
+				'typeSeed_o_Lora' => 'lora'
 			]
 		);
 
@@ -192,6 +199,7 @@ class DatabaseSeeder extends Seeder
 				'photo03' => 'https://imgsassistants.s3.amazonaws.com/uploads/008shintaro03.png',
 				'photo04' => 'https://imgsassistants.s3.amazonaws.com/uploads/008shintaro04.png',
 				'photo05' => 'https://imgsassistants.s3.amazonaws.com/uploads/008shintaro05.png',
+				'typeSeed_o_Lora' => 'lora'
 			]
 		);
 
@@ -210,6 +218,7 @@ class DatabaseSeeder extends Seeder
 				'photo03' => 'https://imgsassistants.s3.amazonaws.com/uploads/009arthur03.png',
 				'photo04' => 'https://imgsassistants.s3.amazonaws.com/uploads/009arthur04.png',
 				'photo05' => 'https://imgsassistants.s3.amazonaws.com/uploads/009arthur05.png',
+				'typeSeed_o_Lora' => 'lora'
 			]
 		);
 
@@ -228,6 +237,7 @@ class DatabaseSeeder extends Seeder
 				'photo03' => 'https://imgsassistants.s3.amazonaws.com/uploads/010luciano03.png',
 				'photo04' => 'https://imgsassistants.s3.amazonaws.com/uploads/010luciano04.png',
 				'photo05' => 'https://imgsassistants.s3.amazonaws.com/uploads/010luciano05.png',
+				'typeSeed_o_Lora' => 'lora'
 			]
 		);
 
@@ -266,6 +276,7 @@ class DatabaseSeeder extends Seeder
 				'photo03' => 'https://imgsassistants.s3.amazonaws.com/uploads/012tao03.png',
 				'photo04' => 'https://imgsassistants.s3.amazonaws.com/uploads/012tao04.png',
 				'photo05' => 'https://imgsassistants.s3.amazonaws.com/uploads/012tao05.png',
+				'typeSeed_o_Lora' => 'lora'
 			]
 		);
 
@@ -371,6 +382,596 @@ class DatabaseSeeder extends Seeder
 				'maxNumberRandom' => 10
 			]
 		);
+
+		// Genero //
+		\App\Models\Genero::factory()->create(['genero' => 'Female']);
+		\App\Models\Genero::factory()->create(['genero' => 'Male']);
+		\App\Models\Genero::factory()->create(['genero' => 'Non-binary']);
+		\App\Models\Genero::factory()->create(['genero' => 'Anime']);
+		\App\Models\Genero::factory()->create(['genero' => 'Fiction ']);
+		\App\Models\Genero::factory()->create(['genero' => 'Robotic']);
+
+		// Pais //
+        \App\Models\Pais::factory()->create(['swift' => 'AF','pais' => 'Afganistán']);
+        \App\Models\Pais::factory()->create(['swift' => 'AL','pais' => 'Albania']);
+        \App\Models\Pais::factory()->create(['swift' => 'DZ','pais' => 'Algeria']);
+        \App\Models\Pais::factory()->create(['swift' => 'AS','pais' => 'Samoa Americana']);
+        \App\Models\Pais::factory()->create(['swift' => 'AD','pais' => 'Andorra']);
+        \App\Models\Pais::factory()->create(['swift' => 'AO','pais' => 'Angola']);
+        \App\Models\Pais::factory()->create(['swift' => 'AI','pais' => 'Anguila']);
+        \App\Models\Pais::factory()->create(['swift' => 'AQ','pais' => 'Antártica']);
+        \App\Models\Pais::factory()->create(['swift' => 'AG','pais' => 'Antigua y Barbuda']);
+        \App\Models\Pais::factory()->create(['swift' => 'AR','pais' => 'Argentina']);
+        \App\Models\Pais::factory()->create(['swift' => 'AM','pais' => 'Armenia']);
+        \App\Models\Pais::factory()->create(['swift' => 'AW','pais' => 'Aruba']);
+        \App\Models\Pais::factory()->create(['swift' => 'AU','pais' => 'Australia']);
+        \App\Models\Pais::factory()->create(['swift' => 'AT','pais' => 'Austria']);
+        \App\Models\Pais::factory()->create(['swift' => 'AZ','pais' => 'Azerbaiyán']);
+        \App\Models\Pais::factory()->create(['swift' => 'BS','pais' => 'Bahamas']);
+        \App\Models\Pais::factory()->create(['swift' => 'BH','pais' => 'Baréin']);
+        \App\Models\Pais::factory()->create(['swift' => 'BD','pais' => 'Bangladés']);
+        \App\Models\Pais::factory()->create(['swift' => 'BB','pais' => 'Barbados']);
+        \App\Models\Pais::factory()->create(['swift' => 'BY','pais' => 'Belarús']);
+        \App\Models\Pais::factory()->create(['swift' => 'BE','pais' => 'Bélgica']);
+        \App\Models\Pais::factory()->create(['swift' => 'BZ','pais' => 'Belice']);
+        \App\Models\Pais::factory()->create(['swift' => 'BJ','pais' => 'Benín']);
+        \App\Models\Pais::factory()->create(['swift' => 'BM','pais' => 'Bermudas']);
+        \App\Models\Pais::factory()->create(['swift' => 'BT','pais' => 'Bhután']);
+        \App\Models\Pais::factory()->create(['swift' => 'BO','pais' => 'Bolivia']);
+        \App\Models\Pais::factory()->create(['swift' => 'BA','pais' => 'Bosnia y Herzegovina']);
+        \App\Models\Pais::factory()->create(['swift' => 'BW','pais' => 'Botsuana']);
+        \App\Models\Pais::factory()->create(['swift' => 'BV','pais' => 'Isla Bouvet']);
+        \App\Models\Pais::factory()->create(['swift' => 'AX','pais' => 'Islas Aland']);
+        \App\Models\Pais::factory()->create(['swift' => 'VG','pais' => 'Islas Virgenes Britanicas']);
+        \App\Models\Pais::factory()->create(['swift' => 'BR','pais' => 'Brasil']);
+        \App\Models\Pais::factory()->create(['swift' => 'BN','pais' => 'Brunéi']);
+        \App\Models\Pais::factory()->create(['swift' => 'BG','pais' => 'Bulgaria']);
+        \App\Models\Pais::factory()->create(['swift' => 'BF','pais' => 'Burkina Faso']);
+        \App\Models\Pais::factory()->create(['swift' => 'BI','pais' => 'Burundi']);
+        \App\Models\Pais::factory()->create(['swift' => 'KH','pais' => 'Camboya']);
+        \App\Models\Pais::factory()->create(['swift' => 'CM','pais' => 'Camerún']);
+        \App\Models\Pais::factory()->create(['swift' => 'CA','pais' => 'Canadá']);
+        \App\Models\Pais::factory()->create(['swift' => 'CV','pais' => 'Cabo Verde']);
+        \App\Models\Pais::factory()->create(['swift' => 'KY','pais' => 'Islas Caimán']);
+        \App\Models\Pais::factory()->create(['swift' => 'CF','pais' => 'República Centroafricana']);
+        \App\Models\Pais::factory()->create(['swift' => 'TD','pais' => 'Chad']);
+        \App\Models\Pais::factory()->create(['swift' => 'CL','pais' => 'Chile']);
+        \App\Models\Pais::factory()->create(['swift' => 'CN','pais' => 'China']);
+        \App\Models\Pais::factory()->create(['swift' => 'CX','pais' => 'Islas Christmas']);
+        \App\Models\Pais::factory()->create(['swift' => 'CC','pais' => 'Islas Cocos']);
+        \App\Models\Pais::factory()->create(['swift' => 'CO','pais' => 'Colombia']);
+        \App\Models\Pais::factory()->create(['swift' => 'KM','pais' => 'Comoras']);
+        \App\Models\Pais::factory()->create(['swift' => 'CG','pais' => 'República Democrática del Congo']);
+        \App\Models\Pais::factory()->create(['swift' => 'CK','pais' => 'Islas Cook']);
+        \App\Models\Pais::factory()->create(['swift' => 'CR','pais' => 'Costa Rica']);
+        \App\Models\Pais::factory()->create(['swift' => 'CI','pais' => 'Costa de Marfil']);
+        \App\Models\Pais::factory()->create(['swift' => 'HR','pais' => 'Croacia']);
+        \App\Models\Pais::factory()->create(['swift' => 'CU','pais' => 'Cuba']);
+        \App\Models\Pais::factory()->create(['swift' => 'CY','pais' => 'Chipre']);
+        \App\Models\Pais::factory()->create(['swift' => 'CZ','pais' => 'Chequia']);
+        \App\Models\Pais::factory()->create(['swift' => 'DK','pais' => 'Dinamarca']);
+        \App\Models\Pais::factory()->create(['swift' => 'DJ','pais' => 'Yibuti']);
+        \App\Models\Pais::factory()->create(['swift' => 'DM','pais' => 'Dominica']);
+        \App\Models\Pais::factory()->create(['swift' => 'DO','pais' => 'Republica Dominicana']);
+        \App\Models\Pais::factory()->create(['swift' => 'EC','pais' => 'Ecuador']);
+        \App\Models\Pais::factory()->create(['swift' => 'EG','pais' => 'Egipto']);
+        \App\Models\Pais::factory()->create(['swift' => 'SV','pais' => 'El Salvador']);
+        \App\Models\Pais::factory()->create(['swift' => 'GW','pais' => 'Guinea Bisáu']);
+        \App\Models\Pais::factory()->create(['swift' => 'ER','pais' => 'Eritrea']);
+        \App\Models\Pais::factory()->create(['swift' => 'EE','pais' => 'Estonia']);
+        \App\Models\Pais::factory()->create(['swift' => 'ET','pais' => 'Etiopía']);
+        \App\Models\Pais::factory()->create(['swift' => 'FK','pais' => 'Islas Malvinas']);
+        \App\Models\Pais::factory()->create(['swift' => 'FO','pais' => 'Islas Feroe']);
+        \App\Models\Pais::factory()->create(['swift' => 'FJ','pais' => 'Fiyi']);
+        \App\Models\Pais::factory()->create(['swift' => 'FI','pais' => 'Finlandia']);
+        \App\Models\Pais::factory()->create(['swift' => 'FR','pais' => 'Francia']);
+        \App\Models\Pais::factory()->create(['swift' => 'GF','pais' => 'Guayana Francesa']);
+        \App\Models\Pais::factory()->create(['swift' => 'PF','pais' => 'Polinesia Francesa']);
+        \App\Models\Pais::factory()->create(['swift' => 'TF','pais' => 'Territorios Australes Franceses']);
+        \App\Models\Pais::factory()->create(['swift' => 'GA','pais' => 'Gabon']);
+        \App\Models\Pais::factory()->create(['swift' => 'GM','pais' => 'Gambia']);
+        \App\Models\Pais::factory()->create(['swift' => 'GE','pais' => 'Georgia']);
+        \App\Models\Pais::factory()->create(['swift' => 'DE','pais' => 'Alemania']);
+        \App\Models\Pais::factory()->create(['swift' => 'GH','pais' => 'Ghana']);
+        \App\Models\Pais::factory()->create(['swift' => 'GI','pais' => 'Gibraltar']);
+        \App\Models\Pais::factory()->create(['swift' => 'GR','pais' => 'Grecia']);
+        \App\Models\Pais::factory()->create(['swift' => 'GL','pais' => 'Groenlandia']);
+        \App\Models\Pais::factory()->create(['swift' => 'GD','pais' => 'Granada']);
+        \App\Models\Pais::factory()->create(['swift' => 'GP','pais' => 'Guadalupe']);
+        \App\Models\Pais::factory()->create(['swift' => 'GU','pais' => 'Guam']);
+        \App\Models\Pais::factory()->create(['swift' => 'GT','pais' => 'Guatemala']);
+        \App\Models\Pais::factory()->create(['swift' => 'GG','pais' => 'Guernsey']);
+        \App\Models\Pais::factory()->create(['swift' => 'GN','pais' => 'Guinea']);
+        \App\Models\Pais::factory()->create(['swift' => 'GQ','pais' => 'Guinea Ecuatorial']);
+        \App\Models\Pais::factory()->create(['swift' => 'GY','pais' => 'Guyana']);
+        \App\Models\Pais::factory()->create(['swift' => 'HM','pais' => 'Islas Heard y McDonald']);
+        \App\Models\Pais::factory()->create(['swift' => 'VA','pais' => 'Ciudad del Vaticano']);
+        \App\Models\Pais::factory()->create(['swift' => 'HN','pais' => 'Honduras']);
+        \App\Models\Pais::factory()->create(['swift' => 'HK','pais' => 'Hong Kong']);
+        \App\Models\Pais::factory()->create(['swift' => 'HU','pais' => 'Hungría']);
+        \App\Models\Pais::factory()->create(['swift' => 'IS','pais' => 'Islandia']);
+        \App\Models\Pais::factory()->create(['swift' => 'IN','pais' => 'India']);
+        \App\Models\Pais::factory()->create(['swift' => 'ID','pais' => 'Indonesia']);
+        \App\Models\Pais::factory()->create(['swift' => 'IR','pais' => 'Irán']);
+        \App\Models\Pais::factory()->create(['swift' => 'IQ','pais' => 'Irak']);
+        \App\Models\Pais::factory()->create(['swift' => 'IE','pais' => 'Irlanda']);
+        \App\Models\Pais::factory()->create(['swift' => 'IM','pais' => 'Isla de Man']);
+        \App\Models\Pais::factory()->create(['swift' => 'IL','pais' => 'Israel']);
+        \App\Models\Pais::factory()->create(['swift' => 'IT','pais' => 'Italia']);
+        \App\Models\Pais::factory()->create(['swift' => 'JM','pais' => 'Jamaica']);
+        \App\Models\Pais::factory()->create(['swift' => 'JP','pais' => 'Japón']);
+        \App\Models\Pais::factory()->create(['swift' => 'JE','pais' => 'Jersey']);
+        \App\Models\Pais::factory()->create(['swift' => 'JO','pais' => 'Jordania']);
+        \App\Models\Pais::factory()->create(['swift' => 'KZ','pais' => 'Kazajistán']);
+        \App\Models\Pais::factory()->create(['swift' => 'KE','pais' => 'Kenia']);
+        \App\Models\Pais::factory()->create(['swift' => 'KI','pais' => 'Kiribati']);
+        \App\Models\Pais::factory()->create(['swift' => 'KR','pais' => 'Corea del Sur']);
+        \App\Models\Pais::factory()->create(['swift' => 'KP','pais' => 'Corea del Norte']);
+        \App\Models\Pais::factory()->create(['swift' => 'KW','pais' => 'Kuwait']);
+        \App\Models\Pais::factory()->create(['swift' => 'KG','pais' => 'Kirguistán']);
+        \App\Models\Pais::factory()->create(['swift' => 'LA','pais' => 'Laos']);
+        \App\Models\Pais::factory()->create(['swift' => 'LV','pais' => 'Letonia']);
+        \App\Models\Pais::factory()->create(['swift' => 'LB','pais' => 'Líbano']);
+        \App\Models\Pais::factory()->create(['swift' => 'LS','pais' => 'Lesoto']);
+        \App\Models\Pais::factory()->create(['swift' => 'LR','pais' => 'Liberia']);
+        \App\Models\Pais::factory()->create(['swift' => 'LY','pais' => 'Libia']);
+        \App\Models\Pais::factory()->create(['swift' => 'LI','pais' => 'Liechtenstein']);
+        \App\Models\Pais::factory()->create(['swift' => 'LT','pais' => 'Lituania']);
+        \App\Models\Pais::factory()->create(['swift' => 'LU','pais' => 'Luxemburgo']);
+        \App\Models\Pais::factory()->create(['swift' => 'MO','pais' => 'Macao']);
+        \App\Models\Pais::factory()->create(['swift' => 'MK','pais' => 'República de Macedonia']);
+        \App\Models\Pais::factory()->create(['swift' => 'MG','pais' => 'Madagascar']);
+        \App\Models\Pais::factory()->create(['swift' => 'MW','pais' => 'Malaui']);
+        \App\Models\Pais::factory()->create(['swift' => 'MY','pais' => 'Malasia']);
+        \App\Models\Pais::factory()->create(['swift' => 'MV','pais' => 'Maldivas']);
+        \App\Models\Pais::factory()->create(['swift' => 'ML','pais' => 'Mali']);
+        \App\Models\Pais::factory()->create(['swift' => 'MT','pais' => 'Malta']);
+        \App\Models\Pais::factory()->create(['swift' => 'HT','pais' => 'Haiti']);
+        \App\Models\Pais::factory()->create(['swift' => 'MH','pais' => 'Islas Marshall']);
+        \App\Models\Pais::factory()->create(['swift' => 'MQ','pais' => 'Martinica']);
+        \App\Models\Pais::factory()->create(['swift' => 'MU','pais' => 'Mauricio']);
+        \App\Models\Pais::factory()->create(['swift' => 'MX','pais' => 'México']);
+        \App\Models\Pais::factory()->create(['swift' => 'FM','pais' => 'Estados Federados de Micronesia']);
+        \App\Models\Pais::factory()->create(['swift' => 'MD','pais' => 'Moldavia']);
+        \App\Models\Pais::factory()->create(['swift' => 'MC','pais' => 'Mónaco']);
+        \App\Models\Pais::factory()->create(['swift' => 'MN','pais' => 'Mongolia']);
+        \App\Models\Pais::factory()->create(['swift' => 'ME','pais' => 'Montenegro']);
+        \App\Models\Pais::factory()->create(['swift' => 'MS','pais' => 'Montserrat']);
+        \App\Models\Pais::factory()->create(['swift' => 'MA','pais' => 'Marruecos']);
+        \App\Models\Pais::factory()->create(['swift' => 'MZ','pais' => 'Mozambique']);
+        \App\Models\Pais::factory()->create(['swift' => 'MM','pais' => 'Birmania']);
+        \App\Models\Pais::factory()->create(['swift' => 'NA','pais' => 'Namibia']);
+        \App\Models\Pais::factory()->create(['swift' => 'NR','pais' => 'Nauru']);
+        \App\Models\Pais::factory()->create(['swift' => 'NP','pais' => 'Nepal']);
+        \App\Models\Pais::factory()->create(['swift' => 'NL','pais' => 'Países Bajos']);
+        \App\Models\Pais::factory()->create(['swift' => 'AN','pais' => 'Antillas Neerlandesas']);
+        \App\Models\Pais::factory()->create(['swift' => 'NC','pais' => 'Nueva Caledonia']);
+        \App\Models\Pais::factory()->create(['swift' => 'NZ','pais' => 'Nueva Zelanda']);
+        \App\Models\Pais::factory()->create(['swift' => 'NI','pais' => 'Nicaragua']);
+        \App\Models\Pais::factory()->create(['swift' => 'NE','pais' => 'Niger']);
+        \App\Models\Pais::factory()->create(['swift' => 'NG','pais' => 'Nigeria']);
+        \App\Models\Pais::factory()->create(['swift' => 'NU','pais' => 'Niue']);
+        \App\Models\Pais::factory()->create(['swift' => 'NF','pais' => 'Isla Norfolk']);
+        \App\Models\Pais::factory()->create(['swift' => 'MP','pais' => 'Islas Marianas del Norte']);
+        \App\Models\Pais::factory()->create(['swift' => 'NO','pais' => 'Noruega']);
+        \App\Models\Pais::factory()->create(['swift' => 'OM','pais' => 'Omán']);
+        \App\Models\Pais::factory()->create(['swift' => 'PK','pais' => 'Pakistán']);
+        \App\Models\Pais::factory()->create(['swift' => 'PS','pais' => 'Territorios Palestinos']);
+        \App\Models\Pais::factory()->create(['swift' => 'PA','pais' => 'Panamá']);
+        \App\Models\Pais::factory()->create(['swift' => 'PG','pais' => 'Papúa Nueva Guinea']);
+        \App\Models\Pais::factory()->create(['swift' => 'PY','pais' => 'Paraguay']);
+        \App\Models\Pais::factory()->create(['swift' => 'PE','pais' => 'Perú']);
+        \App\Models\Pais::factory()->create(['swift' => 'PH','pais' => 'Filipinas']);
+        \App\Models\Pais::factory()->create(['swift' => 'PN','pais' => 'Islas Pitcairn']);
+        \App\Models\Pais::factory()->create(['swift' => 'PL','pais' => 'Polonia']);
+        \App\Models\Pais::factory()->create(['swift' => 'PT','pais' => 'Portugal']);
+        \App\Models\Pais::factory()->create(['swift' => 'PR','pais' => 'Puerto Rico']);
+        \App\Models\Pais::factory()->create(['swift' => 'QA','pais' => 'Catar']);
+        \App\Models\Pais::factory()->create(['swift' => 'RE','pais' => 'Reunion']);
+        \App\Models\Pais::factory()->create(['swift' => 'RO','pais' => 'Rumanía']);
+        \App\Models\Pais::factory()->create(['swift' => 'RU','pais' => 'Rusia']);
+        \App\Models\Pais::factory()->create(['swift' => 'RW','pais' => 'Rwanda']);
+        \App\Models\Pais::factory()->create(['swift' => 'BL','pais' => 'San Bartolomé']);
+        \App\Models\Pais::factory()->create(['swift' => 'SH','pais' => 'Santa Elena']);
+        \App\Models\Pais::factory()->create(['swift' => 'KN','pais' => 'San Cristóbal y Nieves']);
+        \App\Models\Pais::factory()->create(['swift' => 'LC','pais' => 'Santa Lucía']);
+        \App\Models\Pais::factory()->create(['swift' => 'MF','pais' => 'San Martín']);
+        \App\Models\Pais::factory()->create(['swift' => 'PM','pais' => 'San Pedro y Miquelón']);
+        \App\Models\Pais::factory()->create(['swift' => 'VC','pais' => 'San Vicente y las Granadinas']);
+        \App\Models\Pais::factory()->create(['swift' => 'WS','pais' => 'Samoa']);
+        \App\Models\Pais::factory()->create(['swift' => 'SM','pais' => 'San Marino']);
+        \App\Models\Pais::factory()->create(['swift' => 'ST','pais' => 'Santo Tomé y Príncipe']);
+        \App\Models\Pais::factory()->create(['swift' => 'SA','pais' => 'Arabia Saudita']);
+        \App\Models\Pais::factory()->create(['swift' => 'SN','pais' => 'Senegal']);
+        \App\Models\Pais::factory()->create(['swift' => 'RS','pais' => 'Serbia']);
+        \App\Models\Pais::factory()->create(['swift' => 'SC','pais' => 'Seychelles']);
+        \App\Models\Pais::factory()->create(['swift' => 'SG','pais' => 'Singapur']);
+        \App\Models\Pais::factory()->create(['swift' => 'SK','pais' => 'Eslovaquia']);
+        \App\Models\Pais::factory()->create(['swift' => 'SI','pais' => 'Eslovenia']);
+        \App\Models\Pais::factory()->create(['swift' => 'SB','pais' => 'Islas Salomón']);
+        \App\Models\Pais::factory()->create(['swift' => 'SL','pais' => 'Sierra Leona']);
+        \App\Models\Pais::factory()->create(['swift' => 'SO','pais' => 'Somalia']);
+        \App\Models\Pais::factory()->create(['swift' => 'ZA','pais' => 'Sudáfrica']);
+        \App\Models\Pais::factory()->create(['swift' => 'GS','pais' => 'Islas Georgias del Sur y Sandwich del Sur']);
+        \App\Models\Pais::factory()->create(['swift' => 'ES','pais' => 'España']);
+        \App\Models\Pais::factory()->create(['swift' => 'LK','pais' => 'Sri Lanka']);
+        \App\Models\Pais::factory()->create(['swift' => 'SD','pais' => 'Sudán']);
+        \App\Models\Pais::factory()->create(['swift' => 'SR','pais' => 'Surinam']);
+        \App\Models\Pais::factory()->create(['swift' => 'SZ','pais' => 'Esuatini']);
+        \App\Models\Pais::factory()->create(['swift' => 'SE','pais' => 'Suecia']);
+        \App\Models\Pais::factory()->create(['swift' => 'CH','pais' => 'Suiza']);
+        \App\Models\Pais::factory()->create(['swift' => 'SY','pais' => 'Siria']);
+        \App\Models\Pais::factory()->create(['swift' => 'TW','pais' => 'Taiwán']);
+        \App\Models\Pais::factory()->create(['swift' => 'TJ','pais' => 'Tayikistán']);
+        \App\Models\Pais::factory()->create(['swift' => 'TZ','pais' => 'Tanzania']);
+        \App\Models\Pais::factory()->create(['swift' => 'TH','pais' => 'Tailandia']);
+        \App\Models\Pais::factory()->create(['swift' => 'TL','pais' => 'Timor Oriental']);
+        \App\Models\Pais::factory()->create(['swift' => 'TG','pais' => 'Togo']);
+        \App\Models\Pais::factory()->create(['swift' => 'TK','pais' => 'Tokelau']);
+        \App\Models\Pais::factory()->create(['swift' => 'TO','pais' => 'Tonga']);
+        \App\Models\Pais::factory()->create(['swift' => 'TT','pais' => 'Trinidad y Tobago']);
+        \App\Models\Pais::factory()->create(['swift' => 'TN','pais' => 'Túnez']);
+        \App\Models\Pais::factory()->create(['swift' => 'TR','pais' => 'Turquía']);
+        \App\Models\Pais::factory()->create(['swift' => 'TM','pais' => 'Turkmenistán']);
+        \App\Models\Pais::factory()->create(['swift' => 'TC','pais' => 'Islas Turcas y Caicos']);
+        \App\Models\Pais::factory()->create(['swift' => 'TV','pais' => 'Tuvalu']);
+        \App\Models\Pais::factory()->create(['swift' => 'UG','pais' => 'Uganda']);
+        \App\Models\Pais::factory()->create(['swift' => 'UA','pais' => 'Ucrania']);
+        \App\Models\Pais::factory()->create(['swift' => 'AE','pais' => 'Emiratos Árabes Unidos']);
+        \App\Models\Pais::factory()->create(['swift' => 'GB','pais' => 'Reino Unido']);
+        \App\Models\Pais::factory()->create(['swift' => 'UM','pais' => 'Islas Ultramarinas Menores de Estados Unidos']);
+        \App\Models\Pais::factory()->create(['swift' => 'US','pais' => 'Estados Unidos']);
+        \App\Models\Pais::factory()->create(['swift' => 'VI','pais' => 'Islas Vírgenes de los Estados Unidos']);
+        \App\Models\Pais::factory()->create(['swift' => 'UY','pais' => 'Uruguay']);
+        \App\Models\Pais::factory()->create(['swift' => 'UZ','pais' => 'Uzbekistán']);
+        \App\Models\Pais::factory()->create(['swift' => 'VU','pais' => 'Vanuatu']);
+        \App\Models\Pais::factory()->create(['swift' => 'VE','pais' => 'Venezuela']);
+        \App\Models\Pais::factory()->create(['swift' => 'VN','pais' => 'Vietnam']);
+        \App\Models\Pais::factory()->create(['swift' => 'WF','pais' => 'Wallis y Futuna']);
+        \App\Models\Pais::factory()->create(['swift' => 'EH','pais' => 'Western Sahara']);
+        \App\Models\Pais::factory()->create(['swift' => 'YE','pais' => 'Yemen']);
+        \App\Models\Pais::factory()->create(['swift' => 'YU','pais' => 'Yugoslavia']);
+        \App\Models\Pais::factory()->create(['swift' => 'ZM','pais' => 'Zambia']);
+        \App\Models\Pais::factory()->create(['swift' => 'ZW','pais' => 'Zimbabue']);        
+		
+		// Language
+        \App\Models\Language::factory()->create(['language' => 'Spanish']);        
+        \App\Models\Language::factory()->create(['language' => 'Portuguese']);        
+        \App\Models\Language::factory()->create(['language' => 'English']);        
+        \App\Models\Language::factory()->create(['language' => 'French']);        
+        \App\Models\Language::factory()->create(['language' => 'Mandarin']);        
+        \App\Models\Language::factory()->create(['language' => 'Korean']);        
+        \App\Models\Language::factory()->create(['language' => 'Arabic']);        
+        \App\Models\Language::factory()->create(['language' => 'Hindi']);        
+        \App\Models\Language::factory()->create(['language' => 'Italian']);        
+        \App\Models\Language::factory()->create(['language' => 'Japanese']);        
+        \App\Models\Language::factory()->create(['language' => 'Zulu']);        
+        \App\Models\Language::factory()->create(['language' => 'Xhosa']);        
+        \App\Models\Language::factory()->create(['language' => 'Russian']);        
+
+		// Face
+        \App\Models\Face::factory()->create(['face' => 'Happy']);        
+        \App\Models\Face::factory()->create(['face' => 'Sad']);        
+        \App\Models\Face::factory()->create(['face' => 'Angry']);        
+        \App\Models\Face::factory()->create(['face' => 'Surprised']);        
+        \App\Models\Face::factory()->create(['face' => 'Confused']);        
+        \App\Models\Face::factory()->create(['face' => 'Can']);        
+        \App\Models\Face::factory()->create(['face' => 'Excited']);        
+        \App\Models\Face::factory()->create(['face' => 'Nervous']);        
+        \App\Models\Face::factory()->create(['face' => 'Neutral']);        
+        \App\Models\Face::factory()->create(['face' => 'Smiling']);        
+        \App\Models\Face::factory()->create(['face' => 'Stern']);        
+        \App\Models\Face::factory()->create(['face' => 'Shy']);        
+
+		// HairColor
+        \App\Models\HairColor::factory()->create(['hair_color' => 'Black']);        
+        \App\Models\HairColor::factory()->create(['hair_color' => 'Brunette']);        
+        \App\Models\HairColor::factory()->create(['hair_color' => 'Blonde']);        
+        \App\Models\HairColor::factory()->create(['hair_color' => 'White']);        
+        \App\Models\HairColor::factory()->create(['hair_color' => 'Red']);        
+        \App\Models\HairColor::factory()->create(['hair_color' => 'Orange']);        
+        \App\Models\HairColor::factory()->create(['hair_color' => 'Ginger']);        
+        \App\Models\HairColor::factory()->create(['hair_color' => 'Pink']);        
+        \App\Models\HairColor::factory()->create(['hair_color' => 'Purple']);        
+        \App\Models\HairColor::factory()->create(['hair_color' => 'Blue']);        
+        \App\Models\HairColor::factory()->create(['hair_color' => 'Green']);        
+
+		// BodyStyle
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Beautiful']);        
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Perfect boobs']);        
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Huge boobs']);        
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Tattoos']);        
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Muscular']);        
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Big ass']);        
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Small ass']);        
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Skinny']);        
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Abs']);        
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Thick']);        
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Chubby']);        
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Fat']);        
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Perfect body']);        
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Petite']);        
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Oval']);        
+        \App\Models\BodyStyle::factory()->create(['body_style' => 'Pregnant']);        
+
+		// Ethnicity
+        \App\Models\Ethnicity::factory()->create(['ethnicity' => 'Caucasian']);        
+        \App\Models\Ethnicity::factory()->create(['ethnicity' => 'Afrodescendant']);        
+        \App\Models\Ethnicity::factory()->create(['ethnicity' => 'Latino']);        
+        \App\Models\Ethnicity::factory()->create(['ethnicity' => 'Asian']);        
+        \App\Models\Ethnicity::factory()->create(['ethnicity' => 'Middle East']);        
+        \App\Models\Ethnicity::factory()->create(['ethnicity' => 'Indigenous']);        
+        \App\Models\Ethnicity::factory()->create(['ethnicity' => 'Multiracial']);        
+        \App\Models\Ethnicity::factory()->create(['ethnicity' => 'Others']);        
+
+		// EducationLevel
+        \App\Models\EducationLevel::factory()->create(['education_level' => 'College degree']);        
+        \App\Models\EducationLevel::factory()->create(['education_level' => 'High school']);        
+        \App\Models\EducationLevel::factory()->create(['education_level' => 'Technical']);        
+        \App\Models\EducationLevel::factory()->create(['education_level' => 'Preparatory']);        
+        \App\Models\EducationLevel::factory()->create(['education_level' => 'Degree']);        
+        \App\Models\EducationLevel::factory()->create(['education_level' => 'Academic']);        
+        \App\Models\EducationLevel::factory()->create(['education_level' => 'Bachelor’s degree']);        
+        \App\Models\EducationLevel::factory()->create(['education_level' => 'Master’s degree']);        
+        \App\Models\EducationLevel::factory()->create(['education_level' => 'Doctorate degrees']);        
+
+		// Job
+        \App\Models\Job::factory()->create(['job' => 'Software']);        
+        \App\Models\Job::factory()->create(['job' => 'Manager']);        
+        \App\Models\Job::factory()->create(['job' => 'Data Analyst']);        
+        \App\Models\Job::factory()->create(['job' => 'Client Relations']);        
+        \App\Models\Job::factory()->create(['job' => 'Engineer']);        
+        \App\Models\Job::factory()->create(['job' => 'Primary Care']);        
+        \App\Models\Job::factory()->create(['job' => 'Administrator']);        
+        \App\Models\Job::factory()->create(['job' => 'Teacher']);        
+        \App\Models\Job::factory()->create(['job' => 'Accountant']);        
+        \App\Models\Job::factory()->create(['job' => 'Support']);        
+        \App\Models\Job::factory()->create(['job' => 'Salesperson']);        
+        \App\Models\Job::factory()->create(['job' => 'Financial']);        
+        \App\Models\Job::factory()->create(['job' => 'Consultant']);        
+        \App\Models\Job::factory()->create(['job' => 'Marketing']);        
+        \App\Models\Job::factory()->create(['job' => 'Designer']);        
+        \App\Models\Job::factory()->create(['job' => 'Civil Engineer']);        
+        \App\Models\Job::factory()->create(['job' => 'Lawyer']);        
+        \App\Models\Job::factory()->create(['job' => 'Technician']);        
+        \App\Models\Job::factory()->create(['job' => 'Human Resources']);        
+        \App\Models\Job::factory()->create(['job' => 'Sales Manager']);        
+        \App\Models\Job::factory()->create(['job' => 'Nurse']);        
+        \App\Models\Job::factory()->create(['job' => 'Mechanic']);        
+        \App\Models\Job::factory()->create(['job' => 'Social Media']);        
+        \App\Models\Job::factory()->create(['job' => 'Cook']);        
+        \App\Models\Job::factory()->create(['job' => 'Others']);        
+
+		// Profession
+        \App\Models\Profession::factory()->create(['profession' => 'Software']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Manager']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Data Analyst']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Client Relations']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Engineer']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Primary Care']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Administrator']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Teacher']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Accountant']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Support']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Salesperson']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Financial']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Consultant']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Marketing']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Designer']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Civil Engineer']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Lawyer']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Technician']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Human Resources']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Sales Manager']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Nurse']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Mechanic']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Social Media']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Cook']);        
+        \App\Models\Profession::factory()->create(['profession' => 'Others']);        
+		
+		// DoesExercise
+        \App\Models\DoesExercise::factory()->create(['does_exercise' => 'Every day']);        
+        \App\Models\DoesExercise::factory()->create(['does_exercise' => 'Gymrat']);        
+        \App\Models\DoesExercise::factory()->create(['does_exercise' => 'Often']);        
+        \App\Models\DoesExercise::factory()->create(['does_exercise' => 'Sometimes']);        
+        \App\Models\DoesExercise::factory()->create(['does_exercise' => 'Occasionally']);        
+        \App\Models\DoesExercise::factory()->create(['does_exercise' => 'Never']);        
+
+		// HealthCondition
+        \App\Models\HealthCondition::factory()->create(['health_condition' => 'Excellent']);        
+        \App\Models\HealthCondition::factory()->create(['health_condition' => 'Well']);        
+        \App\Models\HealthCondition::factory()->create(['health_condition' => 'Regular']);        
+        \App\Models\HealthCondition::factory()->create(['health_condition' => 'Bad']);        
+
+		// PhisicalActivity
+        \App\Models\PhisicalActivity::factory()->create(['phisical_activity' => 'Sedentary']);        
+        \App\Models\PhisicalActivity::factory()->create(['phisical_activity' => 'Lightly active']);        
+        \App\Models\PhisicalActivity::factory()->create(['phisical_activity' => 'Moderately active']);        
+        \App\Models\PhisicalActivity::factory()->create(['phisical_activity' => 'Very active']);        
+        \App\Models\PhisicalActivity::factory()->create(['phisical_activity' => 'Extremely active']);        
+		
+		// Drinker
+        \App\Models\Drinker::factory()->create(['drinker' => 'Non-drinker']);        
+        \App\Models\Drinker::factory()->create(['drinker' => 'Social drinker']);        
+        \App\Models\Drinker::factory()->create(['drinker' => 'Regular drinker']);        
+        \App\Models\Drinker::factory()->create(['drinker' => 'Heavy drinker']);        
+		
+		// TakeMedication
+        \App\Models\TakeMedication::factory()->create(['take_medication' => 'Yes']);        
+        \App\Models\TakeMedication::factory()->create(['take_medication' => 'No']);        
+		
+		// DrugUse
+        \App\Models\DrugUse::factory()->create(['drug_use' => 'Yes']);        
+        \App\Models\DrugUse::factory()->create(['drug_use' => 'No']);        
+		
+		// EmotionalState
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Joyful']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Sad']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Anger']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Displeasure']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Surprise']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Fear']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Calm']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Curiosity']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Anxious']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Stressed']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Shame']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Gratitude']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Inspiration']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Jealousy']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Love']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Disdain']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Grief']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Proud']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Empathy']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Confusion']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Empowerment']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Self-esteem']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Shyness']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Disillusion']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Tenderness']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Nostalgia']);        
+        \App\Models\EmotionalState::factory()->create(['emotional_state' => 'Fascination']);        
+		
+		// Smoker
+        \App\Models\Smoker::factory()->create(['smoker' => 'Non-smoker']);        
+        \App\Models\Smoker::factory()->create(['smoker' => 'Occasional smoker']);        
+        \App\Models\Smoker::factory()->create(['smoker' => 'Regular smoker']);        
+        \App\Models\Smoker::factory()->create(['smoker' => 'Former smoker']);        
+		
+		// Humor
+        \App\Models\Humor::factory()->create(['humor' => 'Serious']);        
+        \App\Models\Humor::factory()->create(['humor' => 'Sarcastic']);        
+        \App\Models\Humor::factory()->create(['humor' => 'Satirical']);        
+        \App\Models\Humor::factory()->create(['humor' => 'Witty']);        
+        \App\Models\Humor::factory()->create(['humor' => 'Funny']);        
+        \App\Models\Humor::factory()->create(['humor' => 'Absurd']);        
+        \App\Models\Humor::factory()->create(['humor' => 'Ironic']);        
+        \App\Models\Humor::factory()->create(['humor' => 'Grotesque']);        
+        \App\Models\Humor::factory()->create(['humor' => 'Black humor']);        
+		
+		// RelationStatus
+        \App\Models\RelationStatus::factory()->create(['relation_status' => 'Single']);        
+        \App\Models\RelationStatus::factory()->create(['relation_status' => 'Married']);        
+        \App\Models\RelationStatus::factory()->create(['relation_status' => 'Divorced']);        
+        \App\Models\RelationStatus::factory()->create(['relation_status' => 'Widower']);        
+        \App\Models\RelationStatus::factory()->create(['relation_status' => 'In a relationship']);        
+        \App\Models\RelationStatus::factory()->create(['relation_status' => 'Open relationship']);        
+        \App\Models\RelationStatus::factory()->create(['relation_status' => 'Prefers not to say']);        
+		
+		// Children
+        \App\Models\Children::factory()->create(['children' => 'Has no children']);        
+        \App\Models\Children::factory()->create(['children' => 'Has children']);        
+		
+		// FamilyOrientation
+        \App\Models\FamilyOrientation::factory()->create(['family_orientation' => 'you want having children']);  
+        \App\Models\FamilyOrientation::factory()->create(['family_orientation' => 'You are not sure if having children']);  
+        \App\Models\FamilyOrientation::factory()->create(['family_orientation' => 'You do not want having children']);  
+        \App\Models\FamilyOrientation::factory()->create(['family_orientation' => 'You are open to having children']);  
+		
+		// Pets
+        \App\Models\Pets::factory()->create(['pet' => 'Dog']);        
+        \App\Models\Pets::factory()->create(['pet' => 'Cat']);        
+        \App\Models\Pets::factory()->create(['pet' => 'Bird']);        
+        \App\Models\Pets::factory()->create(['pet' => 'Reptile']);        
+        \App\Models\Pets::factory()->create(['pet' => 'Fish']);        
+        \App\Models\Pets::factory()->create(['pet' => 'Guinea pig']);        
+        \App\Models\Pets::factory()->create(['pet' => 'Tortoise']);        
+        \App\Models\Pets::factory()->create(['pet' => 'Hamster']);        
+        \App\Models\Pets::factory()->create(['pet' => 'Other']);        
+		
+		// Values
+        \App\Models\Values::factory()->create(['value' => 'Acceptance']);        
+        \App\Models\Values::factory()->create(['value' => 'Responsibility']);        
+        \App\Models\Values::factory()->create(['value' => 'Honesty']);        
+        \App\Models\Values::factory()->create(['value' => 'Family']);        
+        \App\Models\Values::factory()->create(['value' => 'Boldness']);        
+        \App\Models\Values::factory()->create(['value' => 'Altruism']);        
+        \App\Models\Values::factory()->create(['value' => 'Respect']);        
+        \App\Models\Values::factory()->create(['value' => 'Kindness']);        
+        \App\Models\Values::factory()->create(['value' => 'Adaptability']);        
+        \App\Models\Values::factory()->create(['value' => 'Communication']);        
+        \App\Models\Values::factory()->create(['value' => 'Loyalty']);        
+        \App\Models\Values::factory()->create(['value' => 'Empathy']);        
+        \App\Models\Values::factory()->create(['value' => 'Innovation']);        
+        \App\Models\Values::factory()->create(['value' => 'Trust']);        
+        \App\Models\Values::factory()->create(['value' => 'Justice']);        
+        \App\Models\Values::factory()->create(['value' => 'Modesty']);        
+        \App\Models\Values::factory()->create(['value' => 'Passion']);        
+        \App\Models\Values::factory()->create(['value' => 'Patience']);        
+        \App\Models\Values::factory()->create(['value' => 'Commitment']);        
+        \App\Models\Values::factory()->create(['value' => 'Achievement']);        
+        \App\Models\Values::factory()->create(['value' => 'Courage']);        
+        \App\Models\Values::factory()->create(['value' => 'Appreciation']);        
+        \App\Models\Values::factory()->create(['value' => 'Solidarity']);        
+        \App\Models\Values::factory()->create(['value' => 'Tolerance']);        
+
+		// Interest
+        \App\Models\Interest::factory()->create(['interest' => 'Art']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Anime']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Bets']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Books']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Cars']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Climbing']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Chess']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Coffee']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Comedy']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Cooking']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Cosplay']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Crossfit']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Dance']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Football']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Fashion']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Festivals']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Fitness']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Gardening']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Hiking']);        
+        \App\Models\Interest::factory()->create(['interest' => 'History']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Karaoke']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Movies']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Mountains']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Musicals']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Music']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Nature']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Paddle']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Paint']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Parties']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Pets']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Photography']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Podcast']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Pole Dancing']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Politics']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Programming']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Pubs']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Run']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Real Estate']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Restaurants']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Science']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Series']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Spa']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Sport']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Technology']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Travel']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Videogames']);        
+        \App\Models\Interest::factory()->create(['interest' => 'Others']);        
+
+		\App\Models\SeedUsed::factory()->create(['seedused' => 1000000]);        
+		\App\Models\SeedUsed::factory()->create(['seedused' => 1000001]);        
+		\App\Models\SeedUsed::factory()->create(['seedused' => 1000002]);        
+		\App\Models\SeedUsed::factory()->create(['seedused' => 1000003]);        
+		\App\Models\SeedUsed::factory()->create(['seedused' => 1000004]);        
+		\App\Models\SeedUsed::factory()->create(['seedused' => 1000005]);        
+		\App\Models\SeedUsed::factory()->create(['seedused' => 1000006]);        
+		\App\Models\SeedUsed::factory()->create(['seedused' => 1000007]);        
+
+		\App\Models\DataGenericx::factory()->create(['negativeprompt' => 'deformed, ugly, mutilated, disfigured, text, extra limbs, face cut, head cut, extra fingers, extra arms, poorly drawn face, mutation, bad proportions, cropped head, malformed limbs, mutated hands, fused fingers, long neck']);        
+
+		\App\Models\Voicex::factory()->create(['voicex' => 'alloy']);        
+		\App\Models\Voicex::factory()->create(['voicex' => 'echo']);        
+		\App\Models\Voicex::factory()->create(['voicex' => 'fable']);        
+		\App\Models\Voicex::factory()->create(['voicex' => 'onyx']);        
+		\App\Models\Voicex::factory()->create(['voicex' => 'nova']);        
+		\App\Models\Voicex::factory()->create(['voicex' => 'shimmer']);        
 
     }
 }

@@ -122,6 +122,22 @@ Route::post('texttospeech', [AudioController::class, 'texttospeech']);
 // get speech to text
 Route::post('speechtotext', [AudioController::class, 'speechtotext']);
 
-
 // img bucket
 Route::post('uploadImg', [BucketImgController::class, 'uploadImg']);
+
+
+// Test for fronted (Receive data to show in creation assistant)
+Route::post('testendpoint', [OpenaixController::class, 'testendpoint']);
+
+
+//Route::post('createassistant', [OpenaixController::class, 'createassistant']);
+
+// For create assistant
+Route::post('createassistant', [AssistantController::class, 'createassistant']);
+
+// For get Data for create assistant
+Route::post('getDataCreateAssistant', [AssistantController::class, 'getDataCreateAssistant']);
+
+// For create prompt and img of new assistant (for aprobation)
+Route::post('givemeprompt', [AssistantController::class, 'givemeprompt']);
+
