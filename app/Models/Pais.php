@@ -11,5 +11,5 @@ class Pais extends Model
 
 	protected $fillable = ['pais'];
 
-	protected $hidden = ['created_at', 'updated_at'];
+	protected $hidden = ['created_at', 'updated_at', 'swift'];
 }
