@@ -247,8 +247,8 @@ class AssistantController extends Controller
 		[
 			// 'name'  => 'required|unique:App\Models\Assistant' // OJO descomentar
 			'prompt'  => 'required', 
-			'seed'  => 'required', 
-			'image_seed' => 'required'
+			//'negative_prompt'  => 'required', 
+			//'image_seed' => 'required'
 		]);
 
 		if($validator->fails()){
