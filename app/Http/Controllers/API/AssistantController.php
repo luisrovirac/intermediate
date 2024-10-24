@@ -245,7 +245,10 @@ class AssistantController extends Controller
 
 		$validator = Validator::make($request->all(),
 		[
-			'name'  => 'required|unique:App\Models\Assistant'
+			// 'name'  => 'required|unique:App\Models\Assistant' // OJO descomentar
+			'prompt'  => 'required', 
+			'seed'  => 'required', 
+			'image_seed' => 'required'
 		]);
 
 		if($validator->fails()){
@@ -256,7 +259,7 @@ class AssistantController extends Controller
 			return response()->json($data['message'], $data['status']);				
 		}
 		
-        $response = Http::get('https://jsonplaceholder.typicode.com/posts');
+        $response = Http::post('https://57c8-80-102-129-53.ngrok-free.app/v1/generation/text-to-image');
         return $response->json();		
 		//return true;
 
