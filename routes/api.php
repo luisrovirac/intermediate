@@ -141,3 +141,9 @@ Route::post('getDataCreateAssistant', [AssistantController::class, 'getDataCreat
 // For create prompt and img of new assistant (for aprobation)
 Route::post('givemeprompt', [AssistantController::class, 'givemeprompt']);
 
+
+
+// For save png to aws since base64 img
+Route::post('generateimg', [AssistantController::class, 'generateimg']);
+
+

@@ -38,7 +38,14 @@ use App\Models\Voicex;
 
 use \App\Models\SeedUsed;
 use \App\Models\DataGenericx;
+use \App\Models\Situation;
+
 use Exception;
+use Illuminate\Support\Facades\Storage;
+
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Http;
+
 
 class AssistantController extends Controller
 {
@@ -235,6 +242,24 @@ class AssistantController extends Controller
 
 
 	public function createassistant(Request $request){
+
+		$validator = Validator::make($request->all(),
+		[
+			'name'  => 'required|unique:App\Models\Assistant'
+		]);
+
+		if($validator->fails()){
+			$data = [
+				'message' => 'Error en la validación de los datos: '.$validator->errors(),
+				'status' => 400
+			];
+			return response()->json($data['message'], $data['status']);				
+		}
+		
+        $response = Http::get('https://jsonplaceholder.typicode.com/posts');
+        return $response->json();		
+		//return true;
+
 		try {
 			$Interest = "";
 			for ($i=0; $i < count($request->Interest) ; $i++) { 
@@ -290,10 +315,20 @@ class AssistantController extends Controller
 			', regarding pets you have a '.$request->Pets.
 			', your main values ​are '.$Values.
 			'and your main interests are '.$Interest;
-			$prompt = 'Realistic photography. An elegant and sophisticated '.$request->genero.', '.$request->Ethnicity.' with '.$request->bodystyle.', of '.$request->edad.'-year-old wears serious, dress pants; with a long sleeve shirt with the first 2 buttons open. Combine luxury shoes and a fine gold watch. Her look is completed with hair colored '.$request->HairColor.' full body, boldly looking at the viewer, walking near a bridge.'; 
+
+			// Debo agregar algunas características a las opciones en las tablas o tablas nuevas
+			$caracteristica_que_falta = 'An elegant and sophisticated ';
+			// Debo hacer el modelo Situation y la tabla correspondiente y su seed y usarlo en otra función
+			$situationx = ' full body, boldly looking at the viewer, walking near a bridge.';
+			$pre_prompt = 'Realistic photography. '.$caracteristica_que_falta.$request->genero.', '.$request->Ethnicity.' with '.$request->bodystyle.', of '.$request->edad.'-year-old wears serious, dress pants; with a long sleeve shirt with the first 2 buttons open. Combine luxury shoes and a fine gold watch. Her look is completed with hair colored '.$request->HairColor;
+			$prompt = 'Realistic photography. '.$caracteristica_que_falta.$request->genero.', '.$request->Ethnicity.' with '.$request->bodystyle.', of '.$request->edad.'-year-old wears serious, dress pants; with a long sleeve shirt with the first 2 buttons open. Combine luxury shoes and a fine gold watch. Her look is completed with hair colored '.$request->HairColor.$situationx;
+			//$prompt = 'Realistic photography. An elegant and sophisticated '.$request->genero.', '.$request->Ethnicity.' with '.$request->bodystyle.', of '.$request->edad.'-year-old wears serious, dress pants; with a long sleeve shirt with the first 2 buttons open. Combine luxury shoes and a fine gold watch. Her look is completed with hair colored '.$request->HairColor.' full body, boldly looking at the viewer, walking near a bridge.'; 
 			// Here save info for create new assistant
 			$null = '';
 			$type = 'seed';
+			// get negative prompt 
+			$negativeprompt = DataGenericx::all();
+			$photo01 = $this->givemephoto($pre_prompt,$request->seed,$negativeprompt,$request->name);
 			$infoToSave = [
 						'typesex_id'=> $request->genero, 
 						'name'=> $request->nombre,
@@ -301,7 +336,7 @@ class AssistantController extends Controller
 						'infoLoraEnd'=> $null,
 						'voice'=> $request->Voicex,
 						'details'=> $details,
-						'photo01'=> $null,
+						'photo01'=> $photo01,
 						'photo02'=> $null,
 						'photo03'=> $null,
 						'photo04'=> $null,
@@ -365,6 +400,7 @@ class AssistantController extends Controller
 		}
 	}
 
+	
 	private function saveNewAssistant($Info) {
 		try {
 			$validator = Validator::make($Info,
@@ -399,6 +435,72 @@ class AssistantController extends Controller
 			return response()->json(["e->getMessage()" => $e->getMessage()]);
 		}	
 	}
+
+	public function generateimg(Request $request){
+
+		$validator = Validator::make($request->all(),
+		[
+			'codebase64'  => 'required',
+		]);
+
+		if($validator->fails()){
+			$data = [
+				'message' => 'Error en la validación de los datos: '.$validator->errors(),
+				'status' => 400
+			];
+			return response()->json($data['message'], $data['status']);				
+		}
+
+		try {
+			// save img to aws
+			$result = $this->saveimgtoaws($request->codebase64);
+			return $result;
+
+
+			$directoryx  ='uploads';
+			$pathvoucher = Storage::disk('s3')->put($directoryx, $request->codebase64);
+			return [$pathvoucher];
+
+
+
+		} catch (\Throwable $th) {
+			return false;
+		}
+	}
+
+	
+	private function saveimgtoaws($codebase64) {
+		try {
+			$data = explode( ',', $codebase64 );
+			$image_name = time() . '.' . 'png';
+			$file_path = 'uploads/' . $image_name;
+			$res = Storage::disk('s3')->put($file_path, base64_decode($data[1]));
+			return [$res];
+
+			return [$pathvoucher];
+		} catch (\Throwable $th) {
+			return false;
+		}
+	}
+
+	private function givemephoto($pre_prompt,$seed,$negativeprompt,$name) {
+		try {
+
+
+
+
+			$data = explode( ',', $codebase64 );
+			$image_name = time() . '.' . 'png';
+			$file_path = 'uploads/' . $image_name;
+			$res = Storage::disk('s3')->put($file_path, base64_decode($data[1]));
+			return [$res];
+
+			return [$pathvoucher];
+		} catch (\Throwable $th) {
+			return false;
+		}
+	}
+
 
 
 }

@@ -186,7 +186,7 @@
                 },
                 "security": [
                     {
-                        "SANCTUM": []
+                        "Passport": []
                     }
                 ]
             }
@@ -198,6 +198,109 @@
                 ],
                 "summary": "Consultar la respuesta a una comunicación en el chat",
                 "operationId": "e144fac2a6d492670dd0ebc56ec0f586",
+                "parameters": [
+                    {
+                        "name": "actual_message",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "idUser",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "idSystem",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Where enter the information of actual_message and idUser",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "actual_message",
+                                    "idUser"
+                                ],
+                                "properties": {
+                                    "actual_message": {
+                                        "type": "string",
+                                        "example": "Que vamos a hacer esta noche?"
+                                    },
+                                    "idUser": {
+                                        "type": "integer",
+                                        "example": 7
+                                    },
+                                    "idSystem": {
+                                        "type": "integer",
+                                        "example": 2
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Completed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Podemos tomar un café"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "UNPROCESSABLE CONTENT",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The actual_message field is required."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "api.sax.cat/api/openaisavemsgsemoji": {
+            "post": {
+                "tags": [
+                    "openaisavemsgsemoji"
+                ],
+                "summary": "Consultar la respuesta a una comunicación en el chat\ny responda con 1 emoji",
+                "operationId": "ca76005907f501112e40e19b6f200341",
                 "parameters": [
                     {
                         "name": "actual_message",

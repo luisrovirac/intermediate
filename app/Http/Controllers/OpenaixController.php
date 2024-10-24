@@ -408,57 +408,6 @@ class OpenaixController extends Controller
 	}
 
 
-	/**
-     * Consultar la respuesta a una comunicación en el chat
-     * @OA\Post (
-     *     path="api.sax.cat/api/openaisavemsgs2",
-     *     tags={"openaisavemsgs2"},
-     *     security={ {"bearer": {} }},
-     *     @OA\Parameter(
-     *         in="path",
-     *         name="actual_message",
-     *         required=true,
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         in="path",
-     *         name="idUser",
-     *         required=true,
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Parameter(
-     *         in="path",
-     *         name="idSystem",
-     *         required=true,
-     *         @OA\Schema(type="integer")
-     *     ),
-     * @OA\RequestBody(
-     *    required=true,
-     *    description="Where enter the information of actual_message and idUser",
-     *    @OA\JsonContent(
-     *       required={"actual_message","idUser"},
-     *       @OA\Property(property="actual_message", type="string", example="Que vamos a hacer esta noche?"),
-     *       @OA\Property(property="idUser", type="integer", example=7),
-     *       @OA\Property(property="idSystem", type="integer", example=2),
-     *    ),
-     * ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Completed",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="Podemos tomar un café"),
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="UNPROCESSABLE CONTENT",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="The actual_message field is required."),
-     *          )
-     *      )
-     * )
-     */
-
 	 public function msgproactive(Request $request){
 		try {
 

@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             //$table->unsignedinteger('typesexes_id')->nullable();
 			$table->bigInteger('typesex_id')->unsigned();  // sex type
-			$table->string('name');
+			$table->string('name')->unique();
 			$table->string('infoLoraIni')->nullable();  // Para generar imagen si es tipo lora
 			$table->string('infoLoraEnd')->nullable();  // Para generar imagen si es tipo lora
 			$table->string('voice');     // Que voz usar
 			$table->longtext('details');  // Detalles que definen al asistente
-			$table->string('photo01')->nullable();
+			$table->string('photo01')->nullable();  // una de las fotos a mostrar
 			$table->string('photo02')->nullable();
 			$table->string('photo03')->nullable();
 			$table->string('photo04')->nullable();

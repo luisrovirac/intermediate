@@ -50,37 +50,6 @@ class RegisterController extends Controller
      * )
      */
 
-	public function OLDregister(Request $request): JsonResponse
-	{
-        $message = 'Hubo un problema en el proceso del Registro';
-		try {
-			$validator = Validator::make($request->all(), 
-			[
-				'name' => 'required|name|unique:users',
-				'email' => 'required|email|unique:users',
-				'password' => 'required|min:6',
-				'c_password' => 'required|same:password' // alt 124 |
-			]);
-		
-			/*
-			if($validator->fails()) {
-				return $this->sendError('Validation Error.', $validator->errors(),400);
-			}
-			*/
-
-			//return $this->sendResponse($validator, 'line 71 ... pasan o no la validacion de los campos...no lo se ...',200);
-
-			$input = $request->all();
-			$input['password'] = bcrypt($input['password']);
-			$user = User::create($input);
-			$success['token'] = $user->createToken('MyApp')->accessToken;
-		
-			return $this->sendResponse($success, 'User register succesfully');
-			} catch (\Throwable $th) {
-				return $this->sendError($message, $th, 500);
-			}
-	}
-
 	public function register(Request $request)
 	{
         //$message = 'Flecha - Hubo un problema en el proceso del Registro';
@@ -202,7 +171,7 @@ class RegisterController extends Controller
      *   summary="Cerrar session un usuario",
      *   description="Cerrar session con un usuario ya existente en la base de datos",
      *   operationId="logout",
-     *   security={ * {"SANCTUM": {}}, * },
+     *   security={ * {"Passport": {}}, * },
      *   @OA\Response(response=200, description="Logout satisfactorio"),
      *   @OA\Response(response=401, description="Usuario no auntenticado"),
      *   @OA\Response(response=500, description="Hubo un problema en el proceso del Logout")
@@ -230,6 +199,7 @@ class RegisterController extends Controller
         }
     }    
 
+	
 	public function listuser(){
 		try {
 			$result = User::all();

@@ -11,10 +11,6 @@ use OpenAI\Laravel\Facades\OpenAI;
 use Exception;
 
 
-/**
- * @OA\Info(title="API for projects", version="0.1")
- */
-
 class VisionController extends Controller
 {
 	
