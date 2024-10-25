@@ -259,7 +259,18 @@ class AssistantController extends Controller
 			return response()->json($data['message'], $data['status']);				
 		}
 		
-        $response = Http::post('https://0af2-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$request);
+        //$response = Http::post('https://0af2-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$request);
+        $response = Http::post('https://red-hoops-show.loca.lt/v1/generation/text-to-image',$request);
+		$base64 = $response[0]->base64; 
+		$seed = $response[0]->seed; 
+		return [ "base64" => $base64, "seed" => $seed];
+		/*
+				"url": "http://127.0.0.1:8888/files/2024-10-25/182c56af-3d86-498a-8b31-034bbe9938ea-0.png",
+				"seed": "8264848662383522980",
+				"finish_reason": "SUCCESS"
+			}
+		];
+		*/
         return $response;
 
 		try {
