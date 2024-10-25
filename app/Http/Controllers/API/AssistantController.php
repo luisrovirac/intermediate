@@ -259,7 +259,7 @@ class AssistantController extends Controller
 			return response()->json($data['message'], $data['status']);				
 		}
 		
-        $response = Http::post('https://8ec3-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$request);
+        $response = Http::post('https://0af2-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$request);
         return $response;
 
 		try {
