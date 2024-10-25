@@ -260,7 +260,7 @@ class AssistantController extends Controller
 		}
 		
         //$response = Http::post('https://0af2-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$request);
-        $response = Http::timeout(90)->post('https://famous-walls-rush.loca.lt/v1/generation/text-to-image',$request);
+        $response = Http::timeout(190)->post('https://dark-dingos-ring.loca.lt/v1/generation/text-to-image',$request);
 		$base64 = $response[0]->base64; 
 		$seed = $response[0]->seed; 
 		return [ "base64" => $base64, "seed" => $seed];
