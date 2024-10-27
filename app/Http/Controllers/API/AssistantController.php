@@ -243,6 +243,43 @@ class AssistantController extends Controller
 
 	public function createassistant(Request $request){
 
+// ini test text to image 
+
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+	CURLOPT_URL => "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
+	CURLOPT_RETURNTRANSFER => true,
+	CURLOPT_ENCODING => "",
+	CURLOPT_MAXREDIRS => 10,
+	CURLOPT_TIMEOUT => 30,
+	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+	CURLOPT_CUSTOMREQUEST => "POST",
+	CURLOPT_POSTFIELDS => json_encode([
+		'inputs' => 'Find serenity in the tranquil elegance of a solitary sailboat drifting on a glassy lake at sunset'
+	]),
+	CURLOPT_HTTPHEADER => [
+		"Content-Type: application/json",
+		"x-rapidapi-host: ai-text-to-image-generator-api.p.rapidapi.com",
+		"x-rapidapi-key: 71d88871cfmsh14638d70aaed49ap174d7ejsnd8bb269a5383"
+	],
+]);
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+	return "cURL Error #:" . $err;
+} else {
+	return $response;
+}
+
+// fin to test of text to image
+
+
+
 		$validator = Validator::make($request->all(),
 		[
 			// 'name'  => 'required|unique:App\Models\Assistant' // OJO descomentar
