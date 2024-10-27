@@ -256,7 +256,7 @@ curl_setopt_array($curl, [
 	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 	CURLOPT_CUSTOMREQUEST => "POST",
 	CURLOPT_POSTFIELDS => json_encode([
-		'inputs' => 'Find serenity in the tranquil elegance of a solitary sailboat drifting on a glassy lake at sunset'
+		'inputs' => 'Photo ultra realistic of woman nice'
 	]),
 	CURLOPT_HTTPHEADER => [
 		"Content-Type: application/json",
