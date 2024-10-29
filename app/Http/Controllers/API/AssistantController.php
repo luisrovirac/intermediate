@@ -534,6 +534,8 @@ class AssistantController extends Controller
 				"seed" => $request->image_seed,
 				"require_base64" => true
 			];
+			return $jsondata;
+			
 	        $response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
 
 			$codebase64 = $response[0]["base64"];
