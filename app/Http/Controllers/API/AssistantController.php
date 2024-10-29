@@ -536,7 +536,7 @@ class AssistantController extends Controller
 			];
 	        $response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
 			$codebase64 = $response[0]["base64"];
-			$data = explode( ',', $codebase64 );
+			//$data = explode( ',', $codebase64 );
 
 			// Debo hacer los nombres de las fotos con numeros simples sin 0 antes OJO
 			//$file_path = 'uploads/'.$request->name.$request->num_photo.'.png';
