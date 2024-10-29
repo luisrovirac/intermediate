@@ -526,8 +526,8 @@ class AssistantController extends Controller
 		        $response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
 				//return $response;
 
-				$codebase64 = $response[0];
-				//$codebase64 = $response[0]["seed"];
+				//$codebase64 = $response[0];
+				$codebase64 = $response[0]["seed"];
 				return $codebase64;
 
 				$data = explode( ',', $codebase64 );
