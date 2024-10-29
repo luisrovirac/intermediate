@@ -245,9 +245,12 @@ class AssistantController extends Controller
 		$validator = Validator::make($request->all(),
 		[
 			'name'  => 'required|unique:App\Models\Assistant', // OJO descomentar
+			/*
+			// Aqui van todos los campos ... para validarlos
 			'prompt'  => 'required', 
 			'negative_prompt'  => 'required', 
 			'image_seed' => 'required'
+			*/
 		]);
 
 		if($validator->fails()){
