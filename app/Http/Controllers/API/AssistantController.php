@@ -471,7 +471,7 @@ class AssistantController extends Controller
 
 		try {
 			// save img to aws
-			$result = $this->saveimgtoaws($request->codebase64);
+			$result = $this->saveimgtoaws($request->codebase64, "MariaIribarme");
 			return $result;
 
 
@@ -487,10 +487,10 @@ class AssistantController extends Controller
 	}
 
 	
-	private function saveimgtoaws($codebase64) {
+	private function saveimgtoaws($codebase64, $image_name) {
 		try {
 			$data = explode( ',', $codebase64 );
-			$image_name = time() . '.' . 'png';
+			//$image_name = time() . '.' . 'png';
 			$file_path = 'uploads/' . $image_name;
 			$res = Storage::disk('s3')->put($file_path, base64_decode($data[1]));
 			return $res;
@@ -539,11 +539,14 @@ class AssistantController extends Controller
 			$data = explode( ',', $codebase64 );
 
 			// Debo hacer los nombres de las fotos con numeros simples sin 0 antes OJO
-			$file_path = 'uploads/'.$request->name.$request->num_photo.'.png';
+			//$file_path = 'uploads/'.$request->name.$request->num_photo.'.png';
 
-			$res = Storage::disk('s3')->put($file_path, base64_decode($data[1]));
+			$image_name=$request->name.$request->num_photo;
+			$res = $this->saveimgtoaws($codebase64, $image_name);
+
+			//$res = Storage::disk('s3')->put($file_path, base64_decode($data[1]));
 			if($res){
-				return $file_path;
+				return true;
 			}
 			else{
 				return false;				
