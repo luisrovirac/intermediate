@@ -503,8 +503,6 @@ class AssistantController extends Controller
 	
 	//private function testgivemephoto($pre_prompt,$seed,$negativeprompt,$name) {
 	public function testgivemephoto(Request $request) {
-		return ["En testgivemephoto"];
-		
 		try {
 			// Read info in env 
 			$URL_FOR_IMG = env('URL_FOR_IMG');
@@ -523,8 +521,8 @@ class AssistantController extends Controller
 				//$response = Http::timeout(190)->post('https://famous-singers-juggle.loca.lt/v1/generation/text-to-image',$request);
 				//$response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
 
-		        //$response = Http::timeout($TIMEOUT_FOR_IMG)->post('https://8e36-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$jsondata);
-		        $response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
+		        $response = Http::timeout($TIMEOUT_FOR_IMG)->post('https://8e36-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$jsondata);
+		        //$response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
 				return $response;
 
 				$codebase64 = $response[0]->base64;
