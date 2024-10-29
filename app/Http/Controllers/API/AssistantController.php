@@ -524,7 +524,7 @@ class AssistantController extends Controller
 		        //$response = Http::timeout($TIMEOUT_FOR_IMG)->post('https://8e36-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$jsondata);
 		        //$response = Http::post('https://8e36-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$jsondata);
 		        $response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
-				return $response;
+				//return $response;
 
 				$codebase64 = $response[0]->base64;
 				return $codebase64;
