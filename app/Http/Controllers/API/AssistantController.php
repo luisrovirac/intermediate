@@ -506,7 +506,8 @@ class AssistantController extends Controller
 			'name'  => 'required', 
 			'prompt'  => 'required', 
 			'negative_prompt'  => 'required', 
-			'image_seed' => 'required'
+			'image_seed' => 'required',
+			'num_photo' =>  'required'
 		]);
 
 		if($validator->fails()){
@@ -524,24 +525,30 @@ class AssistantController extends Controller
 			$COMPLEMENT_URL_FOR_IMG = env('COMPLEMENT_URL_FOR_IMG');
 			$TIMEOUT_FOR_IMG = env('TIMEOUT_FOR_IMG');
 			$NUMBER_PHOTOS = env('NUMBER_PHOTOS');
-			$situationsreceive = $this->givemesituations($NUMBER_PHOTOS);
-			$file_path = array();
-			for ($i=0; $i < $NUMBER_PHOTOS; $i++) { 
-				$jsondata = [
-					"prompt" => $request->prompt.$situationsreceive[$i],
-					"negative_prompt" => $request->negative_prompt,
-					"seed" => $request->image_seed,
-					"require_base64" => true
-				];
-		        $response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
+			// debo prevenir que me de una situación que no se repita OJO
+			$cuantas = 1;
+			$situationsreceive = $this->givemesituations($cuantas);
+			$jsondata = [
+				"prompt" => $request->prompt.$situationsreceive[0],
+				"negative_prompt" => $request->negative_prompt,
+				"seed" => $request->image_seed,
+				"require_base64" => true
+			];
+	        $response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
 
-				$codebase64 = $response[0]["base64"];
+			$codebase64 = $response[0]["base64"];
 
-				$data = explode( ',', $codebase64 );
-				$file_path[$i]= 'uploads/'.$request->name.'0'.($i+1).'.png';
-				$res = Storage::disk('s3')->put($file_path[$i], base64_decode($data[1]));
+			$data = explode( ',', $codebase64 );
+			// Debo hacer los nombres de las fotos con numeros simples sin 0 antes OJO
+			$number_photo = $request->number_photo;
+			$file_path = 'uploads/'.$request->name.$number_photo.'.png';
+			$res = Storage::disk('s3')->put($file_path, base64_decode($data[1]));
+			if($res){
+				return $file_path;
 			}
-			return $file_path;
+			else{
+				return false;				
+			}
 		} catch (\Throwable $th) {
 			return ["Error ".$th];
 		}
