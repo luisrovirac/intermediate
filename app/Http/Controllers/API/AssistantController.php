@@ -500,7 +500,7 @@ class AssistantController extends Controller
 		}
 	}
 
-	
+/*	
 	//private function testgivemephoto($pre_prompt,$seed,$negativeprompt,$name) {
 	public function testgivemephoto(Request $request) {
 		try {
@@ -539,7 +539,7 @@ class AssistantController extends Controller
 			return ["Error ".$th];
 		}
 	}
-
+*/
 
 	private function givemephoto($pre_prompt,$seed,$negativeprompt,$name) {
 		try {
@@ -559,9 +559,11 @@ class AssistantController extends Controller
 				];
 				//$response = Http::timeout(190)->post('https://famous-singers-juggle.loca.lt/v1/generation/text-to-image',$request);
 				//$response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
-		        $response = Http::post('https://8e36-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$jsondata);
+		        //$response = Http::post('https://8e36-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$jsondata);
+		        $response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
 
-				$codebase64 = $response[0]->base64;
+				$codebase64 = $response[0]['base64'];
+
 				$data = explode( ',', $codebase64 );
 				$file_path[$i]= 'uploads/' . $name . '0'.($i+1). '.' . 'png';
 				$res = Storage::disk('s3')->put($file_path[$i], base64_decode($data[1]));
