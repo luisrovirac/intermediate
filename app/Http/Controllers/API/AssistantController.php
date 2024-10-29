@@ -519,7 +519,7 @@ class AssistantController extends Controller
 				];
 				//$response = Http::timeout(190)->post('https://famous-singers-juggle.loca.lt/v1/generation/text-to-image',$request);
 				//$response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
-		        $response = Http::post('https://8e36-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$jsondata);
+		        $response = Http::timeout($TIMEOUT_FOR_IMG)->post('https://8e36-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$jsondata);
 				$codebase64 = $response[0]->base64;
 				return $codebase64;
 
