@@ -511,8 +511,6 @@ class AssistantController extends Controller
 			$TIMEOUT_FOR_IMG = env('TIMEOUT_FOR_IMG');
 			$NUMBER_PHOTOS = env('NUMBER_PHOTOS');
 			$situationsreceive = $this->givemesituations($NUMBER_PHOTOS);
-			return $situationsreceive;
-
 			$file_path = array();
 			//for ($i=0; $i < $NUMBER_PHOTOS; $i++) { 
 				$jsondata = [
