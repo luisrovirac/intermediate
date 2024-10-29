@@ -540,8 +540,7 @@ class AssistantController extends Controller
 
 			$data = explode( ',', $codebase64 );
 			// Debo hacer los nombres de las fotos con numeros simples sin 0 antes OJO
-			$number_photo = $request->number_photo;
-			$file_path = 'uploads/'.$request->name.$number_photo.'.png';
+			$file_path = 'uploads/'.$request->name.$request->number_photo.'.png';
 			$res = Storage::disk('s3')->put($file_path, base64_decode($data[1]));
 			if($res){
 				return $file_path;
