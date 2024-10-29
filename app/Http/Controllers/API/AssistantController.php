@@ -503,7 +503,7 @@ class AssistantController extends Controller
 	public function createphotos(Request $request) {
 		$validator = Validator::make($request->all(),
 		[
-			'name'  => 'required|unique:App\Models\Assistant', 
+			'name'  => 'required', 
 			'prompt'  => 'required', 
 			'negative_prompt'  => 'required', 
 			'image_seed' => 'required'
