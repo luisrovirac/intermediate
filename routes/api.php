@@ -147,7 +147,7 @@ Route::post('givemeprompt', [AssistantController::class, 'givemeprompt']);
 Route::post('generateimg', [AssistantController::class, 'generateimg']);
 
 
-// For save png to aws since base64 img
-Route::post('testgivemephoto', [AssistantController::class, 'testgivemephoto']);
+// For create png by ai and to save at aws since base64 img recive (5 photos)
+Route::post('createphotos', [AssistantController::class, 'createphotos']);
 
 

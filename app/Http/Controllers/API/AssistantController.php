@@ -338,28 +338,25 @@ class AssistantController extends Controller
 			// Debo agregar algunas características a las opciones en las tablas o tablas nuevas
 			$caracteristica_que_falta = 'An elegant and sophisticated ';
 			// Debo hacer el modelo Situation y la tabla correspondiente y su seed y usarlo en otra función
-			$situationx = ' full body, boldly looking at the viewer, walking near a bridge.';
+			//$situationx = ' full body, boldly looking at the viewer, walking near a bridge.';
 			$pre_prompt = 'Realistic photography. '.$caracteristica_que_falta.$request->genero.', '.$request->Ethnicity.' with '.$request->bodystyle.', of '.$request->edad.'-year-old wears serious, dress pants; with a long sleeve shirt with the first 2 buttons open. Combine luxury shoes and a fine gold watch. Her look is completed with hair colored '.$request->HairColor;
-			$prompt = 'Realistic photography. '.$caracteristica_que_falta.$request->genero.', '.$request->Ethnicity.' with '.$request->bodystyle.', of '.$request->edad.'-year-old wears serious, dress pants; with a long sleeve shirt with the first 2 buttons open. Combine luxury shoes and a fine gold watch. Her look is completed with hair colored '.$request->HairColor.$situationx;
+			$prompt = 'Realistic photography. '.$caracteristica_que_falta.$request->genero.', '.$request->Ethnicity.' with '.$request->bodystyle.', of '.$request->edad.'-year-old wears serious, dress pants; with a long sleeve shirt with the first 2 buttons open. Combine luxury shoes and a fine gold watch. Her look is completed with hair colored '.$request->HairColor;
 			//$prompt = 'Realistic photography. An elegant and sophisticated '.$request->genero.', '.$request->Ethnicity.' with '.$request->bodystyle.', of '.$request->edad.'-year-old wears serious, dress pants; with a long sleeve shirt with the first 2 buttons open. Combine luxury shoes and a fine gold watch. Her look is completed with hair colored '.$request->HairColor.' full body, boldly looking at the viewer, walking near a bridge.'; 
 			// Here save info for create new assistant
 			$null = '';
 			$type = 'seed';
-			// get negative prompt 
-			$negativeprompt = DataGenericx::all();
-			$photos = $this->givemephoto($pre_prompt,$request->seed,$negativeprompt,$request->name);
 			$infoToSave = [
 						'typesex_id'=> $request->genero, 
-						'name'=> $request->nombre,
+						'name'=> $request->name,
 						'infoLoraIni'=> $null,
 						'infoLoraEnd'=> $null,
 						'voice'=> $request->Voicex,
 						'details'=> $details,
-						'photo01'=> $photos[0],
-						'photo02'=> $photos[1],
-						'photo03'=> $photos[2],
-						'photo04'=> $photos[3],
-						'photo05'=> $photos[4],
+						'photo01'=> $null,
+						'photo02'=> $null,
+						'photo03'=> $null,
+						'photo04'=> $null,
+						'photo05'=> $null,
 						'seed'=> $request->seed,
 						'typeSeed_o_Lora'=> $type,
 						'prompt'=> $prompt,
@@ -368,7 +365,6 @@ class AssistantController extends Controller
 
 			$result=$this->saveNewAssistant($infoToSave);
 			return $result;
-			//return response()->json($details);
 		} catch (\Throwable $th) {
 			echo "Error ";
 			echo $th;
@@ -500,10 +496,26 @@ class AssistantController extends Controller
 		}
 	}
 
-/*	
-	//private function testgivemephoto($pre_prompt,$seed,$negativeprompt,$name) {
-	public function testgivemephoto(Request $request) {
+	
+	public function createphotos(Request $request) {
+		$validator = Validator::make($request->all(),
+		[
+			'name'  => 'required|unique:App\Models\Assistant', 
+			'prompt'  => 'required', 
+			'negative_prompt'  => 'required', 
+			'image_seed' => 'required'
+		]);
+
+		if($validator->fails()){
+			$data = [
+				'message' => 'Error en la validación de los datos: '.$validator->errors(),
+				'status' => 400
+			];
+			return response()->json($data['message'], $data['status']);				
+		}
+
 		try {
+
 			// Read info in env 
 			$URL_FOR_IMG = env('URL_FOR_IMG');
 			$COMPLEMENT_URL_FOR_IMG = env('COMPLEMENT_URL_FOR_IMG');
@@ -511,37 +523,29 @@ class AssistantController extends Controller
 			$NUMBER_PHOTOS = env('NUMBER_PHOTOS');
 			$situationsreceive = $this->givemesituations($NUMBER_PHOTOS);
 			$file_path = array();
-			//for ($i=0; $i < $NUMBER_PHOTOS; $i++) { 
+			for ($i=0; $i < $NUMBER_PHOTOS; $i++) { 
 				$jsondata = [
-					"prompt" => $request->pre_prompt.$situationsreceive[0],
+					"prompt" => $request->prompt.$situationsreceive[$i],
 					"negative_prompt" => $request->negative_prompt,
-					"seed" => $request->seed,
+					"seed" => $request->image_seed,
 					"require_base64" => true
 				];
-				//$response = Http::timeout(190)->post('https://famous-singers-juggle.loca.lt/v1/generation/text-to-image',$request);
-				//$response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
-				//return [$NUMBER_PHOTOS,$TIMEOUT_FOR_IMG,$URL_FOR_IMG,$COMPLEMENT_URL_FOR_IMG];
-		        //$response = Http::timeout($TIMEOUT_FOR_IMG)->post('https://8e36-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$jsondata);
-		        //$response = Http::post('https://8e36-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$jsondata);
 		        $response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
-				//return $response;
 
-				//$codebase64 = $response[0];
-				$codebase64 = $response[0]["seed"];
-				return $codebase64;
+				$codebase64 = $response[0]["base64"];
 
 				$data = explode( ',', $codebase64 );
-				$file_path[$i]= 'uploads/' . $name . '0'.($i+1). '.' . 'png';
+				$file_path[$i]= 'uploads/'.$request->name.'0'.($i+1).'.png';
 				$res = Storage::disk('s3')->put($file_path[$i], base64_decode($data[1]));
-			//}
+			}
 			return $file_path;
 		} catch (\Throwable $th) {
 			return ["Error ".$th];
 		}
 	}
-*/
 
-	private function givemephoto($pre_prompt,$seed,$negativeprompt,$name) {
+
+	public function givemephoto($pre_prompt,$seed,$negativeprompt,$name) {
 		try {
 			// Read info in env 
 			$URL_FOR_IMG = env('URL_FOR_IMG');
