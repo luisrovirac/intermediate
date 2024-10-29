@@ -503,7 +503,8 @@ class AssistantController extends Controller
 	
 	//private function testgivemephoto($pre_prompt,$seed,$negativeprompt,$name) {
 	public function testgivemephoto(Request $request) {
-
+		return ["En testgivemephoto"];
+		
 		try {
 			// Read info in env 
 			$URL_FOR_IMG = env('URL_FOR_IMG');
