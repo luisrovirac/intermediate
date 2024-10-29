@@ -501,7 +501,9 @@ class AssistantController extends Controller
 	}
 
 	
-	private function testgivemephoto($pre_prompt,$seed,$negativeprompt,$name) {
+	//private function testgivemephoto($pre_prompt,$seed,$negativeprompt,$name) {
+	public function testgivemephoto(Request $request) {
+
 		try {
 			// Read info in env 
 			$URL_FOR_IMG = env('URL_FOR_IMG');
@@ -509,17 +511,23 @@ class AssistantController extends Controller
 			$TIMEOUT_FOR_IMG = env('TIMEOUT_FOR_IMG');
 			$NUMBER_PHOTOS = env('NUMBER_PHOTOS');
 			$situationsreceive = $this->givemesituations($NUMBER_PHOTOS);
+			return $situationsreceive;
+
 			$file_path = array();
 			//for ($i=0; $i < $NUMBER_PHOTOS; $i++) { 
 				$jsondata = [
-					"prompt" => $pre_prompt.$situationsreceive[0],
-					"negative_prompt" => $negativeprompt,
-					"seed" => $seed,
+					"prompt" => $request->pre_prompt.$situationsreceive[0],
+					"negative_prompt" => $request->negativeprompt,
+					"seed" => $request->seed,
 					"require_base64" => true
 				];
 				//$response = Http::timeout(190)->post('https://famous-singers-juggle.loca.lt/v1/generation/text-to-image',$request);
 				//$response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
-		        $response = Http::timeout($TIMEOUT_FOR_IMG)->post('https://8e36-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$jsondata);
+
+		        //$response = Http::timeout($TIMEOUT_FOR_IMG)->post('https://8e36-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$jsondata);
+		        $response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
+				return $response;
+
 				$codebase64 = $response[0]->base64;
 				return $codebase64;
 
@@ -529,7 +537,7 @@ class AssistantController extends Controller
 			//}
 			return $file_path;
 		} catch (\Throwable $th) {
-			return false;
+			return ["Error ".$th];
 		}
 	}
 
