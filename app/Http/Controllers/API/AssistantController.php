@@ -514,7 +514,7 @@ class AssistantController extends Controller
 			//for ($i=0; $i < $NUMBER_PHOTOS; $i++) { 
 				$jsondata = [
 					"prompt" => $request->pre_prompt.$situationsreceive[0],
-					"negative_prompt" => $request->negativeprompt,
+					"negative_prompt" => $request->negative_prompt,
 					"seed" => $request->seed,
 					"require_base64" => true
 				];
