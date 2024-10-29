@@ -500,6 +500,40 @@ class AssistantController extends Controller
 		}
 	}
 
+	
+	private function testgivemephoto($pre_prompt,$seed,$negativeprompt,$name) {
+		try {
+			// Read info in env 
+			$URL_FOR_IMG = env('URL_FOR_IMG');
+			$COMPLEMENT_URL_FOR_IMG = env('COMPLEMENT_URL_FOR_IMG');
+			$TIMEOUT_FOR_IMG = env('TIMEOUT_FOR_IMG');
+			$NUMBER_PHOTOS = env('NUMBER_PHOTOS');
+			$situationsreceive = $this->givemesituations($NUMBER_PHOTOS);
+			$file_path = array();
+			//for ($i=0; $i < $NUMBER_PHOTOS; $i++) { 
+				$jsondata = [
+					"prompt" => $pre_prompt.$situationsreceive[0],
+					"negative_prompt" => $negativeprompt,
+					"seed" => $seed,
+					"require_base64" => true
+				];
+				//$response = Http::timeout(190)->post('https://famous-singers-juggle.loca.lt/v1/generation/text-to-image',$request);
+				//$response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
+		        $response = Http::post('https://8e36-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$jsondata);
+				$codebase64 = $response[0]->base64;
+				return $codebase64;
+
+				$data = explode( ',', $codebase64 );
+				$file_path[$i]= 'uploads/' . $name . '0'.($i+1). '.' . 'png';
+				$res = Storage::disk('s3')->put($file_path[$i], base64_decode($data[1]));
+			//}
+			return $file_path;
+		} catch (\Throwable $th) {
+			return false;
+		}
+	}
+
+
 	private function givemephoto($pre_prompt,$seed,$negativeprompt,$name) {
 		try {
 			// Read info in env 
@@ -517,11 +551,13 @@ class AssistantController extends Controller
 					"require_base64" => true
 				];
 				//$response = Http::timeout(190)->post('https://famous-singers-juggle.loca.lt/v1/generation/text-to-image',$request);
-				$response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
+				//$response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
+		        $response = Http::post('https://8e36-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$jsondata);
+
 				$codebase64 = $response[0]->base64;
 				$data = explode( ',', $codebase64 );
 				$file_path[$i]= 'uploads/' . $name . '0'.($i+1). '.' . 'png';
-				$res = Storage::disk('s3')->put($file_path, base64_decode($data[1]));
+				$res = Storage::disk('s3')->put($file_path[$i], base64_decode($data[1]));
 			}
 			return $file_path;
 		} catch (\Throwable $th) {
