@@ -242,50 +242,12 @@ class AssistantController extends Controller
 
 
 	public function createassistant(Request $request){
-
-// ini test text to image 
-
-$curl = curl_init();
-
-curl_setopt_array($curl, [
-	CURLOPT_URL => "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
-	CURLOPT_RETURNTRANSFER => true,
-	CURLOPT_ENCODING => "",
-	CURLOPT_MAXREDIRS => 10,
-	CURLOPT_TIMEOUT => 300,
-	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-	CURLOPT_CUSTOMREQUEST => "POST",
-	CURLOPT_POSTFIELDS => json_encode([
-		'inputs' => 'Photo ultra realistic of woman nice'
-	]),
-	CURLOPT_HTTPHEADER => [
-		"Content-Type: application/json",
-		"x-rapidapi-host: ai-text-to-image-generator-api.p.rapidapi.com",
-		"x-rapidapi-key: 71d88871cfmsh14638d70aaed49ap174d7ejsnd8bb269a5383"
-	],
-]);
-
-$response = curl_exec($curl);
-$err = curl_error($curl);
-
-curl_close($curl);
-
-if ($err) {
-	return "cURL Error #:" . $err;
-} else {
-	return $response;
-}
-
-// fin to test of text to image
-
-
-
 		$validator = Validator::make($request->all(),
 		[
-			// 'name'  => 'required|unique:App\Models\Assistant' // OJO descomentar
-			//'prompt'  => 'required', 
-			//'negative_prompt'  => 'required', 
-			//'image_seed' => 'required'
+			'name'  => 'required|unique:App\Models\Assistant', // OJO descomentar
+			'prompt'  => 'required', 
+			'negative_prompt'  => 'required', 
+			'image_seed' => 'required'
 		]);
 
 		if($validator->fails()){
@@ -295,21 +257,27 @@ if ($err) {
 			];
 			return response()->json($data['message'], $data['status']);				
 		}
-		
+
+/*		
         //$response = Http::post('https://0af2-80-102-129-53.ngrok-free.app/v1/generation/text-to-image',$request);
         $response = Http::timeout(190)->post('https://famous-singers-juggle.loca.lt/v1/generation/text-to-image',$request);
 		return $response[0]->base64;
 		$base64 = $response[0]->base64; 
 		$seed = $response[0]->seed; 
 		return [ "base64" => $base64, "seed" => $seed];
+        return $response;
+*/
+
 		/*
+		[
+			{
+				¨base64¨: "xdcf...",		
 				"url": "http://127.0.0.1:8888/files/2024-10-25/182c56af-3d86-498a-8b31-034bbe9938ea-0.png",
 				"seed": "8264848662383522980",
 				"finish_reason": "SUCCESS"
 			}
 		];
 		*/
-        return $response;
 
 		try {
 			$Interest = "";
@@ -379,7 +347,7 @@ if ($err) {
 			$type = 'seed';
 			// get negative prompt 
 			$negativeprompt = DataGenericx::all();
-			$photo01 = $this->givemephoto($pre_prompt,$request->seed,$negativeprompt,$request->name);
+			$photos = $this->givemephoto($pre_prompt,$request->seed,$negativeprompt,$request->name);
 			$infoToSave = [
 						'typesex_id'=> $request->genero, 
 						'name'=> $request->nombre,
@@ -387,11 +355,11 @@ if ($err) {
 						'infoLoraEnd'=> $null,
 						'voice'=> $request->Voicex,
 						'details'=> $details,
-						'photo01'=> $photo01,
-						'photo02'=> $null,
-						'photo03'=> $null,
-						'photo04'=> $null,
-						'photo05'=> $null,
+						'photo01'=> $photos[0],
+						'photo02'=> $photos[1],
+						'photo03'=> $photos[2],
+						'photo04'=> $photos[3],
+						'photo05'=> $photos[4],
 						'seed'=> $request->seed,
 						'typeSeed_o_Lora'=> $type,
 						'prompt'=> $prompt,
@@ -526,9 +494,7 @@ if ($err) {
 			$image_name = time() . '.' . 'png';
 			$file_path = 'uploads/' . $image_name;
 			$res = Storage::disk('s3')->put($file_path, base64_decode($data[1]));
-			return [$res];
-
-			return [$pathvoucher];
+			return $res;
 		} catch (\Throwable $th) {
 			return false;
 		}
@@ -536,22 +502,49 @@ if ($err) {
 
 	private function givemephoto($pre_prompt,$seed,$negativeprompt,$name) {
 		try {
-
-
-
-
-			$data = explode( ',', $codebase64 );
-			$image_name = time() . '.' . 'png';
-			$file_path = 'uploads/' . $image_name;
-			$res = Storage::disk('s3')->put($file_path, base64_decode($data[1]));
-			return [$res];
-
-			return [$pathvoucher];
+			// Read info in env 
+			$URL_FOR_IMG = env('URL_FOR_IMG');
+			$COMPLEMENT_URL_FOR_IMG = env('COMPLEMENT_URL_FOR_IMG');
+			$TIMEOUT_FOR_IMG = env('TIMEOUT_FOR_IMG');
+			$NUMBER_PHOTOS = env('NUMBER_PHOTOS');
+			$situationsreceive = $this->givemesituations($NUMBER_PHOTOS);
+			$file_path = array();
+			for ($i=0; $i < $NUMBER_PHOTOS; $i++) { 
+				$jsondata = [
+					"prompt" => $pre_prompt.$situationsreceive[$i],
+					"negative_prompt" => $negativeprompt,
+					"seed" => $seed,
+					"require_base64" => true
+				];
+				//$response = Http::timeout(190)->post('https://famous-singers-juggle.loca.lt/v1/generation/text-to-image',$request);
+				$response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
+				$codebase64 = $response[0]->base64;
+				$data = explode( ',', $codebase64 );
+				$file_path[$i]= 'uploads/' . $name . '0'.($i+1). '.' . 'png';
+				$res = Storage::disk('s3')->put($file_path, base64_decode($data[1]));
+			}
+			return $file_path;
 		} catch (\Throwable $th) {
 			return false;
 		}
 	}
 
-
+	private function givemesituations($howmany) {
+		try {
+			$countSituations = Situation::count();
+			$numberSituations = array();
+			for ($i=1; $i <= $countSituations; $i++) { 
+				$numberSituations [] = $i;
+			}
+			$items = Arr::random($numberSituations, $howmany);
+			$selectedSituations = array();
+			for ($i=0; $i < $howmany; $i++) { 
+				$selectedSituations[$i] = (Situation::where('id',$items[$i])->get('situation'))[0]->situation;
+			}
+			return $selectedSituations;
+		} catch (\Throwable $th) {
+			return $th;
+		}
+	}
 
 }
