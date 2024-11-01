@@ -29,6 +29,8 @@ return new class extends Migration
 			$table->string('typeSeed_o_Lora');    // Si usa lora o seed
 			$table->longtext('prompt')->nullable();   // Para generar sus imágenes + campo seed
 			$table->string('userIdCreator')->nullable();  // Que usuario lo creó
+			$table->string('array_used_situations')->nullable();  // Array de situaciones usadas en las fotos
+			
 			$table->timestamps();
             
             $table->foreign('typesex_id')->references('id')->on('typesexes')

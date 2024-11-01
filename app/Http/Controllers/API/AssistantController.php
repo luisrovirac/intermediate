@@ -501,12 +501,16 @@ class AssistantController extends Controller
 
 	
 	public function createphotos(Request $request) {
+		// Debo recibir $request->id_assistant
+		// Debo recibir $request->num_photo (número de foto para bautizar la foto con mary1,mary2,etc)
+		// Debo validar que la foto maryx no exista o que se sobrescriba (puede ser un parámetro adicional)
 		$validator = Validator::make($request->all(),
 		[
-			'name'  => 'required', 
-			'prompt'  => 'required', 
-			'negative_prompt'  => 'required', 
-			'image_seed' => 'required',
+			'id_assistant' => 'required',
+			//'name'  => 'required', 
+			//'prompt'  => 'required', 
+			//'negative_prompt'  => 'required', 
+			//'image_seed' => 'required',
 			'num_photo' =>  'required'
 		]);
 
@@ -525,17 +529,40 @@ class AssistantController extends Controller
 			$COMPLEMENT_URL_FOR_IMG = env('COMPLEMENT_URL_FOR_IMG');
 			$TIMEOUT_FOR_IMG = env('TIMEOUT_FOR_IMG');
 			$NUMBER_PHOTOS = env('NUMBER_PHOTOS');
-			// debo prevenir que me de una situación que no se repita OJO
+			// debo prevenir que me de una situación que no se repita OJO - Ready
 			$cuantas = 1;
-			$situationsreceive = $this->givemesituations($cuantas);
+			//$situationsreceive = $this->givemesituations($cuantas); // antes era la idea así
+			$situationsreceive = $this->giveme_situation_no_repit($request->id_assistant);
+			// Aquí debo testear que $situationsreceive funcione
+			//return $situationsreceive[0]['situation'];
+			// Aquí debo testear que consulto el prompt a partir del id del asistente recibido
+			$Assistantx = Assistant::where('id',$request->id_assistant)->get(); 
+			//return $Assistantx;
+			//return $Assistantx[0]['prompt'];
+
+			// Aquí debo testear que consulto el seed a partir del id del asistente recibido
+			//return $Assistantx[0]['seed'];
+			// Aquí debo testear que consulto el name a partir del id del asistente recibido
+			//return $Assistantx[0]['name'];
+			// Aquí debo testear que consulto el negative_prompt generico y funciona
+			// get negative prompt 
+			$negativeprompt = DataGenericx::all();
+			//return $negativeprompt;
+			//return $negativeprompt[0]['negativeprompt'];
+
+			// luego de probar esto sigo
+
 			$jsondata = [
-				"prompt" => $request->prompt.$situationsreceive[0],
-				"negative_prompt" => $request->negative_prompt,
-				"seed" => $request->image_seed,
+				"prompt" => $Assistantx[0]['prompt'].$situationsreceive[0]['situation'],
+				"negative_prompt" => $negativeprompt[0]['negativeprompt'],
+				"seed" => $Assistantx[0]['seed'],
 				"require_base64" => true
 			];
+			
+			//return $jsondata;
+
 	        $response = Http::timeout($TIMEOUT_FOR_IMG)->post($URL_FOR_IMG.$COMPLEMENT_URL_FOR_IMG,$jsondata);
-			return $response;
+			//return $response;
 
 			$codebase64 = $response[0]["base64"];
 			//$data = explode( ',', $codebase64 );
@@ -543,8 +570,8 @@ class AssistantController extends Controller
 			// Debo hacer los nombres de las fotos con numeros simples sin 0 antes OJO
 			//$file_path = 'uploads/'.$request->name.$request->num_photo.'.png';
 
-			$image_name=$request->name.$request->num_photo;
-			return [$image_name];
+			$image_name=$Assistantx[0]['name'].$request->num_photo;
+			//return [$image_name];
 			$res = $this->saveimgtoaws($codebase64, $image_name);
 
 			//$res = Storage::disk('s3')->put($file_path, base64_decode($data[1]));
@@ -608,6 +635,57 @@ class AssistantController extends Controller
 			return $selectedSituations;
 		} catch (\Throwable $th) {
 			return $th;
+		}
+	}
+
+	private function giveme_situation_no_repit($id_assistant){
+		//return $request;
+		// Crea function giveme_situation_no_repit(id_assistant) que retorna una situations no repetida para ese id
+		// Cada asisstant tiene un campo array nullable array_used_situations que guarda los números 
+		// ya usados de situaciones en las fotos
+
+		// toma campo array_used_situations
+		$infoassistant = Assistant::select('array_used_situations')
+			->where('id',$id_assistant)
+			->get(); 
+		$used_numbers = $infoassistant[0]['array_used_situations'];
+		$used_numbers = explode(',',$used_numbers);
+		//return $used_numbers;
+		$tot_used_numbers = count($used_numbers);
+		//return [$tot_used_numbers];
+
+		// Se cuentan los elementos del array $used_numbers
+		$me_tot_situations = Situation::all()->count();
+		//return $me_tot_situations;
+
+		$situationx = null;
+		// Se valida que no se excede el número de situaciones posibles (totales) $me_tot_situations
+		// que están en la tabla situations
+		$control = true;
+		$pordondepasa = " ";
+		if($tot_used_numbers < $me_tot_situations){
+			//return ["Es menor"];
+			while($control){
+				$rand = rand(1, $me_tot_situations);
+				//return [$rand];
+	    		if (!(in_array($rand, $used_numbers))) {
+    	    		// toma esta situacion de la tabla situations
+					//$situationx = Situation::get($rand);
+					$situationx = Situation::select('situation')
+					->where('id',$rand)
+					->get(); 
+		
+					$pordondepasa = $pordondepasa . " if ";
+					$control = false;
+					//return [$situationx, $used_numbers, $rand,"En el if"];
+    			}
+				else{
+					//return [$situationx, $used_numbers, $rand,"En el else"];
+					$pordondepasa = $pordondepasa . " else ";
+				}
+			}
+			//return [$control, $situationx, $used_numbers, $rand,$pordondepasa];
+			return $situationx;
 		}
 	}
 

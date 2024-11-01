@@ -151,3 +151,7 @@ Route::post('generateimg', [AssistantController::class, 'generateimg']);
 Route::post('createphotos', [AssistantController::class, 'createphotos']);
 
 
+// For return situation rand no repeated
+Route::post('giveme_situation_no_repit', [AssistantController::class, 'giveme_situation_no_repit']);
+
+
