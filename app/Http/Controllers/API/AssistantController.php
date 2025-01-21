@@ -507,10 +507,6 @@ class AssistantController extends Controller
 		$validator = Validator::make($request->all(),
 		[
 			'id_assistant' => 'required',
-			//'name'  => 'required', 
-			//'prompt'  => 'required', 
-			//'negative_prompt'  => 'required', 
-			//'image_seed' => 'required',
 			'num_photo' =>  'required'
 		]);
 

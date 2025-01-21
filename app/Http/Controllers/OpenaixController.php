@@ -289,7 +289,7 @@ class OpenaixController extends Controller
 	}
 
 
-	public function lmstudiouncensored1(Request $request){
+	public function responseText1(Request $request){
 		// El futuro quefrado v2 - uncensored1 ...	
 		//return response()->json('data 428',200);
 		$idUser = $request->idUser;
@@ -355,7 +355,8 @@ class OpenaixController extends Controller
 
 			// start consulting openai response
 			$client = new Client([
-				'base_uri' => 'https://4e49-80-102-129-53.ngrok-free.app/',
+				//'base_uri' => 'https://4e49-80-102-129-53.ngrok-free.app/',
+				'base_uri' => env('ACTUAL_BASE_URI_API')
 			]);
 		
 			//$openaikey = "Bearer ". env('OPEN_API_KEY');

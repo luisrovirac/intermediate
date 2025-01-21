@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\AssistantController;
+use App\Http\Controllers\API\AImageController;
 use App\Http\Controllers\VisionController;
 use App\Http\Controllers\AudioController;
 use Illuminate\Support\Facades\Auth;
@@ -106,7 +107,7 @@ Route::post('msgproactive', [OpenaixController::class, 'msgproactive']);
 // Intento de El quefrado version 2
 // post openaisavemsgsversion2 apunta a lmstudio uncensored test using http and guzzle and save messages
 // You need pass the parameter: actual_message, idUser and idSystem
-Route::post('lmstudiouncensored1', [OpenaixController::class, 'lmstudiouncensored1']);
+Route::post('responseText1', [OpenaixController::class, 'responseText1']);
 
 
 // get msgs of chats
@@ -154,4 +155,7 @@ Route::post('createphotos', [AssistantController::class, 'createphotos']);
 // For return situation rand no repeated
 Route::post('giveme_situation_no_repit', [AssistantController::class, 'giveme_situation_no_repit']);
 
+
+// For get Data for create image AImage
+Route::post('getDataCreateImage', [AImageController::class, 'getDataCreateImage']);
 
