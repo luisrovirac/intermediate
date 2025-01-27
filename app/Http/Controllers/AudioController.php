@@ -12,6 +12,7 @@ use GuzzleHttp\Psr7\Utils;
 
 use Exception;
 
+use App\Models\Assistant;
 
 class AudioController extends Controller
 {
@@ -22,11 +23,23 @@ class AudioController extends Controller
 	try {
 		$apiKey = env('OPEN_API_KEY');
 
+		$result = Assistant::find($request->idUser);
+		if($result){
+			$voicex = $result->voice;
+		}
+		else{
+			return response()->json([
+				'status' => 'failed',
+				'message' => 'Error generating Audio with texttospeech ',
+				'response' => 'No exist this Assistant '.$request->idUser
+				], 404);			
+		}
+		
         $request->validate([
             'input' => 'required',
             'idUser' => 'required',
             'idSystem' => 'required',
-            'voice' => 'required',
+            //'voice' => 'required',
         ]);
 
 		// Initialize Guzzle HTTP client
@@ -38,7 +51,7 @@ class AudioController extends Controller
     		$params = [
         		'model' => 'tts-1',
         		'input' => $request->input,
-        		'voice' => $request->voice,
+        		'voice' => $voicex,
     		];
 
     		// Make POST request to OpenAI API
@@ -73,33 +86,14 @@ class AudioController extends Controller
 			'message' => 'Audio generated successfully! with texttospeech',
 			'response' => $pathfilex
 			], 200);
-
-		//return response()->download($pathx, 'newspeech.mp3', ['Content-Type' => 'audio/mp3']);
 		
-
-/*
-        if (file_exists($pathfilex)) {
-            return response()->download($pathfilex);
-        } else {
-			return response()->json([
-				'status' => 'error',
-				'message' => 'File not found',
-				//'response' => $response->getBody()
-				], 404);
-        }
-*/
-/*
-		return response()->json([
-			'status' => 'success',
-			'message' => 'Test Api texttospeech',
-			//'response' => $response->getBody()
-			], 200);
-*/			
 	}
 
 
     public function speechtotext(Request $request){
 		// path at speech test: C:\Users\luisr\Music\fortest\speechfortest.mp3
+		// body - form-data - cambia Text por File lo buscas y luego lo uploads
+		// En el Key colocas audio
         $testaudio = $request->file('audio');
         $apiKey = env('OPEN_API_KEY');
 /*
