@@ -23,7 +23,7 @@ class AudioController extends Controller
 	try {
 		$apiKey = env('OPEN_API_KEY');
 
-		$result = Assistant::find($request->idUser);
+		$result = Assistant::find($request->idSystem);
 		if($result){
 			$voicex = $result->voice;
 		}
@@ -31,7 +31,7 @@ class AudioController extends Controller
 			return response()->json([
 				'status' => 'failed',
 				'message' => 'Error generating Audio with texttospeech ',
-				'response' => 'No exist this Assistant '.$request->idUser
+				'response' => 'No exist this Assistant '.$request->idSystem
 				], 404);			
 		}
 		
